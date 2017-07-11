@@ -10,11 +10,13 @@
 #import "FLMessageCell.h"
 #import "FLMessageModel.h"
 #import "FLChatManager.h"
+#import "FLMessageInputView.h"
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLChatManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) FLMessageInputView *messageInputView;
 
 @end
 
@@ -51,6 +53,12 @@
     [self.view addSubview:_tableView];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     _tableView.backgroundColor = FLBackGroundColor;
+    
+    _messageInputView = [[FLMessageInputView alloc] init];
+    [self.view addSubview:_messageInputView];
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, _messageInputView.height, 0);
+    _tableView.contentInset = contentInsets;
+    _tableView.scrollIndicatorInsets = contentInsets;
     
 //    FLMessageModel *model1 = [[FLMessageModel alloc] init];
 //    model1.from = @"fox";

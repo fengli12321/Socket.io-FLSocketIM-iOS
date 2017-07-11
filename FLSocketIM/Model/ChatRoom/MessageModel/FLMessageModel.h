@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, FLMessageModelType) {
 @interface FLMessageModel : NSObject
 
 @property (nonatomic, assign) CGFloat messageCellHeight;
+@property (nonatomic, assign) CGSize textMessageLabelSize;
 @property (nonatomic, assign) BOOL isSender;
 
 
@@ -28,9 +29,6 @@ typedef NS_ENUM(NSInteger, FLMessageModelType) {
 @end
 
 @interface FLMessageBody : NSObject
-
-@property (nonatomic, weak) FLMessageModel *superModel;
-@property (nonatomic, assign) CGSize textMessageLabelSize;
 
 @property (nonatomic, copy) NSString *type;     // 消息类型
 @property (nonatomic, copy) NSString *msg;      // 文本消息内容

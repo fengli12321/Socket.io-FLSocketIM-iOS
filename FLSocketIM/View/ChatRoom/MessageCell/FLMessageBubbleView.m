@@ -63,8 +63,8 @@
     _textLabel.text = message.bodies.msg;
     [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         
-        make.width.mas_equalTo(message.bodies.textMessageLabelSize.width);
-        make.height.mas_equalTo(message.bodies.textMessageLabelSize.height);
+        make.width.mas_equalTo(message.textMessageLabelSize.width);
+        make.height.mas_equalTo(message.textMessageLabelSize.height);
     }];
 }
 - (void)setTextFont:(UIFont *)textFont {

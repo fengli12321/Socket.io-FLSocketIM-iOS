@@ -69,7 +69,7 @@
         _isSender ? make.right.equalTo(_userIconView.mas_left).offset(-10) : make.left.equalTo(_userIconView.mas_right).offset(10);
         make.top.equalTo(_userIconView);
         make.width.mas_lessThanOrEqualTo(kScreenWidth);
-        make.height.mas_greaterThanOrEqualTo(@50);
+//        make.height.mas_greaterThanOrEqualTo(@20);
         
     }];
 }
