@@ -1,0 +1,31 @@
+//
+//  FLSocketIM_Prefix.pch
+//  FLSocketIM
+//
+//  Created by 冯里 on 2017/7/6.
+//  Copyright © 2017年 冯里. All rights reserved.
+//
+
+
+#import "UIView+Common.h"
+#import "RequestUrlConst.h"
+#import "FLAlertView.h"
+#import "FLNetWorkManager.h"
+#import "UIViewController+Common.h"
+#import "UIColor+Common.h"
+#import "ColorConst.h"
+#import "Masonry.h"
+#import "YYKit.h"
+#import "YYModel.h"
+
+#ifdef DEBUG // 处于开发阶段
+#define FLLog(...) NSLog(__VA_ARGS__)
+#else // 处于发布阶段
+#define FLLog(...)
+#endif
+
+
+#define RGBAColor(r, g, b, a) [UIColor colorWithRed:((r)/255.0f) green:((g)/255.0f) blue:((b)/255.0f) alpha:(a)]
+
+//#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+//#define kScreenHeight [UIScreen mainScreen].bounds.size.height

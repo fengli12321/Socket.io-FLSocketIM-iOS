@@ -1,0 +1,1021 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		123A9FE31F0E150700DCC9E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 123A9FE21F0E150700DCC9E9 /* main.m */; };
+		123A9FE61F0E150700DCC9E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 123A9FE51F0E150700DCC9E9 /* AppDelegate.m */; };
+		123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123A9FE81F0E150700DCC9E9 /* ViewController.m */; };
+		123A9FEC1F0E150700DCC9E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 123A9FEA1F0E150700DCC9E9 /* Main.storyboard */; };
+		123A9FEE1F0E150700DCC9E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 123A9FED1F0E150700DCC9E9 /* Assets.xcassets */; };
+		123A9FF11F0E150700DCC9E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 123A9FEF1F0E150700DCC9E9 /* LaunchScreen.storyboard */; };
+		123A9FFC1F0E150700DCC9E9 /* FLSocketIMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 123A9FFB1F0E150700DCC9E9 /* FLSocketIMTests.m */; };
+		123AA0071F0E150700DCC9E9 /* FLSocketIMUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0061F0E150700DCC9E9 /* FLSocketIMUITests.m */; };
+		123AA0291F0E1A7700DCC9E9 /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0281F0E1A7700DCC9E9 /* UIView+Common.m */; };
+		123AA0341F0E220D00DCC9E9 /* FLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0331F0E220D00DCC9E9 /* FLAlertView.m */; };
+		123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0371F0E261000DCC9E9 /* FLNetWorkManager.m */; };
+		123AA03D1F0E2F9700DCC9E9 /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA03A1F0E2F9700DCC9E9 /* FLLoginViewController.m */; };
+		123AA03E1F0E2F9700DCC9E9 /* FLLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 123AA03B1F0E2F9700DCC9E9 /* FLLoginViewController.xib */; };
+		123AA0411F0E30A400DCC9E9 /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0401F0E30A400DCC9E9 /* UIViewController+Common.m */; };
+		123AA0451F0E35C100DCC9E9 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 123AA0441F0E35C100DCC9E9 /* MBProgressHUD.bundle */; };
+		123AA0481F0E3AEC00DCC9E9 /* FLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0471F0E3AEC00DCC9E9 /* FLTabBarController.m */; };
+		123AA04D1F0E3C9C00DCC9E9 /* FLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA04C1F0E3C9C00DCC9E9 /* FLViewController.m */; };
+		123AA0501F0E3CBB00DCC9E9 /* FLChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA04F1F0E3CBB00DCC9E9 /* FLChatListViewController.m */; };
+		123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0521F0E3CD200DCC9E9 /* FLChatViewController.m */; };
+		123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */; };
+		123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */; };
+		12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */; };
+		12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D9631F0F264000B7F749 /* FLMessageCell.m */; };
+		12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D9681F0F26A400B7F749 /* FLMessageModel.m */; };
+		12B9D96C1F0F384400B7F749 /* FLMessageBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D96B1F0F384400B7F749 /* FLMessageBubbleView.m */; };
+		12B9D96F1F0F71C500B7F749 /* FLSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D96E1F0F71C500B7F749 /* FLSocketManager.m */; };
+		12BEEE271F1316DD00FF3B44 /* FLClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE261F1316DD00FF3B44 /* FLClientManager.m */; };
+		12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE291F13190800FF3B44 /* FLChatManager.m */; };
+		12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE2C1F13202900FF3B44 /* FLChatDBManager.m */; };
+		12BEEE371F1389D600FF3B44 /* FLChatBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE361F1389D600FF3B44 /* FLChatBottomView.m */; };
+		39E91558BEC0923F3217B8EA /* Pods_FLSocketIMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BEE4FF0EDD70CD2F3C976C /* Pods_FLSocketIMTests.framework */; };
+		7B6B88B802C316BC70E027C1 /* Pods_FLSocketIM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8653D711C85AC9A60FF0F41 /* Pods_FLSocketIM.framework */; };
+		7CBA30BF340E9FAB83805313 /* Pods_FLSocketIMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		123A9FF81F0E150700DCC9E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 123A9FD61F0E150700DCC9E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 123A9FDD1F0E150700DCC9E9;
+			remoteInfo = FLSocketIM;
+		};
+		123AA0031F0E150700DCC9E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 123A9FD61F0E150700DCC9E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 123A9FDD1F0E150700DCC9E9;
+			remoteInfo = FLSocketIM;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		123A9FDE1F0E150700DCC9E9 /* FLSocketIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLSocketIM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		123A9FE21F0E150700DCC9E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		123A9FE41F0E150700DCC9E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		123A9FE51F0E150700DCC9E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		123A9FE71F0E150700DCC9E9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		123A9FE81F0E150700DCC9E9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		123A9FEB1F0E150700DCC9E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		123A9FED1F0E150700DCC9E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		123A9FF01F0E150700DCC9E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		123A9FF21F0E150700DCC9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		123A9FF71F0E150700DCC9E9 /* FLSocketIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLSocketIMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		123A9FFB1F0E150700DCC9E9 /* FLSocketIMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLSocketIMTests.m; sourceTree = "<group>"; };
+		123A9FFD1F0E150700DCC9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		123AA0021F0E150700DCC9E9 /* FLSocketIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLSocketIMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		123AA0061F0E150700DCC9E9 /* FLSocketIMUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLSocketIMUITests.m; sourceTree = "<group>"; };
+		123AA0081F0E150700DCC9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		123AA0261F0E18EF00DCC9E9 /* FLSocketIM_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLSocketIM_Prefix.pch; sourceTree = "<group>"; };
+		123AA0271F0E1A7700DCC9E9 /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
+		123AA0281F0E1A7700DCC9E9 /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
+		123AA0301F0E1DF200DCC9E9 /* RequestUrlConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestUrlConst.h; sourceTree = "<group>"; };
+		123AA0321F0E220D00DCC9E9 /* FLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAlertView.h; sourceTree = "<group>"; };
+		123AA0331F0E220D00DCC9E9 /* FLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAlertView.m; sourceTree = "<group>"; };
+		123AA0361F0E261000DCC9E9 /* FLNetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLNetWorkManager.h; sourceTree = "<group>"; };
+		123AA0371F0E261000DCC9E9 /* FLNetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLNetWorkManager.m; sourceTree = "<group>"; };
+		123AA03A1F0E2F9700DCC9E9 /* FLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLoginViewController.m; sourceTree = "<group>"; };
+		123AA03B1F0E2F9700DCC9E9 /* FLLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLLoginViewController.xib; sourceTree = "<group>"; };
+		123AA03C1F0E2F9700DCC9E9 /* FLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLoginViewController.h; sourceTree = "<group>"; };
+		123AA03F1F0E30A400DCC9E9 /* UIViewController+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Common.h"; sourceTree = "<group>"; };
+		123AA0401F0E30A400DCC9E9 /* UIViewController+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Common.m"; sourceTree = "<group>"; };
+		123AA0441F0E35C100DCC9E9 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		123AA0461F0E3AEC00DCC9E9 /* FLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarController.h; sourceTree = "<group>"; };
+		123AA0471F0E3AEC00DCC9E9 /* FLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarController.m; sourceTree = "<group>"; };
+		123AA04B1F0E3C9C00DCC9E9 /* FLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLViewController.h; sourceTree = "<group>"; };
+		123AA04C1F0E3C9C00DCC9E9 /* FLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLViewController.m; sourceTree = "<group>"; };
+		123AA04E1F0E3CBB00DCC9E9 /* FLChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatListViewController.h; sourceTree = "<group>"; };
+		123AA04F1F0E3CBB00DCC9E9 /* FLChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatListViewController.m; sourceTree = "<group>"; };
+		123AA0511F0E3CD200DCC9E9 /* FLChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatViewController.h; sourceTree = "<group>"; };
+		123AA0521F0E3CD200DCC9E9 /* FLChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatViewController.m; sourceTree = "<group>"; };
+		123AA0541F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFriendsAndGroupsViewController.h; sourceTree = "<group>"; };
+		123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendsAndGroupsViewController.m; sourceTree = "<group>"; };
+		123AA0571F0E3F0E00DCC9E9 /* FLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLNavigationController.h; sourceTree = "<group>"; };
+		123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLNavigationController.m; sourceTree = "<group>"; };
+		12B9D95C1F0F194500B7F749 /* ColorConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConst.h; sourceTree = "<group>"; };
+		12B9D95D1F0F1B4200B7F749 /* UIColor+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Common.h"; sourceTree = "<group>"; };
+		12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Common.m"; sourceTree = "<group>"; };
+		12B9D9621F0F264000B7F749 /* FLMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageCell.h; sourceTree = "<group>"; };
+		12B9D9631F0F264000B7F749 /* FLMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageCell.m; sourceTree = "<group>"; };
+		12B9D9671F0F26A400B7F749 /* FLMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageModel.h; sourceTree = "<group>"; };
+		12B9D9681F0F26A400B7F749 /* FLMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageModel.m; sourceTree = "<group>"; };
+		12B9D96A1F0F384400B7F749 /* FLMessageBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageBubbleView.h; sourceTree = "<group>"; };
+		12B9D96B1F0F384400B7F749 /* FLMessageBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageBubbleView.m; sourceTree = "<group>"; };
+		12B9D96D1F0F71C500B7F749 /* FLSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSocketManager.h; sourceTree = "<group>"; };
+		12B9D96E1F0F71C500B7F749 /* FLSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSocketManager.m; sourceTree = "<group>"; };
+		12BEEE251F1316DD00FF3B44 /* FLClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLClientManager.h; sourceTree = "<group>"; };
+		12BEEE261F1316DD00FF3B44 /* FLClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLClientManager.m; sourceTree = "<group>"; };
+		12BEEE281F13190800FF3B44 /* FLChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatManager.h; sourceTree = "<group>"; };
+		12BEEE291F13190800FF3B44 /* FLChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatManager.m; sourceTree = "<group>"; };
+		12BEEE2B1F13202900FF3B44 /* FLChatDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatDBManager.h; sourceTree = "<group>"; };
+		12BEEE2C1F13202900FF3B44 /* FLChatDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatDBManager.m; sourceTree = "<group>"; };
+		12BEEE351F1389D600FF3B44 /* FLChatBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatBottomView.h; sourceTree = "<group>"; };
+		12BEEE361F1389D600FF3B44 /* FLChatBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatBottomView.m; sourceTree = "<group>"; };
+		2B260E5E0C0660AABA04B15E /* Pods-FLSocketIMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		323334B9EEBE5EDD06613045 /* Pods-FLSocketIMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.debug.xcconfig"; sourceTree = "<group>"; };
+		542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLSocketIMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97A3315C84554C5B679509CC /* Pods-FLSocketIM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.debug.xcconfig"; sourceTree = "<group>"; };
+		99B0DE39C13E8C3D514BEC6D /* Pods-FLSocketIM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIM.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.release.xcconfig"; sourceTree = "<group>"; };
+		A9BEE4FF0EDD70CD2F3C976C /* Pods_FLSocketIMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLSocketIMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4BEA84CA0A82AB7803BC424 /* Pods-FLSocketIMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC8A2CA18374C844F19DBE63 /* Pods-FLSocketIMUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D8653D711C85AC9A60FF0F41 /* Pods_FLSocketIM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLSocketIM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		123A9FDB1F0E150700DCC9E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6B88B802C316BC70E027C1 /* Pods_FLSocketIM.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123A9FF41F0E150700DCC9E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39E91558BEC0923F3217B8EA /* Pods_FLSocketIMTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123A9FFF1F0E150700DCC9E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CBA30BF340E9FAB83805313 /* Pods_FLSocketIMUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		123A9FD51F0E150700DCC9E9 = {
+			isa = PBXGroup;
+			children = (
+				123A9FE01F0E150700DCC9E9 /* FLSocketIM */,
+				123A9FFA1F0E150700DCC9E9 /* FLSocketIMTests */,
+				123AA0051F0E150700DCC9E9 /* FLSocketIMUITests */,
+				123A9FDF1F0E150700DCC9E9 /* Products */,
+				678D4789ABC5DCA1CE81CFCD /* Pods */,
+				2CCA57FDA8B68B00B78B01A6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		123A9FDF1F0E150700DCC9E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				123A9FDE1F0E150700DCC9E9 /* FLSocketIM.app */,
+				123A9FF71F0E150700DCC9E9 /* FLSocketIMTests.xctest */,
+				123AA0021F0E150700DCC9E9 /* FLSocketIMUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		123A9FE01F0E150700DCC9E9 /* FLSocketIM */ = {
+			isa = PBXGroup;
+			children = (
+				123AA01E1F0E15D800DCC9E9 /* Other */,
+				123AA0141F0E15D100DCC9E9 /* Controller */,
+				123AA01B1F0E15D100DCC9E9 /* View */,
+				123AA01A1F0E15D100DCC9E9 /* Model */,
+				123AA0181F0E15D100DCC9E9 /* Src */,
+				123AA0191F0E15D100DCC9E9 /* Util */,
+				123A9FE11F0E150700DCC9E9 /* Supporting Files */,
+			);
+			path = FLSocketIM;
+			sourceTree = "<group>";
+		};
+		123A9FE11F0E150700DCC9E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				123A9FE21F0E150700DCC9E9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		123A9FFA1F0E150700DCC9E9 /* FLSocketIMTests */ = {
+			isa = PBXGroup;
+			children = (
+				123A9FFB1F0E150700DCC9E9 /* FLSocketIMTests.m */,
+				123A9FFD1F0E150700DCC9E9 /* Info.plist */,
+			);
+			path = FLSocketIMTests;
+			sourceTree = "<group>";
+		};
+		123AA0051F0E150700DCC9E9 /* FLSocketIMUITests */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0061F0E150700DCC9E9 /* FLSocketIMUITests.m */,
+				123AA0081F0E150700DCC9E9 /* Info.plist */,
+			);
+			path = FLSocketIMUITests;
+			sourceTree = "<group>";
+		};
+		123AA0141F0E15D100DCC9E9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0461F0E3AEC00DCC9E9 /* FLTabBarController.h */,
+				123AA0471F0E3AEC00DCC9E9 /* FLTabBarController.m */,
+				123AA0571F0E3F0E00DCC9E9 /* FLNavigationController.h */,
+				123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */,
+				123AA04B1F0E3C9C00DCC9E9 /* FLViewController.h */,
+				123AA04C1F0E3C9C00DCC9E9 /* FLViewController.m */,
+				123AA04A1F0E3C4A00DCC9E9 /* FriendAndGroups */,
+				123AA0421F0E31A100DCC9E9 /* Chat */,
+				123AA0391F0E2F6E00DCC9E9 /* Login */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		123AA0181F0E15D100DCC9E9 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0431F0E359700DCC9E9 /* Image */,
+			);
+			path = Src;
+			sourceTree = "<group>";
+		};
+		123AA0191F0E15D100DCC9E9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0351F0E25E900DCC9E9 /* Manager */,
+				123AA02E1F0E1D9700DCC9E9 /* Other */,
+				123AA0221F0E17BC00DCC9E9 /* Category */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		123AA01A1F0E15D100DCC9E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9651F0F266400B7F749 /* ChatRoom */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		123AA01B1F0E15D100DCC9E9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9601F0F25AA00B7F749 /* ChatRoom */,
+				123AA0311F0E21D600DCC9E9 /* Common */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		123AA01E1F0E15D800DCC9E9 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				123A9FE41F0E150700DCC9E9 /* AppDelegate.h */,
+				123A9FE51F0E150700DCC9E9 /* AppDelegate.m */,
+				123A9FE71F0E150700DCC9E9 /* ViewController.h */,
+				123A9FE81F0E150700DCC9E9 /* ViewController.m */,
+				123A9FEA1F0E150700DCC9E9 /* Main.storyboard */,
+				123A9FED1F0E150700DCC9E9 /* Assets.xcassets */,
+				123A9FEF1F0E150700DCC9E9 /* LaunchScreen.storyboard */,
+				123A9FF21F0E150700DCC9E9 /* Info.plist */,
+				123AA0261F0E18EF00DCC9E9 /* FLSocketIM_Prefix.pch */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		123AA0221F0E17BC00DCC9E9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0271F0E1A7700DCC9E9 /* UIView+Common.h */,
+				123AA0281F0E1A7700DCC9E9 /* UIView+Common.m */,
+				123AA03F1F0E30A400DCC9E9 /* UIViewController+Common.h */,
+				123AA0401F0E30A400DCC9E9 /* UIViewController+Common.m */,
+				12B9D95D1F0F1B4200B7F749 /* UIColor+Common.h */,
+				12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */,
+			);
+			name = Category;
+			path = Categroy;
+			sourceTree = "<group>";
+		};
+		123AA02E1F0E1D9700DCC9E9 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0301F0E1DF200DCC9E9 /* RequestUrlConst.h */,
+				12B9D95C1F0F194500B7F749 /* ColorConst.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		123AA0311F0E21D600DCC9E9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0321F0E220D00DCC9E9 /* FLAlertView.h */,
+				123AA0331F0E220D00DCC9E9 /* FLAlertView.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		123AA0351F0E25E900DCC9E9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0361F0E261000DCC9E9 /* FLNetWorkManager.h */,
+				123AA0371F0E261000DCC9E9 /* FLNetWorkManager.m */,
+				12B9D96D1F0F71C500B7F749 /* FLSocketManager.h */,
+				12B9D96E1F0F71C500B7F749 /* FLSocketManager.m */,
+				12BEEE251F1316DD00FF3B44 /* FLClientManager.h */,
+				12BEEE261F1316DD00FF3B44 /* FLClientManager.m */,
+				12BEEE281F13190800FF3B44 /* FLChatManager.h */,
+				12BEEE291F13190800FF3B44 /* FLChatManager.m */,
+				12BEEE2B1F13202900FF3B44 /* FLChatDBManager.h */,
+				12BEEE2C1F13202900FF3B44 /* FLChatDBManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		123AA0391F0E2F6E00DCC9E9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				123AA03C1F0E2F9700DCC9E9 /* FLLoginViewController.h */,
+				123AA03A1F0E2F9700DCC9E9 /* FLLoginViewController.m */,
+				123AA03B1F0E2F9700DCC9E9 /* FLLoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		123AA0421F0E31A100DCC9E9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				123AA04E1F0E3CBB00DCC9E9 /* FLChatListViewController.h */,
+				123AA04F1F0E3CBB00DCC9E9 /* FLChatListViewController.m */,
+				123AA0511F0E3CD200DCC9E9 /* FLChatViewController.h */,
+				123AA0521F0E3CD200DCC9E9 /* FLChatViewController.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		123AA0431F0E359700DCC9E9 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0441F0E35C100DCC9E9 /* MBProgressHUD.bundle */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		123AA04A1F0E3C4A00DCC9E9 /* FriendAndGroups */ = {
+			isa = PBXGroup;
+			children = (
+				123AA0541F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.h */,
+				123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */,
+			);
+			path = FriendAndGroups;
+			sourceTree = "<group>";
+		};
+		12B9D9601F0F25AA00B7F749 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9611F0F25C800B7F749 /* MessageCell */,
+				12BEEE351F1389D600FF3B44 /* FLChatBottomView.h */,
+				12BEEE361F1389D600FF3B44 /* FLChatBottomView.m */,
+			);
+			path = ChatRoom;
+			sourceTree = "<group>";
+		};
+		12B9D9611F0F25C800B7F749 /* MessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9621F0F264000B7F749 /* FLMessageCell.h */,
+				12B9D9631F0F264000B7F749 /* FLMessageCell.m */,
+				12B9D96A1F0F384400B7F749 /* FLMessageBubbleView.h */,
+				12B9D96B1F0F384400B7F749 /* FLMessageBubbleView.m */,
+			);
+			path = MessageCell;
+			sourceTree = "<group>";
+		};
+		12B9D9651F0F266400B7F749 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9661F0F267E00B7F749 /* MessageModel */,
+			);
+			path = ChatRoom;
+			sourceTree = "<group>";
+		};
+		12B9D9661F0F267E00B7F749 /* MessageModel */ = {
+			isa = PBXGroup;
+			children = (
+				12B9D9671F0F26A400B7F749 /* FLMessageModel.h */,
+				12B9D9681F0F26A400B7F749 /* FLMessageModel.m */,
+			);
+			path = MessageModel;
+			sourceTree = "<group>";
+		};
+		2CCA57FDA8B68B00B78B01A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8653D711C85AC9A60FF0F41 /* Pods_FLSocketIM.framework */,
+				A9BEE4FF0EDD70CD2F3C976C /* Pods_FLSocketIMTests.framework */,
+				542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		678D4789ABC5DCA1CE81CFCD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97A3315C84554C5B679509CC /* Pods-FLSocketIM.debug.xcconfig */,
+				99B0DE39C13E8C3D514BEC6D /* Pods-FLSocketIM.release.xcconfig */,
+				323334B9EEBE5EDD06613045 /* Pods-FLSocketIMTests.debug.xcconfig */,
+				B4BEA84CA0A82AB7803BC424 /* Pods-FLSocketIMTests.release.xcconfig */,
+				2B260E5E0C0660AABA04B15E /* Pods-FLSocketIMUITests.debug.xcconfig */,
+				CC8A2CA18374C844F19DBE63 /* Pods-FLSocketIMUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		123A9FDD1F0E150700DCC9E9 /* FLSocketIM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 123AA00B1F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIM" */;
+			buildPhases = (
+				6AF58A04D3564352F5D2D52F /* [CP] Check Pods Manifest.lock */,
+				123A9FDA1F0E150700DCC9E9 /* Sources */,
+				123A9FDB1F0E150700DCC9E9 /* Frameworks */,
+				123A9FDC1F0E150700DCC9E9 /* Resources */,
+				CF0990EA324808DF7B06C2BE /* [CP] Embed Pods Frameworks */,
+				589B8FBCDF716CB60A96B9F3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FLSocketIM;
+			productName = FLSocketIM;
+			productReference = 123A9FDE1F0E150700DCC9E9 /* FLSocketIM.app */;
+			productType = "com.apple.product-type.application";
+		};
+		123A9FF61F0E150700DCC9E9 /* FLSocketIMTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 123AA00E1F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIMTests" */;
+			buildPhases = (
+				95D06BE6D78100ED4013B4EF /* [CP] Check Pods Manifest.lock */,
+				123A9FF31F0E150700DCC9E9 /* Sources */,
+				123A9FF41F0E150700DCC9E9 /* Frameworks */,
+				123A9FF51F0E150700DCC9E9 /* Resources */,
+				57A9668B07CF840C093DEC5F /* [CP] Embed Pods Frameworks */,
+				0F43F5E58F9B09DA66FA597A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				123A9FF91F0E150700DCC9E9 /* PBXTargetDependency */,
+			);
+			name = FLSocketIMTests;
+			productName = FLSocketIMTests;
+			productReference = 123A9FF71F0E150700DCC9E9 /* FLSocketIMTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		123AA0011F0E150700DCC9E9 /* FLSocketIMUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 123AA0111F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIMUITests" */;
+			buildPhases = (
+				A79D22DB23767C678DDFA4E8 /* [CP] Check Pods Manifest.lock */,
+				123A9FFE1F0E150700DCC9E9 /* Sources */,
+				123A9FFF1F0E150700DCC9E9 /* Frameworks */,
+				123AA0001F0E150700DCC9E9 /* Resources */,
+				101465AC802D3DD2A7E63090 /* [CP] Embed Pods Frameworks */,
+				C5EA082D0840528B62F6EBC8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				123AA0041F0E150700DCC9E9 /* PBXTargetDependency */,
+			);
+			name = FLSocketIMUITests;
+			productName = FLSocketIMUITests;
+			productReference = 123AA0021F0E150700DCC9E9 /* FLSocketIMUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		123A9FD61F0E150700DCC9E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FL;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "冯里";
+				TargetAttributes = {
+					123A9FDD1F0E150700DCC9E9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6625VD7T97;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					123A9FF61F0E150700DCC9E9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 123A9FDD1F0E150700DCC9E9;
+					};
+					123AA0011F0E150700DCC9E9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 123A9FDD1F0E150700DCC9E9;
+					};
+				};
+			};
+			buildConfigurationList = 123A9FD91F0E150700DCC9E9 /* Build configuration list for PBXProject "FLSocketIM" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 123A9FD51F0E150700DCC9E9;
+			productRefGroup = 123A9FDF1F0E150700DCC9E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				123A9FDD1F0E150700DCC9E9 /* FLSocketIM */,
+				123A9FF61F0E150700DCC9E9 /* FLSocketIMTests */,
+				123AA0011F0E150700DCC9E9 /* FLSocketIMUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		123A9FDC1F0E150700DCC9E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				123AA03E1F0E2F9700DCC9E9 /* FLLoginViewController.xib in Resources */,
+				123A9FF11F0E150700DCC9E9 /* LaunchScreen.storyboard in Resources */,
+				123AA0451F0E35C100DCC9E9 /* MBProgressHUD.bundle in Resources */,
+				123A9FEE1F0E150700DCC9E9 /* Assets.xcassets in Resources */,
+				123A9FEC1F0E150700DCC9E9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123A9FF51F0E150700DCC9E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123AA0001F0E150700DCC9E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F43F5E58F9B09DA66FA597A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		101465AC802D3DD2A7E63090 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57A9668B07CF840C093DEC5F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		589B8FBCDF716CB60A96B9F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AF58A04D3564352F5D2D52F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		95D06BE6D78100ED4013B4EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A79D22DB23767C678DDFA4E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C5EA082D0840528B62F6EBC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF0990EA324808DF7B06C2BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		123A9FDA1F0E150700DCC9E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */,
+				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
+				12B9D96C1F0F384400B7F749 /* FLMessageBubbleView.m in Sources */,
+				123AA0291F0E1A7700DCC9E9 /* UIView+Common.m in Sources */,
+				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
+				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
+				12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */,
+				12B9D96F1F0F71C500B7F749 /* FLSocketManager.m in Sources */,
+				123AA0341F0E220D00DCC9E9 /* FLAlertView.m in Sources */,
+				12BEEE271F1316DD00FF3B44 /* FLClientManager.m in Sources */,
+				123AA0501F0E3CBB00DCC9E9 /* FLChatListViewController.m in Sources */,
+				12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */,
+				123AA04D1F0E3C9C00DCC9E9 /* FLViewController.m in Sources */,
+				123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */,
+				12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */,
+				123A9FE61F0E150700DCC9E9 /* AppDelegate.m in Sources */,
+				12BEEE371F1389D600FF3B44 /* FLChatBottomView.m in Sources */,
+				12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */,
+				123AA0411F0E30A400DCC9E9 /* UIViewController+Common.m in Sources */,
+				123AA03D1F0E2F9700DCC9E9 /* FLLoginViewController.m in Sources */,
+				123AA0481F0E3AEC00DCC9E9 /* FLTabBarController.m in Sources */,
+				123A9FE31F0E150700DCC9E9 /* main.m in Sources */,
+				123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123A9FF31F0E150700DCC9E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				123A9FFC1F0E150700DCC9E9 /* FLSocketIMTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		123A9FFE1F0E150700DCC9E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				123AA0071F0E150700DCC9E9 /* FLSocketIMUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		123A9FF91F0E150700DCC9E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 123A9FDD1F0E150700DCC9E9 /* FLSocketIM */;
+			targetProxy = 123A9FF81F0E150700DCC9E9 /* PBXContainerItemProxy */;
+		};
+		123AA0041F0E150700DCC9E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 123A9FDD1F0E150700DCC9E9 /* FLSocketIM */;
+			targetProxy = 123AA0031F0E150700DCC9E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		123A9FEA1F0E150700DCC9E9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				123A9FEB1F0E150700DCC9E9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		123A9FEF1F0E150700DCC9E9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				123A9FF01F0E150700DCC9E9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		123AA0091F0E150700DCC9E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		123AA00A1F0E150700DCC9E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		123AA00C1F0E150700DCC9E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97A3315C84554C5B679509CC /* Pods-FLSocketIM.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 6625VD7T97;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
+				INFOPLIST_FILE = FLSocketIM/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		123AA00D1F0E150700DCC9E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99B0DE39C13E8C3D514BEC6D /* Pods-FLSocketIM.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 6625VD7T97;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
+				INFOPLIST_FILE = FLSocketIM/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		123AA00F1F0E150700DCC9E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 323334B9EEBE5EDD06613045 /* Pods-FLSocketIMTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = FLSocketIMTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FLSocketIM.app/FLSocketIM";
+			};
+			name = Debug;
+		};
+		123AA0101F0E150700DCC9E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4BEA84CA0A82AB7803BC424 /* Pods-FLSocketIMTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = FLSocketIMTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FLSocketIM.app/FLSocketIM";
+			};
+			name = Release;
+		};
+		123AA0121F0E150700DCC9E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B260E5E0C0660AABA04B15E /* Pods-FLSocketIMUITests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = FLSocketIMUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIMUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FLSocketIM;
+			};
+			name = Debug;
+		};
+		123AA0131F0E150700DCC9E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC8A2CA18374C844F19DBE63 /* Pods-FLSocketIMUITests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = FLSocketIMUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIMUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FLSocketIM;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		123A9FD91F0E150700DCC9E9 /* Build configuration list for PBXProject "FLSocketIM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				123AA0091F0E150700DCC9E9 /* Debug */,
+				123AA00A1F0E150700DCC9E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		123AA00B1F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				123AA00C1F0E150700DCC9E9 /* Debug */,
+				123AA00D1F0E150700DCC9E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		123AA00E1F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				123AA00F1F0E150700DCC9E9 /* Debug */,
+				123AA0101F0E150700DCC9E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		123AA0111F0E150700DCC9E9 /* Build configuration list for PBXNativeTarget "FLSocketIMUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				123AA0121F0E150700DCC9E9 /* Debug */,
+				123AA0131F0E150700DCC9E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 123A9FD61F0E150700DCC9E9 /* Project object */;
+}

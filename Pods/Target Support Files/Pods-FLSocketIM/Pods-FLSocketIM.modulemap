@@ -1,0 +1,6 @@
+framework module Pods_FLSocketIM {
+  umbrella header "Pods-FLSocketIM-umbrella.h"
+
+  export *
+  module * { export * }
+}
