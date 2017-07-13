@@ -10,7 +10,7 @@ target 'FLSocketIM' do
   pod 'SDWebImage'
   pod 'MBProgressHUD'
   pod 'YYModel'
-  pod 'YYKit'
+  # pod 'YYKit'
   target 'FLSocketIMTests' do
     inherit! :search_paths
     # Pods for testing

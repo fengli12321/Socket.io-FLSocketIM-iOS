@@ -9,3 +9,5 @@
 #define BaseUrl                                 @"http://192.168.0.33:3000"
 #define Login_Url                               @"mobileLogin"
 #define Register_Url                            @"register"
+#define OnlineUser_Url                          @"onLineUsers"
+#define SendImgMsg_Url                          @"uploadFiles"

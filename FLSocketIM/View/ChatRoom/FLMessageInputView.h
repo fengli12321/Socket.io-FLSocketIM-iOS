@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol FLMessageInputViewDelegate;
+
 @interface FLMessageInputView : UIView <UITextViewDelegate>
 
+@property (nonatomic, weak) id<FLMessageInputViewDelegate> delegate;
 
+@end
+
+@protocol FLMessageInputViewDelegate <NSObject>
+
+- (void)messageInputView:(FLMessageInputView *)inputView heightToBottomChange:(CGFloat)heightToBottom;
+- (void)messageInputView:(FLMessageInputView *)inputView sendText:(NSString *)text;
+
+- (void)messageInputViewSendImage;
 @end

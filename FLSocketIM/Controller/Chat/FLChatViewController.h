@@ -10,4 +10,6 @@
 
 @interface FLChatViewController : FLViewController
 
+- (instancetype)initWithToUser:(NSString *)toUser;
+
 @end

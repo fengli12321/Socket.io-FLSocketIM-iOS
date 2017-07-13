@@ -9,7 +9,7 @@
 #import "FLLoginViewController.h"
 #import "FLTabBarController.h"
 #import "FLSocketManager.h"
-
+#import "FLClientManager.h"
 @interface FLLoginViewController ()
 
 // 账号输入
@@ -71,7 +71,10 @@
             }
             else {
                 
-                [weakSelf socketConnectWithToken:response[@"data"][@"auth_token"]];
+                NSString *auth_token = response[@"data"][@"auth_token"];
+                [weakSelf socketConnectWithToken:auth_token];
+                [FLClientManager shareManager].auth_token = auth_token;
+                [FLClientManager shareManager].currentUserID = _userNameField.text;
             }
         } withFailureBlock:^(NSError *error) {
             
@@ -84,14 +87,18 @@
 - (void)socketConnectWithToken:(NSString *)token {
     
     [self showMessage:@"连接中"];
+    __weak typeof(self) weakSelf = self;
     [[FLSocketManager shareManager] connectWithToken:token success:^{
         
-        [self hideHud];
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[FLTabBarController alloc] init];
+        [weakSelf hideHud];
+        if (weakSelf) {
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[FLTabBarController alloc] init];
+        }
+        
     } fail:^{
         
-        [self hideHud];
-        [self showHint:@"连接失败"];
+        [weakSelf hideHud];
+        [weakSelf showHint:@"连接失败"];
     }];
 }
 - (IBAction)register:(id)sender {

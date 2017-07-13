@@ -158,4 +158,62 @@
     return sessionTask;
 }
 
+#pragma mark - 图片上传
++ (NSURLSessionTask *)ba_uploadImageWithUrlString:(NSString *)urlString parameters:(NSDictionary *)parameters imageData:(NSData *)imageData withSuccessBlock:(ResponseSuccess)successBlock withFailurBlock:(ResponseFail)failureBlock withUpLoadProgress:(UploadProgress)progress {
+    if (urlString == nil)
+    {
+        return nil;
+    }
+    
+    
+    [self sharedAFManager].requestSerializer.timeoutInterval = 30;
+    /*! 检查地址中是否有中文 */
+    NSString *URLString = [NSURL URLWithString:urlString] ? urlString : [self strUTF8Encoding:urlString];
+    
+    __weak NSData *weakData = imageData;
+    NSString *fileName = parameters[@"imageFileName"];
+    NSURLSessionTask *sessionTask = nil;
+    __weak typeof(self) weakSelf = self;
+    sessionTask = [[self sharedAFManager] POST:[NSMutableString stringWithFormat:@"%@/%@",BaseUrl,URLString] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        
+        if (weakData) {
+            // 图片数据不为空才传递
+            [formData appendPartWithFileData:weakData name:@"image" fileName:fileName mimeType:@"image/jpg"];
+            
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        
+        if (progress)
+        {
+            progress(uploadProgress.completedUnitCount, uploadProgress.totalUnitCount);
+        }
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        
+        if (successBlock)
+        {
+            successBlock(responseObject);
+        }
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        
+        [weakSelf sharedAFManager].requestSerializer.timeoutInterval = 15;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (failureBlock)
+        {
+            failureBlock(error);
+        }
+        
+        [weakSelf sharedAFManager].requestSerializer.timeoutInterval = 15;
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    }];
+    
+    
+    return sessionTask;
+}
+
+
 @end

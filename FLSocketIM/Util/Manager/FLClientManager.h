@@ -10,4 +10,8 @@
 
 @interface FLClientManager : NSObject
 
++ (instancetype)shareManager;
+@property (nonatomic, copy) NSString *currentUserID;
+@property (nonatomic, copy) NSString *auth_token;
+
 @end

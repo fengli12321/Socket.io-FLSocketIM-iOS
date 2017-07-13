@@ -20,5 +20,6 @@
 
 - (void)doCircleFrame;
 - (void)setCornerRadius:(CGFloat)radius;
++ (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
 @end

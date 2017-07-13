@@ -22,7 +22,7 @@
 }
 - (void)setupUI {
     
-    self.navigationItem.title = @"FoxChat";
+    self.navigationItem.title = [FLClientManager shareManager].currentUserID;
     
     UIBarButtonItem *chat = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(chat)];
     self.navigationItem.rightBarButtonItem = chat;

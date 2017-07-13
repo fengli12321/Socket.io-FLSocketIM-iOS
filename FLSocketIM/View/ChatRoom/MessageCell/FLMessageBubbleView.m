@@ -24,8 +24,8 @@
 + (void)initialize {
     FLMessageBubbleView *view = [self appearance];
     view.textFont = [UIFont systemFontOfSize:15];
-    view.textSendInsets = UIEdgeInsetsMake(5, 12, 5, 15);
-    view.textRecInsets = UIEdgeInsetsMake(5, 15, 5, 15);
+    view.textSendInsets = UIEdgeInsetsMake(5, 8, 5, 15);
+    view.textRecInsets = UIEdgeInsetsMake(5, 15, 5, 8);
 }
 - (instancetype)initWithIsSender:(BOOL)isSender {
     if (self = [super init]) {
@@ -75,6 +75,9 @@
 
 - (void)setTextSendInsets:(UIEdgeInsets)textSendInsets {
     _textSendInsets = textSendInsets;
+    if (!_isSender) {
+        return;
+    }
     [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.edges.equalTo(self).with.insets(textSendInsets);
@@ -82,6 +85,9 @@
 }
 - (void)setTextRecInsets:(UIEdgeInsets)textRecInsets {
     _textRecInsets = textRecInsets;
+    if (_isSender) {
+        return;
+    }
     [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.edges.equalTo(self).with.insets(textRecInsets);

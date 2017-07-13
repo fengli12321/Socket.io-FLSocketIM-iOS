@@ -7,7 +7,28 @@
 //
 
 #import "FLClientManager.h"
-
+static FLClientManager *instance;
 @implementation FLClientManager
+
++ (instancetype)shareManager {
+    return [[self alloc] init];
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [super allocWithZone:zone];
+    });
+    return instance;
+}
+
+- (instancetype)init {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [super init];
+    });
+    return instance;
+}
 
 @end

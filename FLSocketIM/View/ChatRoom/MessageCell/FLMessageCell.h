@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @class FLMessageModel;
+
+typedef NS_ENUM(NSInteger, FLMessageCellType) {
+    FLTextMessageCell,
+    FLImgMessageCell,
+    FLOtherMessageCell
+};
 @interface FLMessageCell : UITableViewCell
 
 /**
@@ -15,11 +21,11 @@
  */
 @property (nonatomic, strong) UIFont *textFont UI_APPEARANCE_SELECTOR;
 
-
+@property (nonatomic, assign) FLMessageCellType cellType;
 @property (nonatomic, strong) FLMessageModel *message;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isSender:(BOOL)isSender;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier messageModel:(FLMessageModel *)model;
 
-+ (NSString *)cellReuseIndetifierWithIsSender:(BOOL)isSender;
++ (NSString *)cellReuseIndetifierWithMessageModel:(FLMessageModel *)Model;
 
 @end
