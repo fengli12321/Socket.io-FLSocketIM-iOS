@@ -14,13 +14,15 @@
 #import "TZImagePickerController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
+#import "FLChatListViewController.h"
+#import "FLConversationModel.h"
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLChatManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) FLMessageInputView *messageInputView;
-@property (nonatomic, copy) NSString *toUser;
+
 
 @end
 
@@ -43,15 +45,23 @@
     return self;
 }
 #pragma mark - LifeCircle
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [FLClientManager shareManager].chattingConversation = self;
     [[FLChatManager shareManager] addDelegate:self];
     [self creatUI];
+    
+    [self queryDataFromDB];
 }
 
 - (void)dealloc {
     [[FLChatManager shareManager] removeDelegate:self];
+    
+    // 关闭时向消息列表添加当前会话
+    [self addCurrentConversationToChatList];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -77,48 +87,37 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, _messageInputView.height, 0);
     _tableView.contentInset = contentInsets;
     _tableView.scrollIndicatorInsets = contentInsets;
+
     
-//    FLMessageModel *model1 = [[FLMessageModel alloc] init];
-//    model1.from = @"fox";
-//    model1.to = @"yy";
-//    model1.bodies = [[FLMessageBody alloc] init];
-//    model1.bodies.msg = @"看见爱上了副科级阿拉山口地方了拉上的飞机离开";
-//    
-//    FLMessageModel *model2 = [[FLMessageModel alloc] init];
-//    model2.from = @"yy";
-//    model2.to = @"fox";
-//    model2.bodies = [[FLMessageBody alloc] init];
-//    model2.bodies.msg = @"看见爱上了副sadfkl了解萨拉克服";
-//    
-//    FLMessageModel *model3 = [[FLMessageModel alloc] init];
-//    model3.from = @"fox";
-//    model3.to = @"yy";
-//    model3.bodies = [[FLMessageBody alloc] init];
-//    model3.bodies.msg = @"看见爱上了副科级阿拉山口地方了拉上的飞机离开爱看楼上的房间卡上的李开复";
-//    
-//    
-//    FLMessageModel *model4 = [[FLMessageModel alloc] init];
-//    model4.from = @"fox";
-//    model4.to = @"yy";
-//    model4.bodies = [[FLMessageBody alloc] init];
-//    model4.bodies.msg = @"看见爱上了副科级阿拉山口地方了拉上的飞机离开阿喀琉斯打飞机快乐撒娇的法律";
-//    
-//    FLMessageModel *model5 = [[FLMessageModel alloc] init];
-//    model5.from = @"yy";
-//    model5.to = @"fox";
-//    model5.bodies = [[FLMessageBody alloc] init];
-//    model5.bodies.msg = @"看见爱上了副科级阿拉山口地方了拉上的飞机离开阿斯蒂芬克拉数据看到房价来看撒娇放得开拉就是考虑到附近萨克了解到疯狂拉升阶段考虑房价";
-//    
-//    [self.dataSource addObject:model1];
-//    [self.dataSource addObject:model2];
-//    [self.dataSource addObject:model3];
-//    [self.dataSource addObject:model4];
-//    [self.dataSource addObject:model5];
+}
+
+#pragma mark - Data
+- (void)queryDataFromDB {
     
+    NSArray *dataArray = [[FLChatDBManager shareManager] queryMessagesWithUser:self.toUser];
+    [self.dataSource addObjectsFromArray:dataArray];
     [self.tableView reloadData];
 }
 
 #pragma mark - Pravite
+
+/**
+ 将当前会话添加到消息列表中
+ */
+- (void)addCurrentConversationToChatList {
+    
+    if (self.dataSource.count) { // 当前会话中有消息记录
+        
+        // 判断消息列表中是否已经有该会话
+        FLChatListViewController *chatListVC = [FLClientManager shareManager].chatListVC;
+        FLConversationModel *conversation = [chatListVC isExistConversationWithToUser:self.toUser];
+        if (!conversation) { // 如果会话不存在，添加该会话
+            
+            FLMessageModel *latestModel = self.dataSource.lastObject;
+            [chatListVC addConversationWithMessage:latestModel isReaded:YES];
+        }
+    }
+}
 // 发送图片消息
 - (void)sendImgMessageWithImage:(UIImage *)image asset:(id)asset isOriginalPhoto:(BOOL)isOriginalPhoto {
     

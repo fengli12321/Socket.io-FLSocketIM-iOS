@@ -10,6 +10,7 @@
 
 @interface FLChatViewController : FLViewController
 
+@property (nonatomic, copy) NSString *toUser;
 - (instancetype)initWithToUser:(NSString *)toUser;
 
 @end

@@ -68,6 +68,8 @@
 		12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE2C1F13202900FF3B44 /* FLChatDBManager.m */; };
 		12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */; };
 		12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */; };
+		12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809A71F1C61B40072A42B /* NSDate+Common.m */; };
+		12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809AA1F1C65DA0072A42B /* NSString+Common.m */; };
 		12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CE21F17634A0069617B /* NSBundle+TZImagePicker.m */; };
 		12D86CF71F17634A0069617B /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CE41F17634A0069617B /* TZAssetCell.m */; };
 		12D86CF81F17634A0069617B /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CE61F17634A0069617B /* TZAssetModel.m */; };
@@ -79,6 +81,9 @@
 		12D86CFE1F17634A0069617B /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF11F17634A0069617B /* TZPhotoPreviewController.m */; };
 		12D86CFF1F17634A0069617B /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF31F17634A0069617B /* TZVideoPlayerController.m */; };
 		12D86D001F17634A0069617B /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF51F17634A0069617B /* UIView+Layout.m */; };
+		12EF3B8E1F18580500111000 /* FLChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF3B8D1F18580500111000 /* FLChatListCell.m */; };
+		12EF3B921F186E8C00111000 /* FLConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF3B911F186E8C00111000 /* FLConversationModel.m */; };
+		12EF3B951F189B4C00111000 /* FLBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF3B941F189B4C00111000 /* FLBadgeLabel.m */; };
 		39E91558BEC0923F3217B8EA /* Pods_FLSocketIMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BEE4FF0EDD70CD2F3C976C /* Pods_FLSocketIMTests.framework */; };
 		7B6B88B802C316BC70E027C1 /* Pods_FLSocketIM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8653D711C85AC9A60FF0F41 /* Pods_FLSocketIM.framework */; };
 		7CBA30BF340E9FAB83805313 /* Pods_FLSocketIMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */; };
@@ -197,6 +202,11 @@
 		12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendsListCell.m; sourceTree = "<group>"; };
 		12D082F91F160FCF00E0D238 /* FLBridgeDelegateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBridgeDelegateModel.h; sourceTree = "<group>"; };
 		12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLBridgeDelegateModel.m; sourceTree = "<group>"; };
+		12D809A61F1C61B40072A42B /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
+		12D809A71F1C61B40072A42B /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
+		12D809A91F1C65DA0072A42B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		12D809AA1F1C65DA0072A42B /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
+		12D809AC1F1C999A0072A42B /* FLSocketIM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FLSocketIM.entitlements; sourceTree = "<group>"; };
 		12D86CE11F17634A0069617B /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
 		12D86CE21F17634A0069617B /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		12D86CE31F17634A0069617B /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
@@ -218,6 +228,12 @@
 		12D86CF31F17634A0069617B /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		12D86CF41F17634A0069617B /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		12D86CF51F17634A0069617B /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		12EF3B8C1F18580500111000 /* FLChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatListCell.h; sourceTree = "<group>"; };
+		12EF3B8D1F18580500111000 /* FLChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLChatListCell.m; sourceTree = "<group>"; };
+		12EF3B901F186E8C00111000 /* FLConversationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLConversationModel.h; sourceTree = "<group>"; };
+		12EF3B911F186E8C00111000 /* FLConversationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLConversationModel.m; sourceTree = "<group>"; };
+		12EF3B931F189B4C00111000 /* FLBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBadgeLabel.h; sourceTree = "<group>"; };
+		12EF3B941F189B4C00111000 /* FLBadgeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLBadgeLabel.m; sourceTree = "<group>"; };
 		2B260E5E0C0660AABA04B15E /* Pods-FLSocketIMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		323334B9EEBE5EDD06613045 /* Pods-FLSocketIMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLSocketIMTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLSocketIMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +323,7 @@
 		123A9FE01F0E150700DCC9E9 /* FLSocketIM */ = {
 			isa = PBXGroup;
 			children = (
+				12D809AC1F1C999A0072A42B /* FLSocketIM.entitlements */,
 				123AA01E1F0E15D800DCC9E9 /* Other */,
 				123AA0141F0E15D100DCC9E9 /* Controller */,
 				123AA01B1F0E15D100DCC9E9 /* View */,
@@ -382,6 +399,7 @@
 		123AA01A1F0E15D100DCC9E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				12EF3B8F1F186D9700111000 /* ChatList */,
 				12B9D9651F0F266400B7F749 /* ChatRoom */,
 				12D082F91F160FCF00E0D238 /* FLBridgeDelegateModel.h */,
 				12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */,
@@ -392,6 +410,7 @@
 		123AA01B1F0E15D100DCC9E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				12EF3B8B1F1857D000111000 /* ChatList */,
 				12D082F51F15F6E300E0D238 /* FriendsAndGroup */,
 				12B9D9601F0F25AA00B7F749 /* ChatRoom */,
 				123AA0311F0E21D600DCC9E9 /* Common */,
@@ -424,6 +443,10 @@
 				123AA0401F0E30A400DCC9E9 /* UIViewController+Common.m */,
 				12B9D95D1F0F1B4200B7F749 /* UIColor+Common.h */,
 				12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */,
+				12D809A61F1C61B40072A42B /* NSDate+Common.h */,
+				12D809A71F1C61B40072A42B /* NSDate+Common.m */,
+				12D809A91F1C65DA0072A42B /* NSString+Common.h */,
+				12D809AA1F1C65DA0072A42B /* NSString+Common.m */,
 			);
 			name = Category;
 			path = Categroy;
@@ -606,6 +629,26 @@
 			path = TZImagePickerController;
 			sourceTree = "<group>";
 		};
+		12EF3B8B1F1857D000111000 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				12EF3B8C1F18580500111000 /* FLChatListCell.h */,
+				12EF3B8D1F18580500111000 /* FLChatListCell.m */,
+				12EF3B931F189B4C00111000 /* FLBadgeLabel.h */,
+				12EF3B941F189B4C00111000 /* FLBadgeLabel.m */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
+		12EF3B8F1F186D9700111000 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				12EF3B901F186E8C00111000 /* FLConversationModel.h */,
+				12EF3B911F186E8C00111000 /* FLConversationModel.m */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
 		2CCA57FDA8B68B00B78B01A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -706,9 +749,17 @@
 				TargetAttributes = {
 					123A9FDD1F0E150700DCC9E9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6625VD7T97;
+						DevelopmentTeam = 5HBP8N48W6;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					123A9FF61F0E150700DCC9E9 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -943,9 +994,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12EF3B921F186E8C00111000 /* FLConversationModel.m in Sources */,
 				12D86CFB1F17634A0069617B /* TZImagePickerController.m in Sources */,
 				12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */,
 				12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */,
+				12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */,
 				122EBB981F14D07F000E7F70 /* FLMessageInputView.m in Sources */,
 				123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */,
 				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
@@ -955,6 +1008,7 @@
 				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
 				12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */,
+				12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */,
 				12B9D96F1F0F71C500B7F749 /* FLSocketManager.m in Sources */,
 				123AA0341F0E220D00DCC9E9 /* FLAlertView.m in Sources */,
 				12D86CFC1F17634A0069617B /* TZPhotoPickerController.m in Sources */,
@@ -976,6 +1030,8 @@
 				123AA0411F0E30A400DCC9E9 /* UIViewController+Common.m in Sources */,
 				123AA03D1F0E2F9700DCC9E9 /* FLLoginViewController.m in Sources */,
 				12D86D001F17634A0069617B /* UIView+Layout.m in Sources */,
+				12EF3B8E1F18580500111000 /* FLChatListCell.m in Sources */,
+				12EF3B951F189B4C00111000 /* FLBadgeLabel.m in Sources */,
 				123AA0481F0E3AEC00DCC9E9 /* FLTabBarController.m in Sources */,
 				123A9FE31F0E150700DCC9E9 /* main.m in Sources */,
 				123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */,
@@ -1129,14 +1185,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 6625VD7T97;
+				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5HBP8N48W6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
 				INFOPLIST_FILE = FLSocketIM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIM;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";
+				PROVISIONING_PROFILE_SPECIFIER = vifuLink;
 				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1149,14 +1209,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 6625VD7T97;
+				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5HBP8N48W6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
 				INFOPLIST_FILE = FLSocketIM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLSocketIM;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";
+				PROVISIONING_PROFILE_SPECIFIER = vifuLink;
 				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

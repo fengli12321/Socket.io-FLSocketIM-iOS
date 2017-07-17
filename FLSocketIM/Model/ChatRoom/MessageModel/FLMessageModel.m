@@ -57,10 +57,6 @@
 
 @implementation FLMessageBody
 
-- (void)setMsg:(NSString *)msg {
-    _msg = [msg copy];
-    
-    
-}
+
 
 @end

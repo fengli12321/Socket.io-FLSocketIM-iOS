@@ -137,6 +137,10 @@ static FLChatManager *instance = nil;
     
     id parameters = [message yy_modelToJSONObject];
     [[FLSocketManager shareManager].client emit:@"chat" with:@[parameters]];
+    
+    
+    // 消息插入数据库
+    [[FLChatDBManager shareManager] addMessage:message];
 }
 
 - (void)addHandles {
@@ -146,11 +150,19 @@ static FLChatManager *instance = nil;
     // 收到消息
     [socket on:@"chat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
         
+        NSString *bodyStr = data.firstObject[@"bodies"];
+        FLMessageBody *body = [FLMessageBody yy_modelWithJSON:[bodyStr stringToJsonDictionary]];
+        FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
+        message.bodies = body;
+        // 插入数据库
+        [[FLChatDBManager shareManager] addMessage:message];
+        
+        // 代理处理
         for (FLBridgeDelegateModel  *model in self.delegateArray) {
             
             id<FLChatManagerDelegate>delegate = model.delegate;
             if (delegate && [delegate respondsToSelector:@selector(chatManager:didReceivedMessage:)]) {
-                FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
+                
                 if (message) {
                     [delegate chatManager:self didReceivedMessage:message];
                 }

@@ -48,6 +48,7 @@
     _tableView.dataSource = self;
     _tableView.rowHeight = 70;
     [_tableView registerClass:[FLFriendsListCell class] forCellReuseIdentifier:@"FLFriendsListCell"];
+    _tableView.tableFooterView = [[UIView alloc] init];
 }
 #pragma mark - Request
 - (void)requestData {

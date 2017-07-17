@@ -62,7 +62,7 @@
         parameters[@"userName"] = _userNameField.text;
         parameters[@"password"] = _passwordField.text;
         __weak typeof(self) weakSelf = self;
-        [FLNetWorkManager ba_requestWithType:Get withUrlString:Login_Url withParameters:parameters withSuccessBlock:^(id response) {
+        [FLNetWorkManager ba_requestWithType:Post withUrlString:Login_Url withParameters:parameters withSuccessBlock:^(id response) {
             
             [weakSelf hideHud];
             if ([response[@"code"] integerValue] < 0) {
@@ -101,7 +101,7 @@
         [weakSelf showHint:@"连接失败"];
     }];
 }
-- (IBAction)register:(id)sender {
+- (IBAction)registerAccount:(id)sender {
     
     if([self checkInput]) {
         
@@ -110,7 +110,7 @@
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"userName"] = _userNameField.text;
         parameters[@"password"] = _passwordField.text;
-        [FLNetWorkManager ba_requestWithType:Get withUrlString:Register_Url withParameters:parameters withSuccessBlock:^(id response) {
+        [FLNetWorkManager ba_requestWithType:Post withUrlString:Register_Url withParameters:parameters withSuccessBlock:^(id response) {
             
             [weakSelf hideHud];
             if([response[@"code"] integerValue] < 0) {

@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, FLMessageModelType) {
 
 @property (nonatomic, assign) FLMessageModelType type;
 @property (nonatomic, copy) NSString *msg_id;           //消息ID
-@property (nonatomic, copy) NSString *timestamp;        //消息发送时间
+@property (nonatomic, assign) long long timestamp;        //消息发送时间
 @property (nonatomic, copy) NSString *to;               //接收人的username或者接收group的ID
 @property (nonatomic, copy) NSString *from;             //发送人username
 @property (nonatomic, copy) NSString *chat_type;        // 聊天类型

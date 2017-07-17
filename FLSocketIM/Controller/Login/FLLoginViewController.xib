@@ -71,7 +71,7 @@
                         <color key="titleColor" red="0.067499190410000007" green="0.067499190410000007" blue="0.067499190410000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="register:" destination="-1" eventType="touchUpInside" id="7yX-gU-smf"/>
+                        <action selector="registerAccount:" destination="-1" eventType="touchUpInside" id="8FD-am-5ZS"/>
                     </connections>
                 </button>
             </subviews>
@@ -95,7 +95,7 @@
                 <constraint firstItem="zoJ-J2-FFg" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-40" id="usD-Fm-VNc"/>
                 <constraint firstItem="zoJ-J2-FFg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="zAY-I9-lSj"/>
             </constraints>
-            <point key="canvasLocation" x="109" y="-149"/>
+            <point key="canvasLocation" x="483" y="-207"/>
         </view>
     </objects>
 </document>
