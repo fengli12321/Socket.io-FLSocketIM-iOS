@@ -27,6 +27,11 @@
     
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
+        
+        SocketIOClient *client = [FLSocketManager shareManager].client;
+        if (client && client.status == SocketIOClientStatusDisconnected) {
+            [client connect];
+        }
         switch (status)
         {
             case AFNetworkReachabilityStatusUnknown: // 未知网络

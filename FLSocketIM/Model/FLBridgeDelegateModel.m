@@ -10,7 +10,7 @@
 
 @implementation FLBridgeDelegateModel
 
-- (instancetype)initWithDelegate:(id<FLChatManagerDelegate>)delegate {
+- (instancetype)initWithDelegate:(id)delegate {
     if (self = [super init]) {
         
         self.delegate = delegate;

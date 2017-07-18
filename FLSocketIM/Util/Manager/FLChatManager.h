@@ -10,52 +10,12 @@
 #import "FLMessageModel.h"
 
 @class FLChatManager;
-@protocol FLChatManagerDelegate <NSObject>
 
-@optional
-
-/**
- 监听收到新消息
-
- @param manager 聊天管理类
- @param message 收到的消息模型
- */
-- (void)chatManager:(FLChatManager *)manager didReceivedMessage:(FLMessageModel *)message;
-
-/**
- 监听到用户上线
-
- @param manager 聊天管理类
- @param userName 上线用户
- */
-- (void)chatManager:(FLChatManager *)manager userOnline:(NSString *)userName;
-
-/**
- 监听到用户下线
-
- @param manager 聊天管理类
- @param userName 下线用户
- */
-- (void)chatManager:(FLChatManager *)manager userOffline:(NSString *)userName;
-
-@end
 @interface FLChatManager : NSObject
 
 + (instancetype)shareManager;
 
-/**
- 添加代理
 
- @param delegate 代理
- */
-- (void)addDelegate:(id<FLChatManagerDelegate>)delegate;
-
-/**
- 移除代理
-
- @param delegate 代理
- */
-- (void)removeDelegate:(id<FLChatManagerDelegate>)delegate;
 
 /**
  发送文本消息

@@ -12,7 +12,7 @@
 #import "FLChatListCell.h"
 #import "FLChatViewController.h"
 
-@interface FLChatListViewController () <UITableViewDelegate, UITableViewDataSource, FLChatManagerDelegate>
+@interface FLChatListViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -34,13 +34,13 @@
     // Do any additional setup after loading the view.
     
     [FLClientManager shareManager].chatListVC = self;
-    [[FLChatManager shareManager] addDelegate:self];
+    [[FLClientManager shareManager] addDelegate:self];
     [self setupUI];
     
     [self queryDataFromDB];
 }
 - (void)dealloc {
-    [[FLChatManager shareManager] removeDelegate:self];
+    [[FLClientManager shareManager] removeDelegate:self];
 }
 #pragma mark - UI
 - (void)setupUI {
@@ -55,7 +55,7 @@
     [self.view addSubview:_tableView];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 65;
+    _tableView.rowHeight = 70;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerClass:[FLChatListCell class] forCellReuseIdentifier:@"FLChatListCell"];
 }
@@ -136,8 +136,9 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
-#pragma mark - FLChatManagerDelegate
-- (void)chatManager:(FLChatManager *)manager didReceivedMessage:(FLMessageModel *)message {
+#pragma mark - FLClientManagerDelegate
+
+- (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message {
     
     // 如果已经开启与对方的会话，则不需要添加消息红点
     FLChatViewController *chatVC = [FLClientManager shareManager].chattingConversation;
@@ -150,11 +151,16 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         FLConversationModel *conversation = [self isExistConversationWithToUser:message.from];
-        NSInteger index = [self.dataSource indexOfObject:conversation];
         if (conversation) {
             conversation.unReadCount += 1;
             conversation.latestMessage = message;
-            [self.dataSource exchangeObjectAtIndex:index withObjectAtIndex:0];
+            // 将会话放到最前面
+            [self.dataSource removeObject:conversation];
+            [self.dataSource insertObject:conversation atIndex:0];
+            
+            // 更新数据库会话最近一条消息的内容
+            [[FLChatDBManager shareManager] updateLatestMessageOfConversation:conversation andMessage:message];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self.tableView reloadData];

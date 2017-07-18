@@ -10,6 +10,9 @@
 #import "FLTabBarController.h"
 #import "FLSocketManager.h"
 #import "FLClientManager.h"
+
+
+static NSString *loginAccountInfo = @"loginAccountInfo";
 @interface FLLoginViewController ()
 
 // 账号输入
@@ -35,6 +38,12 @@
     
     _loginBtn.layer.cornerRadius = 15;
     _registerBtn.layer.cornerRadius = 15;
+    
+    NSDictionary *accountInfo = [FLUserDefault objectForKey:loginAccountInfo];
+    if (accountInfo) {
+        _userNameField.text = accountInfo[@"userName"];
+        _passwordField.text = accountInfo[@"password"];
+    }
 }
 
 #pragma mark - Private
@@ -71,6 +80,7 @@
             }
             else {
                 
+                [FLUserDefault setObject:parameters forKey:loginAccountInfo];
                 NSString *auth_token = response[@"data"][@"auth_token"];
                 [weakSelf socketConnectWithToken:auth_token];
                 [FLClientManager shareManager].auth_token = auth_token;

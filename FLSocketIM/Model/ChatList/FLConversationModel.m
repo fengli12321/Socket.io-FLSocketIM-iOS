@@ -30,7 +30,10 @@
             break;
     }
     
-    self.latestMsgTimeStr = @"一分钟前";
+    
+    
+    NSDate *messageDate = [NSDate timeStampToDate:((CGFloat)latestMessage.timestamp/1000.0f)];
+    self.latestMsgTimeStr = [messageDate stringTimesAgo];
     self.latestMsgId = latestMessage.msg_id;
 }
 

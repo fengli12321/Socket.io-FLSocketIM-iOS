@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@import SocketIO;
 @class FLChatViewController;
 @class FLChatListViewController;
+@class FLMessageModel;
+@protocol FLClientManagerDelegate;
 @interface FLClientManager : NSObject
 
 + (instancetype)shareManager;
@@ -39,5 +42,60 @@
  消息会话列表
  */
 @property (nonatomic, weak) FLChatListViewController *chatListVC;
+
+
+/**
+ 添加代理
+ 
+ @param delegate 代理
+ */
+- (void)addDelegate:(id<FLClientManagerDelegate>)delegate;
+
+/**
+ 移除代理
+ 
+ @param delegate 代理
+ */
+- (void)removeDelegate:(id<FLClientManagerDelegate>)delegate;
+
+@end
+
+@protocol FLClientManagerDelegate <NSObject>
+
+@optional
+/**
+ 连接状态发生变化
+
+ @param manager 客户端管理器
+ @param status 变化的状态
+ */
+- (void)clientManager:(FLClientManager *)manager didChangeStatus:(SocketIOClientStatus)status;
+
+
+/**
+ 监听收到新消息
+ 
+ @param manager 聊天管理类
+ @param message 收到的消息模型
+ */
+- (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message;
+
+/**
+ 监听到用户上线
+ 
+ @param manager 聊天管理类
+ @param userName 上线用户
+ */
+- (void)clientManager:(FLClientManager *)manager userOnline:(NSString *)userName;
+
+/**
+ 监听到用户下线
+ 
+ @param manager 聊天管理类
+ @param userName 下线用户
+ */
+- (void)clientManager:(FLClientManager *)manager userOffline:(NSString *)userName;
+
+
 
 @end

@@ -83,7 +83,7 @@ static FLChatDBManager *instance = nil;
 - (NSString *)DBMianPath {
     
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    path = @"/Users/fengli/Desktop";
+//    path = @"/Users/fengli/Desktop";
     path = [path stringByAppendingPathComponent:@"FLChatDB"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isDir = false;
@@ -247,7 +247,7 @@ static FLChatDBManager *instance = nil;
     [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
         
         NSDate *date = [NSDate date];
-        NSNumber *timeStamp = [NSNumber numberWithLongLong:[date timeStamp]*1000];
+        NSNumber *timeStamp = [NSNumber numberWithLongLong:[date timeStamp]];
         FMResultSet *result = [db executeQuery:@"SELECT * FROM message WHERE conversation = ? AND timestamp < ? ORDER BY timestamp DESC LIMIT ? OFFSET ?", userName, timeStamp, @(limit), @(limit*page)];
         while (result.next) {
             
@@ -259,5 +259,24 @@ static FLChatDBManager *instance = nil;
     return messages;
 }
 
+
+- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation andMessage:(FLMessageModel *)message {
+    
+    if (!message.msg_id) {
+        return;
+    }
+    
+    [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        
+        BOOL success = [db executeUpdate:@"UPDATE conversation SET latestmsgid = ? WHERE id = ?", message.msg_id, conversation.userName];
+        
+        if (success) {
+            FLLog(@"更新成功");
+        }
+        else {
+            FLLog(@"更新失败");
+        }
+    }];
+}
 
 @end

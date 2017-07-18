@@ -9,8 +9,9 @@
 #import "FLFriendsAndGroupsViewController.h"
 #import "FLChatViewController.h"
 #import "FLFriendsListCell.h"
+#import "FLFriendModel.h"
 
-@interface FLFriendsAndGroupsViewController () <UITableViewDelegate, UITableViewDataSource, FLChatManagerDelegate>
+@interface FLFriendsAndGroupsViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -30,12 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[FLChatManager shareManager] addDelegate:self];
+    [[FLClientManager shareManager] addDelegate:self];
     [self creatUI];
     [self requestData];
 }
 - (void)dealloc {
-    [[FLChatManager shareManager] removeDelegate:self];
+    [[FLClientManager shareManager] removeDelegate:self];
 }
 #pragma mark - UI
 - (void)creatUI {
@@ -46,7 +47,7 @@
     [self.view addSubview:_tableView];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.rowHeight = 70;
+    _tableView.rowHeight = 60;
     [_tableView registerClass:[FLFriendsListCell class] forCellReuseIdentifier:@"FLFriendsListCell"];
     _tableView.tableFooterView = [[UIView alloc] init];
 }
@@ -54,10 +55,22 @@
 - (void)requestData {
     
     __weak typeof(self) weakSelf = self;
-    [FLNetWorkManager ba_requestWithType:Get withUrlString:OnlineUser_Url withParameters:nil withSuccessBlock:^(id response) {
+    [FLNetWorkManager ba_requestWithType:Get withUrlString:AllUsers_Url withParameters:nil withSuccessBlock:^(id response) {
         
-        NSArray *onlineUserArr = response[@"data"];
-        [weakSelf.dataSource addObjectsFromArray:onlineUserArr];
+        
+        NSArray *allFriends = [NSArray yy_modelArrayWithClass:[FLFriendModel class] json:response[@"data"][@"allUser"]];
+        
+        for (NSString *onlineUser in response[@"data"][@"onLineUsers"]) {
+            
+            for (FLFriendModel *friend in allFriends) {
+                
+                if ([friend.name isEqualToString:onlineUser]) {
+                    friend.isOnline = YES;
+                    break;
+                }
+            }
+        }
+        [weakSelf.dataSource addObjectsFromArray:allFriends];
         if (weakSelf.dataSource.count) {
             [weakSelf.tableView reloadData];
         }
@@ -65,10 +78,6 @@
         
         [weakSelf showError:@"加载好友失败"];
     }];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource
@@ -78,7 +87,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FLFriendsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FLFriendsListCell" forIndexPath:indexPath];
-    cell.nameLabel.text = self.dataSource[indexPath.row];
+    cell.model = self.dataSource[indexPath.row];
     cell.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Fruit-%ld", indexPath.row%12]];
     return cell;
 }
@@ -91,33 +100,35 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
-#pragma mark - FLChatManagerDelegate
-- (void)chatManager:(FLChatManager *)manager userOnline:(NSString *)userName {
-    
-    bool isExist = NO;
-    for (NSString *str in self.dataSource) {
-        if ([str isEqualToString:userName]) {
-            isExist = YES;
-            break;
-        }
-    }
-    if (isExist) {
-        return;
-    }
-    [self showHint:[NSString stringWithFormat:@"%@上线了", userName]];
-    [self.dataSource insertObject:userName atIndex:0];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-}
-- (void)chatManager:(FLChatManager *)manager userOffline:(NSString *)userName {
+#pragma mark - FLClientManagerDelegate
+
+- (void)clientManager:(FLClientManager *)manager userOnline:(NSString *)userName {
     
     NSInteger index = 0;
-    for (NSString *str in self.dataSource) {
+    for (FLFriendModel *friends in self.dataSource) {
+        if ([friends.name isEqualToString:userName]) {
+
+            friends.isOnline = YES;
+            [self showHint:[NSString stringWithFormat:@"%@上线了", userName]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            break;
+        }
+        index ++;
+    }
+
+    
+    
+}
+- (void)clientManager:(FLClientManager *)manager userOffline:(NSString *)userName {
+    
+    NSInteger index = 0;
+    for (FLFriendModel *friend in self.dataSource) {
         
-        if ([str isEqualToString:userName]) {
+        if ([friend.name isEqualToString:userName]) {
             
+            friend.isOnline = NO;
             [self showHint:[NSString stringWithFormat:@"%@下线了", userName]];
-            [self.dataSource removeObject:str];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         index++;

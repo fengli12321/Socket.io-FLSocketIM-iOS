@@ -48,6 +48,9 @@
 		123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0521F0E3CD200DCC9E9 /* FLChatViewController.m */; };
 		123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */; };
 		123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */; };
+		129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */; };
+		129E31F41F1DA0CC00ECB93C /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 129E31F21F1DA0CC00ECB93C /* README.textile */; };
+		129E323B1F1E09EA00ECB93C /* FLFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E323A1F1E09EA00ECB93C /* FLFriendModel.m */; };
 		12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */; };
 		12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D9631F0F264000B7F749 /* FLMessageCell.m */; };
 		12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B9D9681F0F26A400B7F749 /* FLMessageModel.m */; };
@@ -171,6 +174,11 @@
 		123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendsAndGroupsViewController.m; sourceTree = "<group>"; };
 		123AA0571F0E3F0E00DCC9E9 /* FLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLNavigationController.h; sourceTree = "<group>"; };
 		123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLNavigationController.m; sourceTree = "<group>"; };
+		129E31F01F1DA0CC00ECB93C /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		129E31F21F1DA0CC00ECB93C /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
+		129E32391F1E09EA00ECB93C /* FLFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFriendModel.h; sourceTree = "<group>"; };
+		129E323A1F1E09EA00ECB93C /* FLFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendModel.m; sourceTree = "<group>"; };
 		12B9D95C1F0F194500B7F749 /* ColorConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConst.h; sourceTree = "<group>"; };
 		12B9D95D1F0F1B4200B7F749 /* UIColor+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Common.h"; sourceTree = "<group>"; };
 		12B9D95E1F0F1B4200B7F749 /* UIColor+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Common.m"; sourceTree = "<group>"; };
@@ -399,6 +407,7 @@
 		123AA01A1F0E15D100DCC9E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				129E32381F1E09D100ECB93C /* FriendsAndGroups */,
 				12EF3B8F1F186D9700111000 /* ChatList */,
 				12B9D9651F0F266400B7F749 /* ChatRoom */,
 				12D082F91F160FCF00E0D238 /* FLBridgeDelegateModel.h */,
@@ -527,6 +536,25 @@
 			path = FriendAndGroups;
 			sourceTree = "<group>";
 		};
+		129E31EF1F1DA0CC00ECB93C /* NSDate+Helper */ = {
+			isa = PBXGroup;
+			children = (
+				129E31F01F1DA0CC00ECB93C /* NSDate+Helper.h */,
+				129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */,
+				129E31F21F1DA0CC00ECB93C /* README.textile */,
+			);
+			path = "NSDate+Helper";
+			sourceTree = "<group>";
+		};
+		129E32381F1E09D100ECB93C /* FriendsAndGroups */ = {
+			isa = PBXGroup;
+			children = (
+				129E32391F1E09EA00ECB93C /* FLFriendModel.h */,
+				129E323A1F1E09EA00ECB93C /* FLFriendModel.m */,
+			);
+			path = FriendsAndGroups;
+			sourceTree = "<group>";
+		};
 		12B9D9601F0F25AA00B7F749 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +624,7 @@
 		12D86CDF1F17632B0069617B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				129E31EF1F1DA0CC00ECB93C /* NSDate+Helper */,
 				12D86CE01F17634A0069617B /* TZImagePickerController */,
 			);
 			path = Vendor;
@@ -810,6 +839,7 @@
 				12BAF80A1F1701F7007CC695 /* Fruit-1.png in Resources */,
 				122EBBAD1F14D6A6000E7F70 /* keyboard_add_camera@2x.png in Resources */,
 				122EBBB61F14D6A6000E7F70 /* keyboard_emotion_monkey_gif@2x.png in Resources */,
+				129E31F41F1DA0CC00ECB93C /* README.textile in Resources */,
 				123A9FF11F0E150700DCC9E9 /* LaunchScreen.storyboard in Resources */,
 				122EBBB91F14D6A6000E7F70 /* keyboard_page_unselected@2x.png in Resources */,
 				12BAF80D1F1701F7007CC695 /* Fruit-4.png in Resources */,
@@ -996,6 +1026,7 @@
 			files = (
 				12EF3B921F186E8C00111000 /* FLConversationModel.m in Sources */,
 				12D86CFB1F17634A0069617B /* TZImagePickerController.m in Sources */,
+				129E323B1F1E09EA00ECB93C /* FLFriendModel.m in Sources */,
 				12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */,
 				12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */,
 				12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */,
@@ -1006,6 +1037,7 @@
 				12D86CF81F17634A0069617B /* TZAssetModel.m in Sources */,
 				123AA0291F0E1A7700DCC9E9 /* UIView+Common.m in Sources */,
 				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
+				129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */,
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
 				12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */,
 				12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */,

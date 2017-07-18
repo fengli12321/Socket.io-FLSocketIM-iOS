@@ -177,6 +177,7 @@
 #pragma mark - ButtonAction
 - (void)emotionButtonClicked:(UIButton *)sender {
     [[FLSocketManager shareManager].client disconnect];
+    
 }
 - (void)voiceButtonClicked:(UIButton *)sender {
     [[FLSocketManager shareManager].client connect];

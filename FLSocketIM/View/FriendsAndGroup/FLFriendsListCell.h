@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class FLFriendModel;
 @interface FLFriendsListCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *iconImage;
-@property (nonatomic, strong) UILabel *nameLabel;
+
+@property (nonatomic, strong) FLFriendModel *model;
 
 @end

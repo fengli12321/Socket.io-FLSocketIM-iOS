@@ -32,31 +32,29 @@ static FLSocketManager *instance = nil;
     
     
     NSURL* url = [[NSURL alloc] initWithString:BaseUrl];
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"forcePolling": @YES, @"connectParams": @{@"auth_token" : token}}];
+    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forcePolling": @YES, @"connectParams": @{@"auth_token" : token}}];
 
-    [socket connect];
-    _client = socket;
-    
-    __block BOOL isConnect = false;
-    [socket on:@"connect" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
+    // 连接超时时间设置为15秒
+    [socket connectWithTimeoutAfter:15 withHandler:^{
         
-        isConnect = true;
-        success();
-       
+        fail();
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // 监听一次连接成功
+    [socket once:@"connect" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
         
-        if (!isConnect) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [_client disconnect];
-                fail();
-            });
-        }
-    });
+        success();
+    }];
+    
+    _client = socket;
 }
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    
+    FLLog(@"==========fsafsa==========asfdsaf===========afsaf================");
+}
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     static dispatch_once_t onceToken;

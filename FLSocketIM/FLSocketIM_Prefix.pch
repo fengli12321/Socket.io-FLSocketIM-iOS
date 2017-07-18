@@ -23,7 +23,7 @@
 #import "FLSocketManager.h"
 #import "UIImageView+WebCache.h"
 #import "FLChatDBManager.h"
-
+@import SocketIO;
 
 #ifdef DEBUG // 处于开发阶段
 #define FLLog(...) NSLog(__VA_ARGS__)
@@ -38,3 +38,4 @@
 #define kPadding 10.0f
 #define kMargin 15.0f
 #define FLFont(f) [UIFont systemFontOfSize:(f)]
+#define FLUserDefault [NSUserDefaults standardUserDefaults]

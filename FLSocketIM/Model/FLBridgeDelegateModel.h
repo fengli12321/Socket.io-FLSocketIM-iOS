@@ -11,8 +11,8 @@
 
 @interface FLBridgeDelegateModel : NSObject
 
-@property (nonatomic, weak) id<FLChatManagerDelegate>delegate;
+@property (nonatomic, weak) id delegate;
 
-- (instancetype)initWithDelegate:(id<FLChatManagerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id)delegate;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@import SocketIO;
+
 @interface FLSocketManager : UIView
 
 @property (nonatomic, strong) SocketIOClient *client;

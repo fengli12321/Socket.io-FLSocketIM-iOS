@@ -61,4 +61,14 @@
 - (NSArray <FLMessageModel *>*)queryMessagesWithUser:(NSString *)userName limit:(NSInteger)limit page:(NSInteger)page;
 
 
+
+/**
+ 更新会话的最近消息数据
+
+ @param conversation 会话模型
+ @param message 最新消息
+ */
+- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation  andMessage:(FLMessageModel *)message;
+
+
 @end

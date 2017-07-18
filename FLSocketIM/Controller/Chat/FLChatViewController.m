@@ -17,7 +17,7 @@
 #import "FLChatListViewController.h"
 #import "FLConversationModel.h"
 
-@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLChatManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate>
+@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -51,14 +51,14 @@
     [super viewDidLoad];
     
     [FLClientManager shareManager].chattingConversation = self;
-    [[FLChatManager shareManager] addDelegate:self];
+    [[FLClientManager shareManager] addDelegate:self];
     [self creatUI];
     
     [self queryDataFromDB];
 }
 
 - (void)dealloc {
-    [[FLChatManager shareManager] removeDelegate:self];
+    [[FLClientManager shareManager] removeDelegate:self];
     
     // 关闭时向消息列表添加当前会话
     [self addCurrentConversationToChatList];
@@ -162,13 +162,12 @@
         }
         
     }
-//    [FLChatManager shareManager] sendImgMessage:<#(NSData *)#> toUser:<#(NSString *)#>
 }
 
 - (void)sendImageMessageWithImgData:(NSData *)imgData {
     
     FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData toUser:self.toUser];
-    [self chatManager:nil didReceivedMessage:message];
+    [self clientManager:nil didReceivedMessage:message];
 }
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -197,8 +196,8 @@
     return model.messageCellHeight;
 }
 
-#pragma mark - FLChatManagerDelegate
-- (void)chatManager:(id)manager didReceivedMessage:(FLMessageModel *)message {
+#pragma mark - FLClientManagerDelegate
+- (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message  {
     
     if (!([message.from isEqualToString:self.toUser] || [message.to isEqualToString:self.toUser])) {
         return;
@@ -240,7 +239,7 @@
     
     
     FLMessageModel *message = [[FLChatManager shareManager] sendTextMessage:text toUser:_toUser];
-    [self chatManager:nil didReceivedMessage:message];
+    [self clientManager:nil didReceivedMessage:message];
     
 }
 

@@ -42,7 +42,7 @@ static FLChatManager *instance = nil;
         instance = [super init];
         
         if (instance) {
-            [self addHandles];
+            
         }
     });
     return instance;
@@ -57,37 +57,6 @@ static FLChatManager *instance = nil;
 }
 
 #pragma mark - Public
-- (void)addDelegate:(id<FLChatManagerDelegate>)delegate {
-    
-    BOOL isExist = NO;
-    for (FLBridgeDelegateModel *model in self.delegateArray) {
-        
-        if ([delegate isEqual:model.delegate]) {
-            isExist = YES;
-            break;
-        }
-    }
-    if (!isExist) {
-        FLBridgeDelegateModel *model = [[FLBridgeDelegateModel alloc] initWithDelegate:delegate];
-        [self.delegateArray addObject:model];
-    }
-    
-}
-
-- (void)removeDelegate:(id<FLChatManagerDelegate>)delegate {
-    
-    NSArray *copyArray = [self.delegateArray copy];
-    for (FLBridgeDelegateModel *model in copyArray) {
-        if ([model.delegate isEqual:delegate]) {
-            [self.delegateArray removeObject:model];
-        }
-        else if (!model.delegate) {
-            [self.delegateArray removeObject:model];
-        }
-    }
-}
-
-
 - (FLMessageModel *)sendTextMessage:(NSString *)text toUser:(NSString *)toUser{
     
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
@@ -143,58 +112,6 @@ static FLChatManager *instance = nil;
     [[FLChatDBManager shareManager] addMessage:message];
 }
 
-- (void)addHandles {
-    
-    SocketIOClient *socket = [FLSocketManager shareManager].client;
-    
-    // 收到消息
-    [socket on:@"chat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-        
-        NSString *bodyStr = data.firstObject[@"bodies"];
-        FLMessageBody *body = [FLMessageBody yy_modelWithJSON:[bodyStr stringToJsonDictionary]];
-        FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
-        message.bodies = body;
-        // 插入数据库
-        [[FLChatDBManager shareManager] addMessage:message];
-        
-        // 代理处理
-        for (FLBridgeDelegateModel  *model in self.delegateArray) {
-            
-            id<FLChatManagerDelegate>delegate = model.delegate;
-            if (delegate && [delegate respondsToSelector:@selector(chatManager:didReceivedMessage:)]) {
-                
-                if (message) {
-                    [delegate chatManager:self didReceivedMessage:message];
-                }
-                
-            }
-        }
-    }];
-    
-    // 用户上线
-    [socket on:@"onLine" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-        
-        for (FLBridgeDelegateModel  *model in self.delegateArray) {
-            
-            id<FLChatManagerDelegate>delegate = model.delegate;
-            if (delegate && [delegate respondsToSelector:@selector(chatManager:userOnline:)]) {
-                
-                [delegate chatManager:self userOnline:[data.firstObject valueForKey:@"user"]];
-            }
-        }
-    }];
-    
-    [socket on:@"offLine" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-        
-        for (FLBridgeDelegateModel  *model in self.delegateArray) {
-            
-            id<FLChatManagerDelegate>delegate = model.delegate;
-            if (delegate && [delegate respondsToSelector:@selector(chatManager:userOffline:)]) {
-                
-                [delegate chatManager:self userOffline:[data.firstObject valueForKey:@"user"]];
-            }
-        }
-    }];
-}
+
 
 @end

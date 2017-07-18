@@ -61,7 +61,7 @@
         
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(kMargin);
-        make.width.height.mas_equalTo(45);
+        make.width.height.mas_equalTo(50);
     }];
     
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,7 +109,7 @@
     _unReadMsgCountLabel.hidden = model.unReadCount <= 0;
     if (model.unReadCount) {
         _unReadMsgCountLabel.text = model.unReadCount > 99 ? @"99+" : [NSString stringWithFormat:@"%ld", model.unReadCount];
-        CGFloat width = model.unReadCount > 10 ? (model.unReadCount > 99 ? 30 : 22) : 15;
+        CGFloat width = model.unReadCount > 9 ? (model.unReadCount > 99 ? 30 : 22) : 15;
         [_unReadMsgCountLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             
             make.width.mas_equalTo(width);
