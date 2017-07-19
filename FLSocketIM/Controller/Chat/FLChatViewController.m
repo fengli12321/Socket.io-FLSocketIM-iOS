@@ -17,12 +17,15 @@
 #import "FLChatListViewController.h"
 #import "FLConversationModel.h"
 
+
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) FLMessageInputView *messageInputView;
-
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, assign) BOOL loadAllMessage;
+@property (nonatomic, assign) BOOL isFirstLoad;
 
 @end
 
@@ -49,12 +52,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _isFirstLoad = YES;
     [FLClientManager shareManager].chattingConversation = self;
     [[FLClientManager shareManager] addDelegate:self];
     [self creatUI];
-    
     [self queryDataFromDB];
+    
+    [self updateUnreadMessageRedIconForListAndDB];
+    
 }
 
 - (void)dealloc {
@@ -62,6 +67,9 @@
     
     // 关闭时向消息列表添加当前会话
     [self addCurrentConversationToChatList];
+    
+    // 数据库添加会话
+    [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:self.dataSource.lastObject];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -88,15 +96,58 @@
     _tableView.contentInset = contentInsets;
     _tableView.scrollIndicatorInsets = contentInsets;
 
-    
+    __weak typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf queryDataFromDB];
+    }];
+    header.stateLabel.hidden = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    _tableView.mj_header = header;
 }
 
 #pragma mark - Data
 - (void)queryDataFromDB {
     
-    NSArray *dataArray = [[FLChatDBManager shareManager] queryMessagesWithUser:self.toUser];
-    [self.dataSource addObjectsFromArray:dataArray];
+    
+    if (self.loadAllMessage) {
+        
+        [self showHint:@"没有更多消息记录"];
+        [_tableView.mj_header endRefreshing];
+        
+        [_tableView.mj_header setHidden:YES];
+        return;
+    }
+    NSInteger limit = 10;
+    NSArray *dataArray = [[FLChatDBManager shareManager] queryMessagesWithUser:self.toUser limit:limit page:_currentPage];
+    [_tableView.mj_header endRefreshing];
+    _currentPage ++;
+    if (dataArray.count < limit) {
+        
+        self.loadAllMessage = YES;
+    }
+    [self.dataSource insertObjects:dataArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataArray.count)]];
+    
+
     [self.tableView reloadData];
+    if (_isFirstLoad) {    // 第一次加载，滚动到底部
+        _isFirstLoad = NO;
+        
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    else {
+        
+        CGFloat addHeight = 0.0f;
+        for (FLMessageModel *message in dataArray) {
+            
+            addHeight += message.messageCellHeight;
+        }
+        
+        CGPoint tableOffset = _tableView.contentOffset;
+        tableOffset.y += addHeight;//(addHeight - _tableView.height/2);
+        [_tableView setContentOffset:tableOffset animated:NO];
+    }
+    
 }
 
 #pragma mark - Pravite
@@ -137,11 +188,8 @@
                     
                     [weakSelf sendImageMessageWithImgData:imageData];
                 }
-                
-                
+
             }];
-            
-            
         }
         else {  // iOS8之前
             
@@ -164,10 +212,24 @@
     }
 }
 
+
+/**
+ 发送图片消息
+
+ @param imgData 图片文件
+ */
 - (void)sendImageMessageWithImgData:(NSData *)imgData {
     
     FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData toUser:self.toUser];
     [self clientManager:nil didReceivedMessage:message];
+}
+
+
+// 更新消息列表未读消息数量, 更新数据库
+- (void)updateUnreadMessageRedIconForListAndDB {
+    
+    [[FLClientManager shareManager].chatListVC updateRedPointForUnreadWithConveration:self.toUser];
+    [[FLChatDBManager shareManager] updateUnreadCountOfConversation:self.toUser unreadCount:0];
 }
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -199,9 +261,20 @@
 #pragma mark - FLClientManagerDelegate
 - (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message  {
     
-    if (!([message.from isEqualToString:self.toUser] || [message.to isEqualToString:self.toUser])) {
+    
+    if (manager) { // 接收到的消息
+        if ([message.from isEqualToString:message.to]) { // 自己发送给自己的消息
+            // 不展示UI
+            return;
+        }
+    }
+    
+    if (![message.from isEqualToString:self.toUser] && ![message.to isEqualToString:self.toUser]) { // 不是该会话的消息
+        
+        // 不展示UI
         return;
     }
+
     [self.dataSource addObject:message];
     [self.tableView reloadData];
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -210,7 +283,7 @@
 - (void)messageInputView:(FLMessageInputView *)inputView heightToBottomChange:(CGFloat)heightToBottom {
     
     
-    FLLog(@"最新高度=========%lf", heightToBottom);
+    FLLog(@"\n\n=========%lf=======%ld\n=====\n====%@====\n======%lf\n\n\n", heightToBottom, self.dataSource.count, _tableView, _tableView.contentInset.top);
     CGFloat insetsTop = _tableView.contentInset.top;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(insetsTop, 0, MAX(inputView.height, heightToBottom), 0);
     _tableView.contentInset = contentInsets;
@@ -227,7 +300,7 @@
         keyBoardIsDown = NO;
         CGPoint contentOffset = keyboard_down_ContenOffset;
         CGFloat spaceHeight = MAX(0, self.tableView.height - _tableView.contentSize.height - keyboard_down_InputViewHeight);
-        contentOffset.y += MAX(0, heightToBottom - keyboard_down_InputViewHeight - spaceHeight + insetsTop);
+        contentOffset.y += MAX(0, heightToBottom - keyboard_down_InputViewHeight - spaceHeight);
         _tableView.contentOffset = contentOffset;
     }
     else {

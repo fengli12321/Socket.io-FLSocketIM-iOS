@@ -14,24 +14,6 @@
 + (instancetype)shareManager;
 
 
-
-/**
- 向数据库添加会话
-
- @param conversation 会话模型
- */
-- (void)addConversation:(FLConversationModel *)conversation;
-
-
-/**
- 查询所有的会话
-
- @return 查询到的会话数组
- */
-- (NSArray<FLConversationModel *> *)queryAllConversations;
-
-
-
 /**
  向数据库添加消息
 
@@ -62,13 +44,47 @@
 
 
 
+
+
+/**
+ 向数据库添加会话
+ 
+ @param conversation 会话模型
+ */
+//- (void)addConversation:(FLConversationModel *)conversation;
+
+
+/**
+ 查询所有的会话
+ 
+ @return 查询到的会话数组
+ */
+- (NSArray<FLConversationModel *> *)queryAllConversations;
+
 /**
  更新会话的最近消息数据
 
  @param conversation 会话模型
  @param message 最新消息
  */
-- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation  andMessage:(FLMessageModel *)message;
+//- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation  andMessage:(FLMessageModel *)message;
+
+
+/**
+ 插入或更新会话
+
+ @param message 消息模型
+ */
+- (void)addOrUpdateConversationWithMessage:(FLMessageModel *)message;
+
+
+/**
+ 更新会话未读消息数量
+
+ @param conversationName 会话ID
+ @param unreadCount 未读消息数量
+ */
+- (void)updateUnreadCountOfConversation:(NSString *)conversationName unreadCount:(NSInteger)unreadCount;
 
 
 @end

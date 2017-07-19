@@ -24,6 +24,7 @@
 #import "UIImageView+WebCache.h"
 #import "FLChatDBManager.h"
 @import SocketIO;
+#import "MJRefresh.h"
 
 #ifdef DEBUG // 处于开发阶段
 #define FLLog(...) NSLog(__VA_ARGS__)

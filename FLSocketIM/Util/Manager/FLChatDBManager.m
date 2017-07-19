@@ -10,6 +10,7 @@
 #import <FMDB/FMDB.h>
 #import "FLConversationModel.h"
 #import "FLMessageModel.h"
+#import "FLChatViewController.h"
 static FLChatDBManager *instance = nil;
 
 @interface FLChatDBManager ()
@@ -107,17 +108,19 @@ static FLChatDBManager *instance = nil;
  @param conversationId 会话的ID
  @param exist 是否存在，且返回db以便下步操作
  */
-- (void)conversation:(NSString *)conversationId isExist:(void(^)(BOOL isExist, FMDatabase *db))exist{
+- (void)conversation:(NSString *)conversationId isExist:(void(^)(BOOL isExist, FMDatabase *db, NSInteger unReadCount))exist{
     
     [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
         
         BOOL e = NO;
+        NSInteger unreadCount = 0;
         FMResultSet *result = [db executeQuery:@"SELECT * FROM conversation WHERE id = ?", conversationId];
         while (result.next) {
             e = YES;
+            unreadCount = [result intForColumnIndex:3];
             break;
         }
-        exist(e, db);
+        exist(e, db, unreadCount);
     }];
     
 }
@@ -127,6 +130,10 @@ static FLChatDBManager *instance = nil;
     [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
         
         BOOL e = NO;
+        if (!message.msg_id.length) {
+            exist(NO, db);
+            return ;
+        }
         FMResultSet *result = [db executeQuery:@"SELECT * FROM message WHERE id = ?", message.msg_id];
         while (result.next) {
             
@@ -170,23 +177,22 @@ static FLChatDBManager *instance = nil;
 }
 
 #pragma mark - Public
-- (void)addConversation:(FLConversationModel *)conversation {
-    
-    [self conversation:conversation.userName isExist:^(BOOL isExist, FMDatabase *db) {
-        
-        // 判断不存在再插入数据库
-        if (!isExist) {
-            
-                
-                NSString *toUser = conversation.userName;
-                NSInteger unreadCount = conversation.unReadCount;
-                NSString *latestMsgId = conversation.latestMsgId;
-                [db executeUpdate:@"INSERT INTO conversation (id, unreadcount, latestmsgid) VALUES (?, ?, ?)", toUser, unreadCount, latestMsgId];
-
-        }
-    }];
-    
-}
+//- (void)addConversation:(FLConversationModel *)conversation {
+//    
+//    [self conversation:conversation.userName isExist:^(BOOL isExist, FMDatabase *db) {
+//        
+//        // 判断不存在再插入数据库
+//        if (!isExist) {
+//            
+//                
+//                NSString *toUser = conversation.userName;
+//                NSInteger unreadCount = conversation.unReadCount;
+//                NSString *latestMsgId = conversation.latestMsgId;
+//                [db executeUpdate:@"INSERT INTO conversation (id, unreadcount, latestmsgid) VALUES (?, ?, ?)", toUser, @(unreadCount), latestMsgId];
+//
+//        }
+//    }];
+//}
 
 - (NSArray<FLConversationModel *> *)queryAllConversations {
     
@@ -197,7 +203,7 @@ static FLChatDBManager *instance = nil;
         while (result.next) {
             FLConversationModel *conversation = [[FLConversationModel alloc] init];
             conversation.userName = [result stringForColumnIndex:0];
-            
+            conversation.unReadCount = [result intForColumnIndex:3];
             // 查询最新一条消息
             NSString *latestMsgId = [result stringForColumnIndex:4];
             FMResultSet *latesMsgRes = [db executeQuery:@"SELECT * FROM message WHERE id = ?", latestMsgId];
@@ -256,25 +262,95 @@ static FLChatDBManager *instance = nil;
             [messages addObject:message];
         }
     }];
+    
+    
+    // 数组倒序
+    for (NSInteger index = 0; index < messages.count / 2; index++) {
+        [messages exchangeObjectAtIndex:index withObjectAtIndex:messages.count - index - 1];
+    }
+    
+//    [messages sortUsingComparator:^NSComparisonResult(FLMessageModel * _Nonnull obj1, FLMessageModel *  _Nonnull obj2) {
+//        
+//        if (obj1.timestamp > obj2.timestamp) {
+//            return NSOrderedDescending;
+//        }
+//        else if (obj1.timestamp < obj2.timestamp) {
+//            
+//            return NSOrderedAscending;
+//        }
+//        return NSOrderedSame;
+//    }];
     return messages;
 }
 
 
-- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation andMessage:(FLMessageModel *)message {
+//- (void)updateLatestMessageOfConversation:(FLConversationModel *)conversation andMessage:(FLMessageModel *)message {
+//    
+//    if (!message.msg_id) {
+//        return;
+//    }
+//    
+//    [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
+//        
+//        BOOL success = [db executeUpdate:@"UPDATE conversation SET latestmsgid = ? WHERE id = ?", message.msg_id, conversation.userName];
+//        
+//        if (success) {
+//            FLLog(@"更新成功");
+//        }
+//        else {
+//            FLLog(@"更新失败");
+//        }
+//    }];
+//}
+
+
+- (void)addOrUpdateConversationWithMessage:(FLMessageModel *)message {
     
-    if (!message.msg_id) {
-        return;
-    }
-    
-    [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
+    BOOL isSender = [message.from isEqualToString:[FLClientManager shareManager].currentUserID];
+    NSString *conversationName = isSender ? message.to : message.from;
+    BOOL conversationIsOpen = [conversationName isEqualToString:[FLClientManager shareManager].chattingConversation.toUser];
+    [self conversation:conversationName isExist:^(BOOL isExist, FMDatabase *db, NSInteger unreadCount) {
         
-        BOOL success = [db executeUpdate:@"UPDATE conversation SET latestmsgid = ? WHERE id = ?", message.msg_id, conversation.userName];
-        
-        if (success) {
-            FLLog(@"更新成功");
+        // 判断不存在再插入数据库
+        if (!isExist) {
+            
+            FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message];
+            conversation.unReadCount = conversationIsOpen ? 0 : 1;
+            
+            NSString *toUser = conversation.userName;
+            NSInteger unreadCount = conversation.unReadCount;
+            NSString *latestMsgId = conversation.latestMessage.msg_id;
+            [db executeUpdate:@"INSERT INTO conversation (id, unreadcount, latestmsgid) VALUES (?, ?, ?)", toUser, @(unreadCount), latestMsgId];
+            
         }
-        else {
-            FLLog(@"更新失败");
+        else {  // 如果已经存在，更新最后一条消息
+            
+            unreadCount = conversationIsOpen ? 0 : (unreadCount + 1);
+            BOOL success = [db executeUpdate:@"UPDATE conversation SET latestmsgid = ?, unreadcount = ? WHERE id = ?", message.msg_id, @(unreadCount),conversationName];
+            
+            if (success) {
+                FLLog(@"更新成功");
+            }
+            else {
+                FLLog(@"更新失败");
+            }
+        }
+    }];
+}
+
+- (void)updateUnreadCountOfConversation:(NSString *)conversationName unreadCount:(NSInteger)unreadCount{
+    
+    [self conversation:conversationName isExist:^(BOOL isExist, FMDatabase *db, NSInteger unReadCount) {
+        
+        if (isExist) {
+            BOOL success = [db executeUpdate:@"UPDATE conversation SET unreadcount = ? WHERE id = ?", @(unreadCount),conversationName];
+            
+            if (success) {
+                FLLog(@"更新成功");
+            }
+            else {
+                FLLog(@"更新失败");
+            }
         }
     }];
 }

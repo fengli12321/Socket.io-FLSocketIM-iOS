@@ -29,4 +29,13 @@
  */
 - (void)addConversationWithMessage:(FLMessageModel *)message isReaded:(BOOL)read;
 
+
+
+/**
+ 更新未读消息红点
+
+ @param conversationName 会话ID
+ */
+- (void)updateRedPointForUnreadWithConveration:(NSString *)conversationName;
+
 @end

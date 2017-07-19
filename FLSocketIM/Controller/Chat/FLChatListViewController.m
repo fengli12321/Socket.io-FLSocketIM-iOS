@@ -92,6 +92,22 @@
     [self.dataSource insertObject:conversation atIndex:0];
     [self.tableView reloadData];
 }
+
+
+/**
+ 消除未读消息红点
+
+ @param conversationName 会话ID
+ */
+- (void)updateRedPointForUnreadWithConveration:(NSString *)conversationName {
+    
+    FLConversationModel *conversation = [self isExistConversationWithToUser:conversationName];
+    if (conversation) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfObject:conversation] inSection:0];
+        [self updateRedPointForCellAtIndexPath:indexPath];
+    }
+}
 #pragma mark - Private
 - (void)chat {
     
@@ -100,9 +116,13 @@
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// 打开会话，更新未读消息数量
+- (void)updateRedPointForCellAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FLConversationModel *model = self.dataSource[indexPath.row];
+    model.unReadCount = 0;
+    FLChatListCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    [cell updateUnreadCount];
 }
 
 #pragma mark - UITableViewDatasource
@@ -123,14 +143,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    // 打开会话，更新未读消息数量
     FLConversationModel *model = self.dataSource[indexPath.row];
-    model.unReadCount = 0;
-    FLChatListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell updateUnreadCount];
-
-    
     FLChatViewController *chatVC = [[FLChatViewController alloc] initWithToUser:model.userName];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
@@ -140,12 +153,10 @@
 
 - (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message {
     
-    // 如果已经开启与对方的会话，则不需要添加消息红点
+    // 是否已经开启与对方的会话
     FLChatViewController *chatVC = [FLClientManager shareManager].chattingConversation;
-    if (chatVC && [chatVC.toUser isEqualToString:message.from]) {
-        
-        return;
-    }
+    BOOL isChatting = chatVC && [chatVC.toUser isEqualToString:message.from];
+
     
     // 异步查询会话是否存在，避免阻塞主线程, 然后回到主线程刷新UI
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -153,13 +164,13 @@
         FLConversationModel *conversation = [self isExistConversationWithToUser:message.from];
         if (conversation) {
             conversation.unReadCount += 1;
+            if (isChatting) {
+                conversation.unReadCount = 0;
+            }
             conversation.latestMessage = message;
             // 将会话放到最前面
             [self.dataSource removeObject:conversation];
             [self.dataSource insertObject:conversation atIndex:0];
-            
-            // 更新数据库会话最近一条消息的内容
-            [[FLChatDBManager shareManager] updateLatestMessageOfConversation:conversation andMessage:message];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

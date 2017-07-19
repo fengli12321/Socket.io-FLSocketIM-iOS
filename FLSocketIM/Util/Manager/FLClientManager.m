@@ -102,8 +102,11 @@ static FLClientManager *instance;
             message.bodies = body;
         }
         
-        // 插入数据库
+        // 消息插入数据库
         [[FLChatDBManager shareManager] addMessage:message];
+        
+        // 会话插入数据库或者更新会话
+        [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:message];
         
         // 代理处理
         for (FLBridgeDelegateModel  *model in self.delegateArray) {

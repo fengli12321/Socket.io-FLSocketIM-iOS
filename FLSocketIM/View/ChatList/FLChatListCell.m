@@ -97,7 +97,7 @@
     _model = model;
     _iconImageView.image = [UIImage imageNamed:model.imageStr];
     _nameLabel.text = model.userName;
-    _timeLabel.text = model.latestMsgTimeStr;
+    _timeLabel.text = [NSDate stringTimesWithTimeStamp:model.latestMessage.timestamp];
     _lastMessageLabel.text = model.latestMsgStr;
     
     [self updateUnreadCount];

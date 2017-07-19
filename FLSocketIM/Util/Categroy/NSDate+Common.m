@@ -110,6 +110,12 @@
     return text;
 }
 
++ (NSString *)stringTimesWithTimeStamp:(long long)timeStamp {
+    
+    
+    NSDate *date = [NSDate timeStampToDate:((CGFloat)timeStamp/1000.0f)];
+    return [date stringTimesAgo];
+}
 - (NSString *)string_yyyy_MM_dd_EEE{
     NSString *text = [self stringWithFormat:@"yyyy-MM-dd EEE"];
     NSInteger daysAgo = [self daysAgoAgainstMidnight];

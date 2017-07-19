@@ -107,9 +107,11 @@ static FLChatManager *instance = nil;
     id parameters = [message yy_modelToJSONObject];
     [[FLSocketManager shareManager].client emit:@"chat" with:@[parameters]];
     
+    if ([message.from isEqualToString:message.to]) {    // 发送给自己的消息不插入数据库，等到接收到自己的消息后再插入数据库
+        // 消息插入数据库
+        [[FLChatDBManager shareManager] addMessage:message];
+    }
     
-    // 消息插入数据库
-    [[FLChatDBManager shareManager] addMessage:message];
 }
 
 

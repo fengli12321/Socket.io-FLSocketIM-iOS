@@ -30,11 +30,6 @@
             break;
     }
     
-    
-    
-    NSDate *messageDate = [NSDate timeStampToDate:((CGFloat)latestMessage.timestamp/1000.0f)];
-    self.latestMsgTimeStr = [messageDate stringTimesAgo];
-    self.latestMsgId = latestMessage.msg_id;
 }
 
 - (instancetype)initWithMessageModel:(FLMessageModel *)message {
@@ -42,17 +37,9 @@
         
         self.latestMessage = message;
         self.userName = message.from;
-        [self saveConversationToDB];
     }
     return self;
 }
 
-/**
- 将会话保存到数据库
- */
-- (void)saveConversationToDB {
-    
-    [[FLChatDBManager shareManager] addConversation:self];
-}
 
 @end

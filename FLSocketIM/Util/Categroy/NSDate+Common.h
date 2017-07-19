@@ -33,5 +33,6 @@
 
 - (NSString *)stringTimesAgo;//代码更新时间
 
++ (NSString *)stringTimesWithTimeStamp:(long long)timeStamp;
 
 @end

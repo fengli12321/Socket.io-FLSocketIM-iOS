@@ -26,7 +26,7 @@ static char tHud;
         hud.label.text = message;
         hud.removeFromSuperViewOnHide = YES;
         hud.backgroundView.hidden = YES;
-        
+        hud.userInteractionEnabled = NO;
         objc_setAssociatedObject(self, &tHud, hud, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
@@ -56,7 +56,7 @@ static char tHud;
     
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
-    
+    hud.userInteractionEnabled = NO;
     // 2秒之后再消失
     [hud hideAnimated:YES afterDelay:2];
 }
@@ -75,7 +75,7 @@ static char tHud;
     
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
-    
+    hud.userInteractionEnabled = NO;
     // 1秒之后再消失
     [hud hideAnimated:YES afterDelay:0.7];
 }
@@ -89,6 +89,7 @@ static char tHud;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     
+    hud.userInteractionEnabled = NO;
     // 2秒之后再消失
     [hud hideAnimated:YES afterDelay:1.5];
 }

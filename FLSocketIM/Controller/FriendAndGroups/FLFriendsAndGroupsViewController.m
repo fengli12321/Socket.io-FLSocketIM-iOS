@@ -95,7 +95,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    FLChatViewController *chatVC = [[FLChatViewController alloc] initWithToUser:self.dataSource[indexPath.row]];
+    FLChatViewController *chatVC = [[FLChatViewController alloc] initWithToUser:[self.dataSource[indexPath.row] name]];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
 }

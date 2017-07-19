@@ -13,10 +13,8 @@
 
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, strong) FLMessageModel *latestMessage;
-@property (nonatomic, copy) NSString *latestMsgId;
 @property (nonatomic, copy) NSString *imageStr;
 @property (nonatomic, copy) NSString *latestMsgStr;
-@property (nonatomic, copy) NSString *latestMsgTimeStr;
 @property (nonatomic, assign) NSInteger unReadCount;
 
 - (instancetype)initWithMessageModel:(FLMessageModel *)message;
