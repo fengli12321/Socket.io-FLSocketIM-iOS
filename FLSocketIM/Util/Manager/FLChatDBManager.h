@@ -74,8 +74,9 @@
  插入或更新会话
 
  @param message 消息模型
+ @param isChatting 会话是否已经开启
  */
-- (void)addOrUpdateConversationWithMessage:(FLMessageModel *)message;
+- (void)addOrUpdateConversationWithMessage:(FLMessageModel *)message isChatting:(BOOL)isChatting;
 
 
 /**

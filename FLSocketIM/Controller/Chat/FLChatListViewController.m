@@ -84,6 +84,22 @@
     }
     return conversationModel;
 }
+
+- (void)addOrUpdateConversation:(NSString *)conversationName latestMessage:(FLMessageModel *)message isRead:(BOOL)isRead{
+    
+    
+    FLConversationModel *conversation = [self isExistConversationWithToUser:conversationName];
+    if (conversation) {
+        
+        [self updateLatestMsgForConversation:conversation latestMessage:message isRead:isRead];
+    }
+    else {
+        
+        // 如果当前会话开启，则已读消息
+        [self addConversationWithMessage:message isReaded:isRead];
+    }
+}
+
 - (void)addConversationWithMessage:(FLMessageModel *)message isReaded:(BOOL)read{
  
     FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message];
@@ -93,12 +109,22 @@
     [self.tableView reloadData];
 }
 
+- (void)updateLatestMsgForConversation:(FLConversationModel *)conversation latestMessage:(FLMessageModel *)message isRead:(BOOL)isRead{
 
-/**
- 消除未读消息红点
+    conversation.unReadCount += 1;
+    if (isRead) {
+        conversation.unReadCount = 0;
+    }
+    conversation.latestMessage = message;
+    // 将会话放到最前面
+    [self.dataSource removeObject:conversation];
+    [self.dataSource insertObject:conversation atIndex:0];
+    
+    [self.tableView reloadData];
 
- @param conversationName 会话ID
- */
+    
+}
+
 - (void)updateRedPointForUnreadWithConveration:(NSString *)conversationName {
     
     FLConversationModel *conversation = [self isExistConversationWithToUser:conversationName];
@@ -153,41 +179,48 @@
 
 - (void)clientManager:(FLClientManager *)manager didReceivedMessage:(FLMessageModel *)message {
     
-    // 是否已经开启与对方的会话
-    FLChatViewController *chatVC = [FLClientManager shareManager].chattingConversation;
-    BOOL isChatting = chatVC && [chatVC.toUser isEqualToString:message.from];
-
     
-    // 异步查询会话是否存在，避免阻塞主线程, 然后回到主线程刷新UI
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        FLConversationModel *conversation = [self isExistConversationWithToUser:message.from];
-        if (conversation) {
-            conversation.unReadCount += 1;
-            if (isChatting) {
-                conversation.unReadCount = 0;
-            }
-            conversation.latestMessage = message;
-            // 将会话放到最前面
-            [self.dataSource removeObject:conversation];
-            [self.dataSource insertObject:conversation atIndex:0];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self.tableView reloadData];
-            });
-        }
-        else { // 接收到消息但是会话不存在，创建一个新的会话
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self addConversationWithMessage:message isReaded:NO];
-                
-            });
-            
+    NSString *conversationName = message.from;
     
-        }
-        
-    });
+    BOOL isRead = [conversationName isEqualToString:[FLClientManager shareManager].chattingConversation.toUser];
+    [self addOrUpdateConversation:conversationName latestMessage:message isRead:isRead];
+    
+//    // 异步查询会话是否存在，避免阻塞主线程, 然后回到主线程刷新UI
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        
+//        // 是否已经开启与对方的会话
+//        FLChatViewController *chatVC = [FLClientManager shareManager].chattingConversation;
+//        BOOL isChatting = chatVC && [chatVC.toUser isEqualToString:message.from];
+//        
+//        
+//        FLConversationModel *conversation = [self isExistConversationWithToUser:message.from];
+//        if (conversation) {
+//            conversation.unReadCount += 1;
+//            if (isChatting) {
+//                conversation.unReadCount = 0;
+//            }
+//            conversation.latestMessage = message;
+//            // 将会话放到最前面
+//            [self.dataSource removeObject:conversation];
+//            [self.dataSource insertObject:conversation atIndex:0];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                [self.tableView reloadData];
+//            });
+//        }
+//        else { // 接收到消息但是会话不存在，创建一个新的会话
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self addConversationWithMessage:message isReaded:NO];
+//                
+//            });
+//            
+//    
+//        }
+//        
+//    });
     
 }
 

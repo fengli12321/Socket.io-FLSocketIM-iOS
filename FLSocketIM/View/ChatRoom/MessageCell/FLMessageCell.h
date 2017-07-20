@@ -28,4 +28,6 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
 
 + (NSString *)cellReuseIndetifierWithMessageModel:(FLMessageModel *)Model;
 
+- (void)updateSendStatus:(FLMessageSendStatus)status;
+
 @end

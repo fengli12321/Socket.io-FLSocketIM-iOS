@@ -13,19 +13,38 @@ typedef NS_ENUM(NSInteger, FLMessageModelType) {
     FLMessageImage,
     FLMessageOther
 };
+
+typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
+    
+    FLMessageSending,   // 正在发送
+    FLMessageSendSuccess,   // 发送成功
+    FLMessageSendFail   // 发送失败
+};
 @interface FLMessageModel : NSObject
 
-@property (nonatomic, assign) CGFloat messageCellHeight;
-@property (nonatomic, assign) CGSize textMessageLabelSize;
-@property (nonatomic, assign) BOOL isSender;
 
+/** 在聊天界面行高 */
+@property (nonatomic, assign) CGFloat messageCellHeight;
+/** 文字气泡尺寸 */
+@property (nonatomic, assign) CGSize textMessageLabelSize;
+/** 消息类型 */
 @property (nonatomic, assign) FLMessageModelType type;
-@property (nonatomic, copy) NSString *msg_id;           //消息ID
-@property (nonatomic, assign) long long timestamp;        //消息发送时间
-@property (nonatomic, copy) NSString *to;               //接收人的username或者接收group的ID
-@property (nonatomic, copy) NSString *from;             //发送人username
-@property (nonatomic, copy) NSString *chat_type;        // 聊天类型
-@property (nonatomic, strong) FLMessageBody *bodies;     // 消息体对象
+/** 消息ID */
+@property (nonatomic, copy) NSString *msg_id;
+/** 消息发送时间 */
+@property (nonatomic, assign) long long timestamp;
+/** 接收人的username或者接收group的ID */
+@property (nonatomic, copy) NSString *to;
+/** 发送人username */
+@property (nonatomic, copy) NSString *from;
+/** 聊天类型 */
+@property (nonatomic, copy) NSString *chat_type;
+/** 消息体对象 */
+@property (nonatomic, strong) FLMessageBody *bodies;
+/** 发送是否成功 */
+@property (nonatomic, assign) BOOL isSendSuccess;
+/** 消息发送状态 */
+@property (nonatomic, assign) enum FLMessageSendStatus sendStatus;
 
 - (instancetype)initWithToUser:(NSString *)toUser fromUser:(NSString *)fromUser chatType:(NSString *)chatType messageBody:(FLMessageBody *)body;
 

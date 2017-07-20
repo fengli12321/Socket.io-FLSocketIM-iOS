@@ -8,6 +8,7 @@
 
 #import "FLClientManager.h"
 #import "FLBridgeDelegateModel.h"
+#import "FLChatViewController.h"
 static FLClientManager *instance;
 
 @interface FLClientManager ()
@@ -90,11 +91,17 @@ static FLClientManager *instance;
 - (void)addHandles {
     
     SocketIOClient *socket = [FLSocketManager shareManager].client;
-    
+     
     // 收到消息
+
     [socket on:@"chat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
         
 
+        if (ack.expected == YES) {
+            
+            [ack with:@[@"hello 我是应答"]];
+        }
+        
         FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
         id bodyStr = data.firstObject[@"bodies"];
         if ([bodyStr isKindOfClass:[NSString class]]) {
@@ -106,7 +113,8 @@ static FLClientManager *instance;
         [[FLChatDBManager shareManager] addMessage:message];
         
         // 会话插入数据库或者更新会话
-        [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:message];
+        BOOL isChatting = [message.from isEqualToString:[FLClientManager shareManager].chattingConversation.toUser];
+        [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:message isChatting:isChatting];
         
         // 代理处理
         for (FLBridgeDelegateModel  *model in self.delegateArray) {
@@ -186,5 +194,8 @@ static FLClientManager *instance;
         }
     }];
 }
+
+
+
 
 @end

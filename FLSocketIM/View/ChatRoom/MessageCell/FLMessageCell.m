@@ -23,9 +23,12 @@
 }
 
 
-@property (nonatomic, strong) UIImageView *userIconView;
-@property (nonatomic, strong) FLMessageBubbleView *bubbleView;
-@property (nonatomic, strong) UIImageView *messageImage;
+@property (nonatomic, strong) UIImageView *userIconView;            // 用户头像
+@property (nonatomic, strong) FLMessageBubbleView *bubbleView;      // 文字气泡
+@property (nonatomic, strong) UIImageView *messageImage;            // 消息图片
+
+@property (nonatomic, strong) UIButton *reSendBtn;                  // 重新发送按钮
+@property (nonatomic, strong) UIActivityIndicatorView *sendingView; // 发送中菊花转
 
 @end
 @implementation FLMessageCell
@@ -63,6 +66,22 @@
     }];
     _userIconView.image = [UIImage imageNamed:_isSender?@"Fruit-1":@"Fruit-2"];
     [_userIconView setCornerRadius:kMessageCell_UserIconWith/2.0];
+
+    _reSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_reSendBtn setImage:[UIImage imageNamed:@"resend"] forState:UIControlStateNormal];
+    [self.contentView addSubview:_reSendBtn];
+    [_reSendBtn setTitle:@"重试" forState:UIControlStateNormal];
+    [_reSendBtn setTitleColor:FLSecondColor forState:UIControlStateNormal];
+    _reSendBtn.titleLabel.font = FLFont(13);
+    
+    _sendingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.contentView addSubview:_sendingView];
+    [_sendingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(_reSendBtn);
+        make.right.equalTo(_reSendBtn);
+    }];
+    [_sendingView startAnimating];
     
     switch (self.cellType) {
         case FLTextMessageCell:{
@@ -74,6 +93,16 @@
                 make.top.equalTo(_userIconView);
                 make.width.mas_lessThanOrEqualTo(kScreenWidth);
             }];
+            
+            [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.centerY.equalTo(_bubbleView);
+                make.right.mas_equalTo(_bubbleView.mas_left).offset(-5);
+                make.height.mas_equalTo(30);
+            }];
+            
+            
+            
             break;
         }
         case FLImgMessageCell:{
@@ -89,6 +118,14 @@
                 make.width.mas_equalTo(kScreenWidth/4.0);
                 make.height.equalTo(_messageImage.mas_width).multipliedBy(1.5);
             }];
+            
+            [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.centerY.equalTo(_messageImage);
+                make.right.mas_equalTo(_messageImage.mas_left).offset(-5);
+                make.height.mas_equalTo(30);
+            }];
+            
             break;
         }
             
@@ -115,7 +152,7 @@
         default:
             break;
     }
-    
+    [self updateSendStatus:message.sendStatus];
 }
 
 - (void)setTextFont:(UIFont *)textFont {
@@ -143,5 +180,33 @@
             break;
     }
     
+}
+
+- (void)updateSendStatus:(FLMessageSendStatus)status {
+    
+    switch (status) {
+        case FLMessageSending:{ // 正在发送中
+            
+            [_sendingView startAnimating];
+            _reSendBtn.hidden = YES;
+            break;
+        }
+        case FLMessageSendSuccess:{ // 发送成功
+            
+            [_sendingView stopAnimating];
+            _reSendBtn.hidden = YES;
+            break;
+        }
+            
+        case FLMessageSendFail: {   // 发送失败
+            
+            [_sendingView stopAnimating];
+            _reSendBtn.hidden = NO;
+        }
+            
+            
+        default:
+            break;
+    }
 }
 @end

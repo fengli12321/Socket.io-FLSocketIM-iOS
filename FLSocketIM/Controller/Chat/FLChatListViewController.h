@@ -21,15 +21,32 @@
 - (FLConversationModel *)isExistConversationWithToUser:(NSString *)toUser;
 
 
+
+
+/**
+ 会话存在，则更新会话最新消息，不存在则添加该会话
+
+ @param conversationName 会话ID
+ @param message 最新一条消息
+ */
+- (void)addOrUpdateConversation:(NSString *)conversationName latestMessage:(FLMessageModel *)message isRead:(BOOL)isRead;
+
 /**
  添加会话
 
  @param message 会话的最新一条消息
  @param read 消息是否已读
  */
-- (void)addConversationWithMessage:(FLMessageModel *)message isReaded:(BOOL)read;
+//- (void)addConversationWithMessage:(FLMessageModel *)message isReaded:(BOOL)read;
 
 
+
+/**
+ 更新会话的最新消息，包括模型数据和UI
+
+ @param message 会话的最新一条消息
+ */
+//- (void)updateLatestMsgForConversation:(FLConversationModel *)conversation latestMessage:(FLMessageModel *)message;
 
 /**
  更新未读消息红点

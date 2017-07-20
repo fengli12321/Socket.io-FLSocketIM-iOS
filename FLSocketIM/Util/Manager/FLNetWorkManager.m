@@ -28,10 +28,10 @@
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
         
-        SocketIOClient *client = [FLSocketManager shareManager].client;
-        if (client && client.status == SocketIOClientStatusDisconnected) {
-            [client connect];
-        }
+//        SocketIOClient *client = [FLSocketManager shareManager].client;
+//        if (client && client.status == SocketIOClientStatusDisconnected) {
+//            [client connect];
+//        }
         switch (status)
         {
             case AFNetworkReachabilityStatusUnknown: // 未知网络
@@ -171,7 +171,7 @@
     }
     
     
-    [self sharedAFManager].requestSerializer.timeoutInterval = 30;
+    [self sharedAFManager].requestSerializer.timeoutInterval = 25;
     /*! 检查地址中是否有中文 */
     NSString *URLString = [NSURL URLWithString:urlString] ? urlString : [self strUTF8Encoding:urlString];
     

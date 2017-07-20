@@ -11,24 +11,9 @@
 @implementation FLConversationModel
 
 - (void)setLatestMessage:(FLMessageModel *)latestMessage {
-    _latestMessage = latestMessage;
     
-    switch (latestMessage.type) {
-        case FLMessageText:
-            self.latestMsgStr = latestMessage.bodies.msg;
-            break;
-            
-        case FLMessageImage:
-            self.latestMsgStr = @"[图片]";
-            break;
-            
-        case FLMessageOther:
-            self.latestMsgStr = @"[其他]";
-            break;
-            
-        default:
-            break;
-    }
+    self.latestMsgTimeStamp = latestMessage.timestamp;
+    self.latestMsgStr = [FLConversationModel getLatestMessageStrWithMessage:latestMessage];
     
 }
 
@@ -41,5 +26,28 @@
     return self;
 }
 
+
++ (NSString *)getLatestMessageStrWithMessage:(FLMessageModel *)message {
+    
+    NSString *latestMsgStr;
+    switch (message.type) {
+        case FLMessageText:
+            latestMsgStr = message.bodies.msg;
+            break;
+            
+        case FLMessageImage:
+            latestMsgStr = @"[图片]";
+            break;
+            
+        case FLMessageOther:
+            latestMsgStr = @"[其他]";
+            break;
+            
+        default:
+            latestMsgStr = @"错误";
+            break;
+    }
+    return latestMsgStr;
+}
 
 @end

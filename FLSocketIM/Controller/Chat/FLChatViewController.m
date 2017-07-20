@@ -69,7 +69,8 @@
     [self addCurrentConversationToChatList];
     
     // 数据库添加会话
-    [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:self.dataSource.lastObject];
+    [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:self.dataSource.lastObject isChatting:YES];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -133,7 +134,10 @@
     if (_isFirstLoad) {    // 第一次加载，滚动到底部
         _isFirstLoad = NO;
         
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        if (_dataSource.count) {
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
     }
     else {
         
@@ -152,6 +156,23 @@
 
 #pragma mark - Pravite
 
+
+
+/**
+ 刷新消息的发送状态
+
+ @param message 消息
+ */
+- (void)updateSendStatusUIWithMessage:(FLMessageModel *)message {
+    
+    NSInteger index = [_dataSource indexOfObject:message];
+    if (index >= 0) {
+        
+        FLMessageCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        [cell updateSendStatus:message.sendStatus];
+    }
+}
+
 /**
  将当前会话添加到消息列表中
  */
@@ -159,13 +180,9 @@
     
     if (self.dataSource.count) { // 当前会话中有消息记录
         
-        // 判断消息列表中是否已经有该会话
-        FLChatListViewController *chatListVC = [FLClientManager shareManager].chatListVC;
-        FLConversationModel *conversation = [chatListVC isExistConversationWithToUser:self.toUser];
-        if (!conversation) { // 如果会话不存在，添加该会话
-            
-            FLMessageModel *latestModel = self.dataSource.lastObject;
-            [chatListVC addConversationWithMessage:latestModel isReaded:YES];
+        FLMessageModel *message = [self.dataSource lastObject];
+        if ([message.from isEqualToString:[FLClientManager shareManager].currentUserID]) { // 消息是自己发送的，则更新消息列表最新消息UI（接收到别人的消息, chatListVC会更新UI,这里不做处理）
+            [[FLClientManager shareManager].chatListVC addOrUpdateConversation:message.to latestMessage:message isRead:YES];
         }
     }
 }
@@ -220,7 +237,11 @@
  */
 - (void)sendImageMessageWithImgData:(NSData *)imgData {
     
-    FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData toUser:self.toUser];
+    __weak typeof(self) weakSelf = self;
+    FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
+        
+        [weakSelf updateSendStatusUIWithMessage:newMessage];
+    }];
     [self clientManager:nil didReceivedMessage:message];
 }
 
@@ -311,7 +332,11 @@
 - (void)messageInputView:(FLMessageInputView *)inputView sendText:(NSString *)text {
     
     
-    FLMessageModel *message = [[FLChatManager shareManager] sendTextMessage:text toUser:_toUser];
+    __weak typeof(self) weakSelf = self;
+    FLMessageModel *message = [[FLChatManager shareManager] sendTextMessage:text toUser:_toUser sendStatus:^(FLMessageModel *newMessage) {
+        
+        [weakSelf updateSendStatusUIWithMessage:newMessage];
+    }];
     [self clientManager:nil didReceivedMessage:message];
     
 }

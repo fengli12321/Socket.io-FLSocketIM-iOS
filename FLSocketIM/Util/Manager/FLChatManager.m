@@ -57,17 +57,20 @@ static FLChatManager *instance = nil;
 }
 
 #pragma mark - Public
-- (FLMessageModel *)sendTextMessage:(NSString *)text toUser:(NSString *)toUser{
+- (FLMessageModel *)sendTextMessage:(NSString *)text toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *message))sendStatus{
     
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
     messageBody.type = @"txt";
     messageBody.msg = text;
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
-    [self sendMessage:message];
+    [self sendMessage:message statusChange:^{
+        
+        sendStatus(message);
+    }];
     return message;
 }
 
-- (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser {
+- (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *message))sendStatus {
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
     messageBody.type = @"img";
     messageBody.imgData = imgData;
@@ -82,11 +85,16 @@ static FLChatManager *instance = nil;
         if ([response[@"code"] integerValue] > 0) {
             
             messageBody.imgUrl = response[@"data"];
-            [weakSelf sendMessage:message];
+            [weakSelf sendMessage:message statusChange:^{
+                
+                sendStatus(message);
+            }];
         }
     } withFailurBlock:^(NSError *error) {
         
-        
+        // 上传失败
+        message.sendStatus = FLMessageSendFail;
+        sendStatus(message);
     } withUpLoadProgress:nil];
     return message;
 }
@@ -102,15 +110,43 @@ static FLChatManager *instance = nil;
     NSString *timeSp = [NSString stringWithFormat:@"%f", [localeDate timeIntervalSince1970]];
     return timeSp;
 }
-- (void)sendMessage:(FLMessageModel *)message {
+- (void)sendMessage:(FLMessageModel *)message statusChange:(void (^)())statusChange{
     
     id parameters = [message yy_modelToJSONObject];
-    [[FLSocketManager shareManager].client emit:@"chat" with:@[parameters]];
+//    [[FLSocketManager shareManager].client emit:@"chat" with:@[parameters]];
     
-    if ([message.from isEqualToString:message.to]) {    // 发送给自己的消息不插入数据库，等到接收到自己的消息后再插入数据库
-        // 消息插入数据库
-        [[FLChatDBManager shareManager] addMessage:message];
-    }
+    [[[FLSocketManager shareManager].client emitWithAck:@"chat" with:@[parameters]] timingOutAfter:5 callback:^(NSArray * _Nonnull data) {
+        
+        FLLog(@"%@", data.firstObject);
+        
+        if ([data.firstObject isKindOfClass:[NSString class]] && [data.firstObject isEqualToString:@"NO ACK"]) {  // 服务器没有应答
+            
+            
+            message.sendStatus = FLMessageSendFail;
+            message.timestamp = [[NSDate date] timeStamp];
+            // 发送失败
+            statusChange();
+            
+            if (![message.from isEqualToString:message.to]) {    // 发送给自己的消息不插入数据库，等到接收到自己的消息后再插入数据库
+                // 消息插入数据库
+                [[FLChatDBManager shareManager] addMessage:message];
+            }
+        }
+        else {  // 服务器应答
+            
+            message.sendStatus = FLMessageSendSuccess;
+            NSDictionary *ackDic = data.firstObject;
+            message.timestamp = [ackDic[@"timestamp"] longLongValue];
+            message.msg_id = ackDic[@"msg_id"];
+            // 发送成功
+            statusChange();
+            if (![message.from isEqualToString:message.to]) {    // 发送给自己的消息不插入数据库，等到接收到自己的消息后再插入数据库
+                // 消息插入数据库
+                [[FLChatDBManager shareManager] addMessage:message];
+            }
+        }
+    }];
+    
     
 }
 

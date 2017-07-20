@@ -32,7 +32,15 @@ static FLSocketManager *instance = nil;
     
     
     NSURL* url = [[NSURL alloc] initWithString:BaseUrl];
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forcePolling": @YES, @"connectParams": @{@"auth_token" : token}}];
+    
+    /*
+     log 是否打印日志
+     forcePolling  If passed true, the only transport that will be used will be HTTP long-polling.
+     reconnectAttempts 重连次数，-1表示一直重连
+     reconnectWait 重连间隔时间
+     connectParams 参数
+     **/
+    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forcePolling": @YES, @"reconnectAttempts":@(-1), @"reconnectWait" : @2, @"connectParams": @{@"auth_token" : token}}];
 
     // 连接超时时间设置为15秒
     [socket connectWithTimeoutAfter:15 withHandler:^{
