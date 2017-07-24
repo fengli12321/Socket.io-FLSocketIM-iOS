@@ -113,6 +113,8 @@ static NSString *loginAccountInfo = @"loginAccountInfo";
 }
 - (IBAction)registerAccount:(id)sender {
     
+
+    
     if([self checkInput]) {
         
         [self showMessage:@"正在注册中"];

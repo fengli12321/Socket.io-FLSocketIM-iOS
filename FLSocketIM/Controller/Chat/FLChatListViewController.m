@@ -96,13 +96,13 @@
     else {
         
         // 如果当前会话开启，则已读消息
-        [self addConversationWithMessage:message isReaded:isRead];
+        [self addConversationWithMessage:message conversationId:conversationName isReaded:isRead];
     }
 }
 
-- (void)addConversationWithMessage:(FLMessageModel *)message isReaded:(BOOL)read{
+- (void)addConversationWithMessage:(FLMessageModel *)message conversationId:(NSString *)conversationId isReaded:(BOOL)read{
  
-    FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message];
+    FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message conversationId:conversationId];
     conversation.unReadCount = read?0:1;
     
     [self.dataSource insertObject:conversation atIndex:0];

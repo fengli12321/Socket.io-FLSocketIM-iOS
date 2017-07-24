@@ -10,6 +10,9 @@
 #import "NSDate+Helper.h"
 @implementation NSDate (Common)
 
++ (long long)nowTimeStamp {
+    return [[NSDate date] timeStamp];
+}
 - (long long)timeStamp {
     
     return [self timeIntervalSince1970] * 1000;

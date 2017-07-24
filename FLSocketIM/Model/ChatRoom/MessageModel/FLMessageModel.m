@@ -12,6 +12,11 @@
 
 @implementation FLMessageModel
 
++ (NSDictionary<NSString *,id> *)modelCustomPropertyMapper {
+    
+    return @{@"to" : @"to_user", @"from" : @"from_user"};
+}
+
 - (void)setBodies:(FLMessageBody *)bodies {
     _bodies = bodies;
     

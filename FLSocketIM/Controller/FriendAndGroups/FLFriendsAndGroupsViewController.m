@@ -61,7 +61,9 @@
         NSArray *allFriends = [NSArray yy_modelArrayWithClass:[FLFriendModel class] json:response[@"data"][@"allUser"]];
         
         for (NSString *onlineUser in response[@"data"][@"onLineUsers"]) {
-            
+            if (!onlineUser) {
+                break;
+            }
             for (FLFriendModel *friend in allFriends) {
                 
                 if ([friend.name isEqualToString:onlineUser]) {

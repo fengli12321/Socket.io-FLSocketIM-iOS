@@ -45,7 +45,7 @@ static FLChatDBManager *instance = nil;
                 }
                 
                 // 消息数据表
-                BOOL msgSuccess = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS message (id TEXT NOT NULL, timestamp INT32, conversation TEXT, msgdirection INT1, chattype TEXT, bodies TEXT)"];
+                BOOL msgSuccess = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS message (id TEXT NOT NULL, localtime INT32, timestamp INT32, conversation TEXT, msgdirection INT1, chattype TEXT, bodies TEXT, status INT1)"];
                 if (msgSuccess) {
                     FLLog(@"创建消息表成功");
                 }
@@ -84,7 +84,9 @@ static FLChatDBManager *instance = nil;
 - (NSString *)DBMianPath {
     
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-    path = @"/Users/fengli/Desktop";
+    
+    FLLog(@"%@======", NSHomeDirectory());
+//    path = @"/Users/fengli/Desktop";
     path = [path stringByAppendingPathComponent:@"FLChatDB"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isDir = false;
@@ -99,6 +101,7 @@ static FLChatDBManager *instance = nil;
         }
     }
     return path;
+    
 }
 
 
@@ -125,7 +128,7 @@ static FLChatDBManager *instance = nil;
     
 }
 
-- (void)message:(FLMessageModel *)message isExist:(void(^)(BOOL isExist, FMDatabase *db))exist {
+- (void)message:(FLMessageModel *)message baseId:(BOOL)baseId isExist:(void(^)(BOOL isExist, FMDatabase *db))exist {
     
     [self.DBQueue inDatabase:^(FMDatabase * _Nonnull db) {
         
@@ -134,7 +137,14 @@ static FLChatDBManager *instance = nil;
             exist(NO, db);
             return ;
         }
-        FMResultSet *result = [db executeQuery:@"SELECT * FROM message WHERE id = ?", message.msg_id];
+        FMResultSet *result;
+        if (baseId) {  // 基于消息ID查询
+            result = [db executeQuery:@"SELECT * FROM message WHERE id = ?", message.msg_id];
+        }
+        else {  // 基于消息发送的本地时间查询
+            result = [db executeQuery:@"SELECT * FROM message WHERE localtime = ?", @(message.sendtime)];
+        }
+        
         while (result.next) {
             
             e = YES;
@@ -158,21 +168,24 @@ static FLChatDBManager *instance = nil;
 
 - (FLMessageModel *)makeMessageWithFMResult:(FMResultSet *)result {
     
-    NSString *bodies = [result stringForColumnIndex:5];
+    NSString *bodies = [result stringForColumnIndex:6];
     FLMessageBody *body = [FLMessageBody yy_modelWithJSON:[bodies stringToJsonDictionary]];
-    BOOL isSender = [result boolForColumnIndex:3];
+    BOOL isSender = [result boolForColumnIndex:4];
     
     NSString *currentUser = [FLClientManager shareManager].currentUserID;
-    NSString *conversation = [result stringForColumnIndex:2];
+    NSString *conversation = [result stringForColumnIndex:3];
     NSString *toUser = isSender?conversation:currentUser;
     NSString *fromUser = isSender?currentUser:conversation;
-    NSString *chat_type = [result stringForColumnIndex:4];
-    long long timeStamp = [result longLongIntForColumnIndex:1];
+    NSString *chat_type = [result stringForColumnIndex:5];
+    long long timeStamp = [result longLongIntForColumnIndex:2];
+    long long localTime = [result longLongIntForColumnIndex:1];
     NSString *msgId = [result stringForColumnIndex:0];
+    NSInteger status = [result intForColumnIndex:7];
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:fromUser chatType:chat_type messageBody:body];
     message.timestamp = timeStamp;
     message.msg_id = msgId;
-    
+    message.sendtime = localTime;
+    message.sendStatus = status?FLMessageSendSuccess:FLMessageSendFail;
     return message;
 }
 
@@ -215,7 +228,7 @@ static FLChatDBManager *instance = nil;
 
 - (void)addMessage:(FLMessageModel *)message {
     
-    [self message:message isExist:^(BOOL isExist, FMDatabase *db) {
+    [self message:message baseId:YES isExist:^(BOOL isExist, FMDatabase *db) {
         
        // 判断再数据库中不存在再插入消息
         if (!isExist) {
@@ -223,9 +236,47 @@ static FLChatDBManager *instance = nil;
             NSString *bodies = [message.bodies yy_modelToJSONString];
             NSNumber *time = [NSNumber numberWithLongLong:message.timestamp];
             NSString *msgId = message.msg_id?message.msg_id:@"";
-            [db executeUpdate:@"INSERT INTO message (id, timestamp, conversation, msgdirection, chattype, bodies) VALUES (?, ?, ?, ?, ?, ?)", msgId, time, isSender?message.to:message.from, isSender?@1:@0, @"chat", bodies];
+            NSNumber *locTime = [NSNumber numberWithLongLong:message.sendtime];
+            NSNumber *status;
+            switch (message.sendStatus) {
+                case FLMessageSending:
+                case FLMessageSendFail:
+                    status = @0;
+                    break;
+                    
+                case FLMessageSendSuccess:
+                    status = @1;
+                    break;
+                default:
+                    break;
+            }
+            [db executeUpdate:@"INSERT INTO message (id, localtime, timestamp, conversation, msgdirection, chattype, bodies, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", msgId, locTime,time, isSender?message.to:message.from, isSender?@1:@0, @"chat", bodies, status];
         }
         
+    }];
+}
+
+- (void)updateMessage:(FLMessageModel *)message {
+    
+    [self message:message baseId:NO  isExist:^(BOOL isExist, FMDatabase *db) {
+        
+        NSNumber *sendStatus;
+        switch (message.sendStatus) {
+            case FLMessageSendFail:case FLMessageSending:
+                sendStatus = @0;
+                break;
+                
+            case FLMessageSendSuccess:
+                sendStatus = @1;
+                break;
+            default:
+                break;
+        }
+        // 如果消息存在，更新状态
+        if (isExist) {
+            
+            [db executeUpdate:@"UPDATE message SET status = ?, id = ?, timestamp = ? WHERE localtime = ?", sendStatus, message.msg_id, @(message.timestamp), @(message.sendtime)];
+        }
     }];
 }
 
@@ -306,14 +357,14 @@ static FLChatDBManager *instance = nil;
     // 聊天的对象
     NSString *conversationName = isSender ? message.to : message.from;
     // 最新消息字符
-    NSString *latestMsgStr = [FLConversationModel getLatestMessageStrWithMessage:message];
+    NSString *latestMsgStr = [FLConversationModel getMessageStrWithMessage:message];
     // 会话是否开启
     [self conversation:conversationName isExist:^(BOOL isExist, FMDatabase *db, NSInteger unreadCount) {
         
         // 判断不存在再插入数据库
         if (!isExist) {
             
-            FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message];
+            FLConversationModel *conversation = [[FLConversationModel alloc] initWithMessageModel:message conversationId:conversationName];
             conversation.unReadCount = isChatting ? 0 : 1;
             
             NSString *toUser = conversation.userName;

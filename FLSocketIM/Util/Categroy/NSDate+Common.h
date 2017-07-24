@@ -10,6 +10,7 @@
 
 @interface NSDate (Common)
 
++ (long long)nowTimeStamp;
 - (long long)timeStamp;
 
 + (NSDate *)timeStampToDate:(long long)timeStamp;

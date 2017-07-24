@@ -29,4 +29,8 @@
     return dic;
 }
 
++ (NSString *)creatUUIDString {
+    return [[NSUUID UUID] UUIDString];
+}
+
 @end

@@ -18,8 +18,8 @@
 @property (nonatomic, copy) NSString *latestMsgStr;
 @property (nonatomic, assign) NSInteger unReadCount;
 
-- (instancetype)initWithMessageModel:(FLMessageModel *)message;
+- (instancetype)initWithMessageModel:(FLMessageModel *)message conversationId:(NSString *)conversationId;
 - (void)setLatestMessage:(FLMessageModel *)latestMessage;
-+ (NSString *)getLatestMessageStrWithMessage:(FLMessageModel *)message;
-//- (instancetype)initWithLatestMsgStr
++ (NSString *)getMessageStrWithMessage:(FLMessageModel *)message;
+
 @end

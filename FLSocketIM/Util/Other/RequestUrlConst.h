@@ -8,6 +8,8 @@
 
 // 服务器地址
 #define BaseUrl                                 @"http://192.168.0.33:3000"
+//#define BaseUrl                                 @"http://192.168.0.66:3000"
+
 // 登录接口
 #define Login_Url                               @"mobileLogin"
 // 注册接口

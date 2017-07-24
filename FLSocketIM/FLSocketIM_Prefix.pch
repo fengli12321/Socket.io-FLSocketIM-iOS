@@ -25,6 +25,9 @@
 #import "FLChatDBManager.h"
 @import SocketIO;
 #import "MJRefresh.h"
+#import "FLLocalNotification.h"
+#import "FLSystemTool.h"
+#import "UIImageView+common.h"
 
 #ifdef DEBUG // 处于开发阶段
 #define FLLog(...) NSLog(__VA_ARGS__)

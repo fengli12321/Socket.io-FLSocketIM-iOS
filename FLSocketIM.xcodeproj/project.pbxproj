@@ -48,6 +48,8 @@
 		123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0521F0E3CD200DCC9E9 /* FLChatViewController.m */; };
 		123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */; };
 		123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */; };
+		1255BDCD1F2584080089F6D0 /* FLSystemTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1255BDCC1F2584080089F6D0 /* FLSystemTool.m */; };
+		1255BDD01F25E1D10089F6D0 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */; };
 		129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */; };
 		129E31F41F1DA0CC00ECB93C /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 129E31F21F1DA0CC00ECB93C /* README.textile */; };
 		129E323B1F1E09EA00ECB93C /* FLFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E323A1F1E09EA00ECB93C /* FLFriendModel.m */; };
@@ -71,6 +73,7 @@
 		12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE2C1F13202900FF3B44 /* FLChatDBManager.m */; };
 		12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */; };
 		12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */; };
+		12D45B131F21D46B00B3CB83 /* FLLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D45B121F21D46B00B3CB83 /* FLLocalNotification.m */; };
 		12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809A71F1C61B40072A42B /* NSDate+Common.m */; };
 		12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809AA1F1C65DA0072A42B /* NSString+Common.m */; };
 		12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CE21F17634A0069617B /* NSBundle+TZImagePicker.m */; };
@@ -174,6 +177,10 @@
 		123AA0551F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendsAndGroupsViewController.m; sourceTree = "<group>"; };
 		123AA0571F0E3F0E00DCC9E9 /* FLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLNavigationController.h; sourceTree = "<group>"; };
 		123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLNavigationController.m; sourceTree = "<group>"; };
+		1255BDCB1F2584080089F6D0 /* FLSystemTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSystemTool.h; sourceTree = "<group>"; };
+		1255BDCC1F2584080089F6D0 /* FLSystemTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSystemTool.m; sourceTree = "<group>"; };
+		1255BDCE1F25E1D10089F6D0 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
+		1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
 		129E31F01F1DA0CC00ECB93C /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		129E31F21F1DA0CC00ECB93C /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
@@ -210,6 +217,8 @@
 		12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFriendsListCell.m; sourceTree = "<group>"; };
 		12D082F91F160FCF00E0D238 /* FLBridgeDelegateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBridgeDelegateModel.h; sourceTree = "<group>"; };
 		12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLBridgeDelegateModel.m; sourceTree = "<group>"; };
+		12D45B111F21D46B00B3CB83 /* FLLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLocalNotification.h; sourceTree = "<group>"; };
+		12D45B121F21D46B00B3CB83 /* FLLocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLocalNotification.m; sourceTree = "<group>"; };
 		12D809A61F1C61B40072A42B /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
 		12D809A71F1C61B40072A42B /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
 		12D809A91F1C65DA0072A42B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
@@ -397,6 +406,7 @@
 		123AA0191F0E15D100DCC9E9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				12D45B101F21D44800B3CB83 /* Tool */,
 				123AA0351F0E25E900DCC9E9 /* Manager */,
 				123AA02E1F0E1D9700DCC9E9 /* Other */,
 				123AA0221F0E17BC00DCC9E9 /* Category */,
@@ -456,6 +466,8 @@
 				12D809A71F1C61B40072A42B /* NSDate+Common.m */,
 				12D809A91F1C65DA0072A42B /* NSString+Common.h */,
 				12D809AA1F1C65DA0072A42B /* NSString+Common.m */,
+				1255BDCE1F25E1D10089F6D0 /* UIImageView+common.h */,
+				1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */,
 			);
 			name = Category;
 			path = Categroy;
@@ -619,6 +631,17 @@
 				12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */,
 			);
 			path = FriendsAndGroup;
+			sourceTree = "<group>";
+		};
+		12D45B101F21D44800B3CB83 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				12D45B111F21D46B00B3CB83 /* FLLocalNotification.h */,
+				12D45B121F21D46B00B3CB83 /* FLLocalNotification.m */,
+				1255BDCB1F2584080089F6D0 /* FLSystemTool.h */,
+				1255BDCC1F2584080089F6D0 /* FLSystemTool.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		12D86CDF1F17632B0069617B /* Vendor */ = {
@@ -1025,6 +1048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12EF3B921F186E8C00111000 /* FLConversationModel.m in Sources */,
+				1255BDD01F25E1D10089F6D0 /* UIImageView+common.m in Sources */,
 				12D86CFB1F17634A0069617B /* TZImagePickerController.m in Sources */,
 				129E323B1F1E09EA00ECB93C /* FLFriendModel.m in Sources */,
 				12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */,
@@ -1036,6 +1060,7 @@
 				12B9D96C1F0F384400B7F749 /* FLMessageBubbleView.m in Sources */,
 				12D86CF81F17634A0069617B /* TZAssetModel.m in Sources */,
 				123AA0291F0E1A7700DCC9E9 /* UIView+Common.m in Sources */,
+				12D45B131F21D46B00B3CB83 /* FLLocalNotification.m in Sources */,
 				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
 				129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */,
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
@@ -1052,6 +1077,7 @@
 				123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */,
 				12D86CFE1F17634A0069617B /* TZPhotoPreviewController.m in Sources */,
 				122EBBC11F14D9B1000E7F70 /* FLPlaceholderTextView.m in Sources */,
+				1255BDCD1F2584080089F6D0 /* FLSystemTool.m in Sources */,
 				12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */,
 				12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */,
 				12D86CFD1F17634A0069617B /* TZPhotoPreviewCell.m in Sources */,

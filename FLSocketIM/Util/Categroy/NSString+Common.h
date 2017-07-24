@@ -10,6 +10,9 @@
 
 @interface NSString (Common)
 
+/** 字符串转字典 */
 - (NSDictionary *)stringToJsonDictionary;
+/** 生成唯一编码 */
++ (NSString *)creatUUIDString;
 
 @end

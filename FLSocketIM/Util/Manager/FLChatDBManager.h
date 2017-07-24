@@ -24,6 +24,15 @@
 
 
 /**
+ 更新消息
+
+ @param message 消息模型
+ */
+- (void)updateMessage:(FLMessageModel *)message;
+
+
+
+/**
  查询与某个用户的所有聊天信息
 
  @param userName 对方用户的名字

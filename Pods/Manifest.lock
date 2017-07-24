@@ -23,7 +23,7 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - Socket.IO-Client-Swift (10.0.1)
+  - Socket.IO-Client-Swift (10.2.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -33,7 +33,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJRefresh
   - SDWebImage
-  - Socket.IO-Client-Swift (~> 10.0.1)
+  - Socket.IO-Client-Swift (~> 10.2.0)
   - YYModel
 
 SPEC CHECKSUMS:
@@ -43,9 +43,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  Socket.IO-Client-Swift: f6553633ba6a01df8f1c8b583ec36560901e9de6
+  Socket.IO-Client-Swift: ecd7fe4d2746a7557e71c2d6e95e23e3be31ddd1
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d55f64334e72072af72029f23a582e72d9315946
+PODFILE CHECKSUM: 2e337c45c67a169e1739c87b8affc258a82e72e1
 
 COCOAPODS: 1.2.1

@@ -13,21 +13,21 @@
 - (void)setLatestMessage:(FLMessageModel *)latestMessage {
     
     self.latestMsgTimeStamp = latestMessage.timestamp;
-    self.latestMsgStr = [FLConversationModel getLatestMessageStrWithMessage:latestMessage];
+    self.latestMsgStr = [FLConversationModel getMessageStrWithMessage:latestMessage];
     
 }
 
-- (instancetype)initWithMessageModel:(FLMessageModel *)message {
+- (instancetype)initWithMessageModel:(FLMessageModel *)message conversationId:(NSString *)conversationId{
     if (self = [super init]) {
         
         self.latestMessage = message;
-        self.userName = message.from;
+        self.userName = conversationId;
     }
     return self;
 }
 
 
-+ (NSString *)getLatestMessageStrWithMessage:(FLMessageModel *)message {
++ (NSString *)getMessageStrWithMessage:(FLMessageModel *)message {
     
     NSString *latestMsgStr;
     switch (message.type) {

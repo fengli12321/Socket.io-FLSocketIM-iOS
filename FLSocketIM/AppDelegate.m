@@ -15,8 +15,6 @@
 @end
 
 @implementation AppDelegate
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -36,45 +34,42 @@
 }
 
 - (void)remotePushSetting {
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];
+
     
     
+    // iOS10系统以上
+    if ([UIDevice currentDevice].systemVersion.doubleValue >= 10.0) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        //监听回调事件
+        center.delegate = self;
+        
+        //iOS 10 使用以下方法注册，才能得到授权
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            
+            FLLog(@"%d===是否推送授权", granted);
+            if(granted) {
+                
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+                
+            }
+        }];
+        
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            
+        }];
+        
+    }
     // iOS8系统以上
-    if ([UIDevice currentDevice].systemVersion.doubleValue >= 8.0) {
+    else if ([UIDevice currentDevice].systemVersion.doubleValue >= 8.0) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }
-    // iOS8系统以下
-    else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
     
- 
-    
-//    UIRemoteNotificationType types =
-//    (UIRemoteNotificationTypeBadge
-//     |UIRemoteNotificationTypeSound
-//     |UIRemoteNotificationTypeAlert);
-//    
-//    //注册消息推送
-//    [[UIApplication sharedApplication]registerForRemoteNotificationTypes:types];
-//    
-//    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-//    
-//    center.delegate = self;
-//    
-//    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-//        
-//        if (!error) {
-//            
-//            FLLog(@"request authorization succeeded!");
-//            
-//        }
-//        
-//    }];
-
 
 }
+
+
 
 - (void)commonSetting {
     
@@ -105,25 +100,45 @@
 }
 
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"收到远程通知----%@", userInfo);
+#pragma mark - UNUserNotificationCenterDelegate
+//在展示通知前进行处理，即有机会在展示通知前再修改通知内容。
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+
+    UIApplicationState state = [UIApplication sharedApplication].applicationState;
+    if (state == UIApplicationStateActive) {
+        completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge);
+    }
+    else {
+        completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge);
+    }
 }
 
-// 当接收到远程通知（实现了这个方法，则上面的方法不再执行）
-// 前台（会调用）
-// 从后台进入到前台（会调用）
-// 完全退出再进入APP （也会调用这个方法）
-//
-// 如果要实现：只要接收到通知，不管当前应用在前台、后台、还是锁屏，都执行这个方法
-//    > 必须勾选后台模式 Remote Notification
-//    > 告诉系统是否有新的内容更新（执行完成代码块）
-//    > 设置发送通知的格式 {"content-available" : "随便传"} （在 aps 键里面设置）
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"收到远程通知2----%@", userInfo);
+// iOS10通知点击回调
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     
-    // 调用系统回调代码块的作用
-    //  > 系统会估量app消耗的电量，并根据传递的 `UIBackgroundFetchResult` 参数记录新数据是否可用
-    //  > 调用完成的处理代码时，应用的界面缩略图会更新
+    
+    completionHandler();
+}
+
+// iOS8收到本地推送回调
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    
+    FLLog(@"收到本地推送");
+    // 播放声音及震动
+    [FLSystemTool playNotifySound];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    FLLog(@"收到远程通知----%@", userInfo);
+}
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    
+    FLLog(@"收到远程通知2----%@", userInfo);
+    
+
     completionHandler(UIBackgroundFetchResultNewData);
 }
 

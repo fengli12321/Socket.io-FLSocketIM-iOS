@@ -40,4 +40,12 @@
  */
 - (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser sendStatus:(void(^)(FLMessageModel *message))sendStatus;
 
+/**
+ 消息重发
+ 
+ @param message 消息模型
+ @param sendStatus 发送状态回调
+ */
+- (void)resendMessage:(FLMessageModel *)message sendStatus:(void(^)(FLMessageModel *message))sendStatus;
+
 @end

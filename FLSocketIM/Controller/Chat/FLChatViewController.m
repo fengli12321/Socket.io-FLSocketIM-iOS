@@ -18,7 +18,7 @@
 #import "FLConversationModel.h"
 
 
-@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate>
+@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -65,11 +65,8 @@
 - (void)dealloc {
     [[FLClientManager shareManager] removeDelegate:self];
     
-    // 关闭时向消息列表添加当前会话
+    // 关闭时向消息列表添加当前会话(更新会话列表UI)
     [self addCurrentConversationToChatList];
-    
-    // 数据库添加会话
-    [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:self.dataSource.lastObject isChatting:YES];
     
 }
 
@@ -186,6 +183,25 @@
         }
     }
 }
+
+
+/**
+ 发送文本消息
+
+ @param text 文本
+ */
+- (void)sendTextMessageWithText:(NSString *)text {
+    __weak typeof(self) weakSelf = self;
+    FLMessageModel *message = [[FLChatManager shareManager] sendTextMessage:text toUser:_toUser sendStatus:^(FLMessageModel *newMessage) {
+        
+        [weakSelf updateSendStatusUIWithMessage:newMessage];
+    }];
+    [self clientManager:nil didReceivedMessage:message];
+}
+
+
+
+
 // 发送图片消息
 - (void)sendImgMessageWithImage:(UIImage *)image asset:(id)asset isOriginalPhoto:(BOOL)isOriginalPhoto {
     
@@ -246,6 +262,7 @@
 }
 
 
+
 // 更新消息列表未读消息数量, 更新数据库
 - (void)updateUnreadMessageRedIconForListAndDB {
     
@@ -268,6 +285,7 @@
     if (!cell) {
         cell = [[FLMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier messageModel:model];
     }
+    cell.delegate = self;
     cell.message = model;
     return cell;
 }
@@ -331,13 +349,8 @@
 
 - (void)messageInputView:(FLMessageInputView *)inputView sendText:(NSString *)text {
     
+    [self sendTextMessageWithText:text];
     
-    __weak typeof(self) weakSelf = self;
-    FLMessageModel *message = [[FLChatManager shareManager] sendTextMessage:text toUser:_toUser sendStatus:^(FLMessageModel *newMessage) {
-        
-        [weakSelf updateSendStatusUIWithMessage:newMessage];
-    }];
-    [self clientManager:nil didReceivedMessage:message];
     
 }
 
@@ -379,5 +392,17 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.messageInputView endEditing:YES];
+}
+
+#pragma mark - FLMessageCellDelegate
+- (void)resendMessage:(FLMessageModel *)message {
+    
+    message.sendStatus = FLMessageSending;
+    [self updateSendStatusUIWithMessage:message];
+    __weak typeof(self) weakSelf = self;
+    [[FLChatManager shareManager] resendMessage:message sendStatus:^(FLMessageModel *message) {
+        
+        [self updateSendStatusUIWithMessage:message];
+    }];
 }
 @end

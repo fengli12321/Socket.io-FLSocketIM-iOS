@@ -102,6 +102,8 @@ static FLClientManager *instance;
             [ack with:@[@"hello 我是应答"]];
         }
         
+        
+        
         FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
         id bodyStr = data.firstObject[@"bodies"];
         if ([bodyStr isKindOfClass:[NSString class]]) {
@@ -115,6 +117,13 @@ static FLClientManager *instance;
         // 会话插入数据库或者更新会话
         BOOL isChatting = [message.from isEqualToString:[FLClientManager shareManager].chattingConversation.toUser];
         [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:message isChatting:isChatting];
+        
+        
+        
+        
+        [FLLocalNotification pushLocalNotificationWithMessage:message];
+        
+        
         
         // 代理处理
         for (FLBridgeDelegateModel  *model in self.delegateArray) {

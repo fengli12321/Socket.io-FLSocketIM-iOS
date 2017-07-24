@@ -67,21 +67,27 @@
     _userIconView.image = [UIImage imageNamed:_isSender?@"Fruit-1":@"Fruit-2"];
     [_userIconView setCornerRadius:kMessageCell_UserIconWith/2.0];
 
-    _reSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_reSendBtn setImage:[UIImage imageNamed:@"resend"] forState:UIControlStateNormal];
-    [self.contentView addSubview:_reSendBtn];
-    [_reSendBtn setTitle:@"重试" forState:UIControlStateNormal];
-    [_reSendBtn setTitleColor:FLSecondColor forState:UIControlStateNormal];
-    _reSendBtn.titleLabel.font = FLFont(13);
     
-    _sendingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self.contentView addSubview:_sendingView];
-    [_sendingView mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (_isSender) {
+        _reSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_reSendBtn setImage:[UIImage imageNamed:@"resend"] forState:UIControlStateNormal];
+        [self.contentView addSubview:_reSendBtn];
+        [_reSendBtn setTitle:@"重试" forState:UIControlStateNormal];
+        [_reSendBtn setTitleColor:FLSecondColor forState:UIControlStateNormal];
+        _reSendBtn.titleLabel.font = FLFont(13);
         
-        make.centerY.equalTo(_reSendBtn);
-        make.right.equalTo(_reSendBtn);
-    }];
-    [_sendingView startAnimating];
+        [_reSendBtn addTarget:self action:@selector(reSendMessage) forControlEvents:UIControlEventTouchUpInside];
+        
+        _sendingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [self.contentView addSubview:_sendingView];
+        [_sendingView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(_reSendBtn);
+            make.right.equalTo(_reSendBtn);
+        }];
+        [_sendingView startAnimating];
+    }
+    
     
     switch (self.cellType) {
         case FLTextMessageCell:{
@@ -94,14 +100,15 @@
                 make.width.mas_lessThanOrEqualTo(kScreenWidth);
             }];
             
-            [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.centerY.equalTo(_bubbleView);
-                make.right.mas_equalTo(_bubbleView.mas_left).offset(-5);
-                make.height.mas_equalTo(30);
-            }];
-            
-            
+            if (_isSender) {
+                [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.centerY.equalTo(_bubbleView);
+                    make.right.mas_equalTo(_bubbleView.mas_left).offset(-5);
+                    make.height.mas_equalTo(30);
+                }];
+            }
+        
             
             break;
         }
@@ -119,12 +126,14 @@
                 make.height.equalTo(_messageImage.mas_width).multipliedBy(1.5);
             }];
             
-            [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.centerY.equalTo(_messageImage);
-                make.right.mas_equalTo(_messageImage.mas_left).offset(-5);
-                make.height.mas_equalTo(30);
-            }];
+            if (_isSender) {
+                [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.centerY.equalTo(_messageImage);
+                    make.right.mas_equalTo(_messageImage.mas_left).offset(-5);
+                    make.height.mas_equalTo(30);
+                }];
+            }
             
             break;
         }
@@ -145,7 +154,7 @@
                 self.messageImage.image = [UIImage imageWithData:imgData];
             }
             else {
-                [self.messageImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", BaseUrl, message.bodies.imgUrl]] placeholderImage:[UIImage imageNamed:@"Fruit-5"]];
+                [self.messageImage fl_setImageWithURL:[NSString stringWithFormat:@"%@/%@", BaseUrl, message.bodies.imgUrl] locSavePath:message.bodies.locSavePath placeholderImage:[UIImage imageNamed:@"Fruit-5"]];
             }
             break;
         }
@@ -209,4 +218,16 @@
             break;
     }
 }
+
+/**
+ 重新发送消息
+ */
+- (void)reSendMessage {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(resendMessage:)]) {
+        
+        [_delegate resendMessage:self.message];
+    }
+}
+
 @end

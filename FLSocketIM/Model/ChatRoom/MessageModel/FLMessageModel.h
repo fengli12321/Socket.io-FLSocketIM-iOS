@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
     FLMessageSendSuccess,   // 发送成功
     FLMessageSendFail   // 发送失败
 };
-@interface FLMessageModel : NSObject
+@interface FLMessageModel : NSObject <YYModel>
 
 
 /** 在聊天界面行高 */
@@ -31,8 +31,10 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 @property (nonatomic, assign) FLMessageModelType type;
 /** 消息ID */
 @property (nonatomic, copy) NSString *msg_id;
-/** 消息发送时间 */
+/** 消息发送服务器时间 */
 @property (nonatomic, assign) long long timestamp;
+/** 消息发送本地时间 */
+@property (nonatomic, assign) long long sendtime;
 /** 接收人的username或者接收group的ID */
 @property (nonatomic, copy) NSString *to;
 /** 发送人username */
@@ -46,16 +48,23 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 /** 消息发送状态 */
 @property (nonatomic, assign) enum FLMessageSendStatus sendStatus;
 
+
 - (instancetype)initWithToUser:(NSString *)toUser fromUser:(NSString *)fromUser chatType:(NSString *)chatType messageBody:(FLMessageBody *)body;
 
 @end
 
 @interface FLMessageBody : NSObject
-
-@property (nonatomic, copy) NSString *type;     // 消息类型
-@property (nonatomic, copy) NSString *msg;      // 文本消息内容
-@property (nonatomic, copy) NSString *imgUrl;   // 图片远程地址
-@property (nonatomic, copy) NSString *imageName;    // 图片名称
-@property (nonatomic, strong) NSData *imgData;  // 图片数据
+/** 消息类型 */
+@property (nonatomic, copy) NSString *type;
+/** 文本消息内容 */
+@property (nonatomic, copy) NSString *msg;
+/** 图片远程地址 */
+@property (nonatomic, copy) NSString *imgUrl;
+/** 图片名称 */
+@property (nonatomic, copy) NSString *imageName;
+/** 图片数据 */
+@property (nonatomic, strong) NSData *imgData;
+/** 文件本地保存地址 */
+@property (nonatomic, copy) NSString *locSavePath;
 
 @end
