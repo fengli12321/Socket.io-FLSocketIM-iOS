@@ -15,4 +15,7 @@
 /** 生成唯一编码 */
 + (NSString *)creatUUIDString;
 
+/** 获取文件保存路径 */
++ (NSString *)getFielSavePath;
+
 @end

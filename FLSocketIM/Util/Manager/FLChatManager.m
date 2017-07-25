@@ -80,9 +80,9 @@ static FLChatManager *instance = nil;
     messageBody.imgData = imgData;
     
     // 保存图片到本地沙河
-    NSString *savePath = [[self getFielSavePath] stringByAppendingPathComponent:imageName];
+    NSString *savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:imageName];
     if ([self saveFile:imgData toPath:savePath]) {
-        messageBody.locSavePath = savePath;
+        messageBody.locSavePath = imageName;
     }
     
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
@@ -162,7 +162,7 @@ static FLChatManager *instance = nil;
     
     
     NSData *imageData;
-    NSString *locImgPath = message.bodies.locSavePath;
+    NSString *locImgPath = [[NSString getFielSavePath] stringByAppendingPathComponent:message.bodies.locSavePath];
     if (locImgPath.length) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         imageData = [fileManager contentsAtPath:locImgPath];
@@ -211,7 +211,7 @@ static FLChatManager *instance = nil;
         
         failureBlock(error);
     } withUpLoadProgress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        progress(bytesProgress, totalBytesProgress);
+//        progress(bytesProgress, totalBytesProgress);
     }];
 }
 - (BOOL)saveFile:(NSData *)fileData toPath:(NSString *)savePath {
@@ -223,24 +223,7 @@ static FLChatManager *instance = nil;
     return saveSuccess;
 }
 
-/** 获取文件保存路径 */
-- (NSString *)getFielSavePath{
-    
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    path = [path stringByAppendingPathComponent:@"FLFileSavePath"];
-    BOOL isDir = false;
-    BOOL isExist = [fileManager fileExistsAtPath:path isDirectory:&isDir];
-    if (!(isDir && isExist)) {
-        
-        BOOL bCreateDir = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-        if (bCreateDir) {
-            
-            FLLog(@"文件路径创建成功");
-        }
-    }
-    return path;
-}
+
 
 /**
  保存消息和会话

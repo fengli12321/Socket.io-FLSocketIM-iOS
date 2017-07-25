@@ -50,6 +50,17 @@
 		123AA0591F0E3F0E00DCC9E9 /* FLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 123AA0581F0E3F0E00DCC9E9 /* FLNavigationController.m */; };
 		1255BDCD1F2584080089F6D0 /* FLSystemTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1255BDCC1F2584080089F6D0 /* FLSystemTool.m */; };
 		1255BDD01F25E1D10089F6D0 /* UIImageView+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */; };
+		128DCD901F26DFB600F52ACD /* FLTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */; };
+		128DCD991F26E93500F52ACD /* FLTabBarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD971F26E93500F52ACD /* FLTabBarItemView.m */; };
+		128DCD9C1F26E97300F52ACD /* FLBarBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD9B1F26E97300F52ACD /* FLBarBadgeLabel.m */; };
+		128DCD9F1F26F32B00F52ACD /* FLTabBarMessageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD9E1F26F32B00F52ACD /* FLTabBarMessageItemView.m */; };
+		128DCDA21F270CC700F52ACD /* FLTabBarContactsItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCDA11F270CC700F52ACD /* FLTabBarContactsItemView.m */; };
+		128DCDA51F27162A00F52ACD /* FLTabBarDynamicItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCDA41F27162A00F52ACD /* FLTabBarDynamicItemView.m */; };
+		128DCDA91F2720CD00F52ACD /* FLMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCDA81F2720CD00F52ACD /* FLMeViewController.m */; };
+		128DCDAB1F273D3B00F52ACD /* FLMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 128DCDAA1F273D3B00F52ACD /* FLMeViewController.xib */; };
+		128DCDAD1F273E4D00F52ACD /* fengjing.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 128DCDAC1F273E4D00F52ACD /* fengjing.jpeg */; };
+		128DCDB01F2743F200F52ACD /* WID-small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 128DCDAF1F2743F200F52ACD /* WID-small.jpg */; };
+		128DCDB21F27471000F52ACD /* MIDAUTUMNIMAGE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 128DCDB11F27471000F52ACD /* MIDAUTUMNIMAGE.jpg */; };
 		129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */; };
 		129E31F41F1DA0CC00ECB93C /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 129E31F21F1DA0CC00ECB93C /* README.textile */; };
 		129E323B1F1E09EA00ECB93C /* FLFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 129E323A1F1E09EA00ECB93C /* FLFriendModel.m */; };
@@ -66,7 +77,7 @@
 		12BAF80F1F1701F7007CC695 /* Fruit-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8051F1701F7007CC695 /* Fruit-6.png */; };
 		12BAF8101F1701F7007CC695 /* Fruit-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8061F1701F7007CC695 /* Fruit-7.png */; };
 		12BAF8111F1701F7007CC695 /* Fruit-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8071F1701F7007CC695 /* Fruit-8.png */; };
-		12BAF8121F1701F7007CC695 /* Fruit-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8081F1701F7007CC695 /* Fruit-11.png */; };
+		12BAF8121F1701F7007CC695 /* Fruit-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8081F1701F7007CC695 /* Fruit-9.png */; };
 		12BAF8131F1701F7007CC695 /* Fruit-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 12BAF8091F1701F7007CC695 /* Fruit-0.png */; };
 		12BEEE271F1316DD00FF3B44 /* FLClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE261F1316DD00FF3B44 /* FLClientManager.m */; };
 		12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BEEE291F13190800FF3B44 /* FLChatManager.m */; };
@@ -181,6 +192,24 @@
 		1255BDCC1F2584080089F6D0 /* FLSystemTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSystemTool.m; sourceTree = "<group>"; };
 		1255BDCE1F25E1D10089F6D0 /* UIImageView+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+common.h"; sourceTree = "<group>"; };
 		1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+common.m"; sourceTree = "<group>"; };
+		128DCD8E1F26DFB600F52ACD /* FLTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarView.h; sourceTree = "<group>"; };
+		128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarView.m; sourceTree = "<group>"; };
+		128DCD971F26E93500F52ACD /* FLTabBarItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarItemView.m; sourceTree = "<group>"; };
+		128DCD981F26E93500F52ACD /* FLTabBarItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarItemView.h; sourceTree = "<group>"; };
+		128DCD9A1F26E97300F52ACD /* FLBarBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLBarBadgeLabel.h; sourceTree = "<group>"; };
+		128DCD9B1F26E97300F52ACD /* FLBarBadgeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLBarBadgeLabel.m; sourceTree = "<group>"; };
+		128DCD9D1F26F32B00F52ACD /* FLTabBarMessageItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarMessageItemView.h; sourceTree = "<group>"; };
+		128DCD9E1F26F32B00F52ACD /* FLTabBarMessageItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarMessageItemView.m; sourceTree = "<group>"; };
+		128DCDA01F270CC700F52ACD /* FLTabBarContactsItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarContactsItemView.h; sourceTree = "<group>"; };
+		128DCDA11F270CC700F52ACD /* FLTabBarContactsItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarContactsItemView.m; sourceTree = "<group>"; };
+		128DCDA31F27162A00F52ACD /* FLTabBarDynamicItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarDynamicItemView.h; sourceTree = "<group>"; };
+		128DCDA41F27162A00F52ACD /* FLTabBarDynamicItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarDynamicItemView.m; sourceTree = "<group>"; };
+		128DCDA71F2720CD00F52ACD /* FLMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMeViewController.h; sourceTree = "<group>"; };
+		128DCDA81F2720CD00F52ACD /* FLMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMeViewController.m; sourceTree = "<group>"; };
+		128DCDAA1F273D3B00F52ACD /* FLMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLMeViewController.xib; sourceTree = "<group>"; };
+		128DCDAC1F273E4D00F52ACD /* fengjing.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fengjing.jpeg; sourceTree = "<group>"; };
+		128DCDAF1F2743F200F52ACD /* WID-small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "WID-small.jpg"; sourceTree = "<group>"; };
+		128DCDB11F27471000F52ACD /* MIDAUTUMNIMAGE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MIDAUTUMNIMAGE.jpg; sourceTree = "<group>"; };
 		129E31F01F1DA0CC00ECB93C /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		129E31F11F1DA0CC00ECB93C /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		129E31F21F1DA0CC00ECB93C /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
@@ -205,7 +234,7 @@
 		12BAF8051F1701F7007CC695 /* Fruit-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-6.png"; sourceTree = "<group>"; };
 		12BAF8061F1701F7007CC695 /* Fruit-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-7.png"; sourceTree = "<group>"; };
 		12BAF8071F1701F7007CC695 /* Fruit-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-8.png"; sourceTree = "<group>"; };
-		12BAF8081F1701F7007CC695 /* Fruit-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-11.png"; sourceTree = "<group>"; };
+		12BAF8081F1701F7007CC695 /* Fruit-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-9.png"; sourceTree = "<group>"; };
 		12BAF8091F1701F7007CC695 /* Fruit-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fruit-0.png"; sourceTree = "<group>"; };
 		12BEEE251F1316DD00FF3B44 /* FLClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLClientManager.h; sourceTree = "<group>"; };
 		12BEEE261F1316DD00FF3B44 /* FLClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLClientManager.m; sourceTree = "<group>"; };
@@ -391,6 +420,7 @@
 				123AA04A1F0E3C4A00DCC9E9 /* FriendAndGroups */,
 				123AA0421F0E31A100DCC9E9 /* Chat */,
 				123AA0391F0E2F6E00DCC9E9 /* Login */,
+				128DCDA61F2720B200F52ACD /* MeAndSetting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -429,6 +459,7 @@
 		123AA01B1F0E15D100DCC9E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				128DCD8D1F26DFA400F52ACD /* TabBar */,
 				12EF3B8B1F1857D000111000 /* ChatList */,
 				12D082F51F15F6E300E0D238 /* FriendsAndGroup */,
 				12B9D9601F0F25AA00B7F749 /* ChatRoom */,
@@ -548,6 +579,35 @@
 			path = FriendAndGroups;
 			sourceTree = "<group>";
 		};
+		128DCD8D1F26DFA400F52ACD /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				128DCD8E1F26DFB600F52ACD /* FLTabBarView.h */,
+				128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */,
+				128DCD981F26E93500F52ACD /* FLTabBarItemView.h */,
+				128DCD971F26E93500F52ACD /* FLTabBarItemView.m */,
+				128DCD9D1F26F32B00F52ACD /* FLTabBarMessageItemView.h */,
+				128DCD9E1F26F32B00F52ACD /* FLTabBarMessageItemView.m */,
+				128DCDA01F270CC700F52ACD /* FLTabBarContactsItemView.h */,
+				128DCDA11F270CC700F52ACD /* FLTabBarContactsItemView.m */,
+				128DCDA31F27162A00F52ACD /* FLTabBarDynamicItemView.h */,
+				128DCDA41F27162A00F52ACD /* FLTabBarDynamicItemView.m */,
+				128DCD9A1F26E97300F52ACD /* FLBarBadgeLabel.h */,
+				128DCD9B1F26E97300F52ACD /* FLBarBadgeLabel.m */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		128DCDA61F2720B200F52ACD /* MeAndSetting */ = {
+			isa = PBXGroup;
+			children = (
+				128DCDA71F2720CD00F52ACD /* FLMeViewController.h */,
+				128DCDA81F2720CD00F52ACD /* FLMeViewController.m */,
+				128DCDAA1F273D3B00F52ACD /* FLMeViewController.xib */,
+			);
+			path = MeAndSetting;
+			sourceTree = "<group>";
+		};
 		129E31EF1F1DA0CC00ECB93C /* NSDate+Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +670,9 @@
 		12BAF7FF1F1701DC007CC695 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				128DCDB11F27471000F52ACD /* MIDAUTUMNIMAGE.jpg */,
+				128DCDAF1F2743F200F52ACD /* WID-small.jpg */,
+				128DCDAC1F273E4D00F52ACD /* fengjing.jpeg */,
 				12BAF8001F1701F7007CC695 /* Fruit-1.png */,
 				12BAF8011F1701F7007CC695 /* Fruit-2.png */,
 				12BAF8021F1701F7007CC695 /* Fruit-3.png */,
@@ -618,7 +681,7 @@
 				12BAF8051F1701F7007CC695 /* Fruit-6.png */,
 				12BAF8061F1701F7007CC695 /* Fruit-7.png */,
 				12BAF8071F1701F7007CC695 /* Fruit-8.png */,
-				12BAF8081F1701F7007CC695 /* Fruit-11.png */,
+				12BAF8081F1701F7007CC695 /* Fruit-9.png */,
 				12BAF8091F1701F7007CC695 /* Fruit-0.png */,
 			);
 			path = Icon;
@@ -860,12 +923,14 @@
 				12BAF80B1F1701F7007CC695 /* Fruit-2.png in Resources */,
 				123AA03E1F0E2F9700DCC9E9 /* FLLoginViewController.xib in Resources */,
 				12BAF80A1F1701F7007CC695 /* Fruit-1.png in Resources */,
+				128DCDB01F2743F200F52ACD /* WID-small.jpg in Resources */,
 				122EBBAD1F14D6A6000E7F70 /* keyboard_add_camera@2x.png in Resources */,
 				122EBBB61F14D6A6000E7F70 /* keyboard_emotion_monkey_gif@2x.png in Resources */,
 				129E31F41F1DA0CC00ECB93C /* README.textile in Resources */,
 				123A9FF11F0E150700DCC9E9 /* LaunchScreen.storyboard in Resources */,
 				122EBBB91F14D6A6000E7F70 /* keyboard_page_unselected@2x.png in Resources */,
 				12BAF80D1F1701F7007CC695 /* Fruit-4.png in Resources */,
+				128DCDAD1F273E4D00F52ACD /* fengjing.jpeg in Resources */,
 				122EBBB21F14D6A6000E7F70 /* keyboard_emotion_delete@2x.png in Resources */,
 				122EBBB71F14D6A6000E7F70 /* keyboard_keyboard@2x.png in Resources */,
 				123AA0451F0E35C100DCC9E9 /* MBProgressHUD.bundle in Resources */,
@@ -876,7 +941,7 @@
 				122EBBAC1F14D6A6000E7F70 /* keyboard_add@2x.png in Resources */,
 				123A9FEE1F0E150700DCC9E9 /* Assets.xcassets in Resources */,
 				122EBBB31F14D6A6000E7F70 /* keyboard_emotion_emoji@2x.png in Resources */,
-				12BAF8121F1701F7007CC695 /* Fruit-11.png in Resources */,
+				12BAF8121F1701F7007CC695 /* Fruit-9.png in Resources */,
 				122EBBB01F14D6A6000E7F70 /* keyboard_at@2x.png in Resources */,
 				122EBBBC1F14D6A6000E7F70 /* keyboard_voice@2x.png in Resources */,
 				12BAF80F1F1701F7007CC695 /* Fruit-6.png in Resources */,
@@ -884,6 +949,8 @@
 				123A9FEC1F0E150700DCC9E9 /* Main.storyboard in Resources */,
 				12BAF8111F1701F7007CC695 /* Fruit-8.png in Resources */,
 				122EBBB11F14D6A6000E7F70 /* keyboard_emotion@2x.png in Resources */,
+				128DCDAB1F273D3B00F52ACD /* FLMeViewController.xib in Resources */,
+				128DCDB21F27471000F52ACD /* MIDAUTUMNIMAGE.jpg in Resources */,
 				12D86CFA1F17634A0069617B /* TZImagePickerController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1066,10 +1133,12 @@
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
 				12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */,
 				12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */,
+				128DCDA21F270CC700F52ACD /* FLTabBarContactsItemView.m in Sources */,
 				12B9D96F1F0F71C500B7F749 /* FLSocketManager.m in Sources */,
 				123AA0341F0E220D00DCC9E9 /* FLAlertView.m in Sources */,
 				12D86CFC1F17634A0069617B /* TZPhotoPickerController.m in Sources */,
 				12D86CF91F17634A0069617B /* TZImageManager.m in Sources */,
+				128DCD9C1F26E97300F52ACD /* FLBarBadgeLabel.m in Sources */,
 				12BEEE271F1316DD00FF3B44 /* FLClientManager.m in Sources */,
 				123AA0501F0E3CBB00DCC9E9 /* FLChatListViewController.m in Sources */,
 				12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */,
@@ -1080,13 +1149,18 @@
 				1255BDCD1F2584080089F6D0 /* FLSystemTool.m in Sources */,
 				12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */,
 				12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */,
+				128DCDA91F2720CD00F52ACD /* FLMeViewController.m in Sources */,
+				128DCDA51F27162A00F52ACD /* FLTabBarDynamicItemView.m in Sources */,
 				12D86CFD1F17634A0069617B /* TZPhotoPreviewCell.m in Sources */,
 				123A9FE61F0E150700DCC9E9 /* AppDelegate.m in Sources */,
 				12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */,
+				128DCD901F26DFB600F52ACD /* FLTabBarView.m in Sources */,
+				128DCD991F26E93500F52ACD /* FLTabBarItemView.m in Sources */,
 				12D86CF71F17634A0069617B /* TZAssetCell.m in Sources */,
 				12D86CFF1F17634A0069617B /* TZVideoPlayerController.m in Sources */,
 				123AA0411F0E30A400DCC9E9 /* UIViewController+Common.m in Sources */,
 				123AA03D1F0E2F9700DCC9E9 /* FLLoginViewController.m in Sources */,
+				128DCD9F1F26F32B00F52ACD /* FLTabBarMessageItemView.m in Sources */,
 				12D86D001F17634A0069617B /* UIView+Layout.m in Sources */,
 				12EF3B8E1F18580500111000 /* FLChatListCell.m in Sources */,
 				12EF3B951F189B4C00111000 /* FLBadgeLabel.m in Sources */,

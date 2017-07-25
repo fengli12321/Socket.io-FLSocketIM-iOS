@@ -18,7 +18,7 @@
         if (localPath.length) {
             
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSData *imageData = [fileManager contentsAtPath:localPath];
+            NSData *imageData = [fileManager contentsAtPath:[[NSString getFielSavePath] stringByAppendingPathComponent:localPath]];
             image = [UIImage imageWithData:imageData];
         };
         dispatch_async(dispatch_get_main_queue(), ^{

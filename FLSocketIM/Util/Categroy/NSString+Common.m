@@ -33,4 +33,22 @@
     return [[NSUUID UUID] UUIDString];
 }
 
+/** 获取文件保存路径 */
++ (NSString *)getFielSavePath{
+    
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    path = [path stringByAppendingPathComponent:@"FLFileSavePath"];
+    BOOL isDir = false;
+    BOOL isExist = [fileManager fileExistsAtPath:path isDirectory:&isDir];
+    if (!(isDir && isExist)) {
+        
+        BOOL bCreateDir = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+        if (bCreateDir) {
+            
+            FLLog(@"文件路径创建成功");
+        }
+    }
+    return path;
+}
 @end

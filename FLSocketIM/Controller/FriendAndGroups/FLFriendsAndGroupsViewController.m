@@ -50,6 +50,8 @@
     _tableView.rowHeight = 60;
     [_tableView registerClass:[FLFriendsListCell class] forCellReuseIdentifier:@"FLFriendsListCell"];
     _tableView.tableFooterView = [[UIView alloc] init];
+    [_tableView setSeparatorColor:[UIColor colorWithHex:0xe5e5e5]];
+    [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
 }
 #pragma mark - Request
 - (void)requestData {
@@ -57,11 +59,11 @@
     __weak typeof(self) weakSelf = self;
     [FLNetWorkManager ba_requestWithType:Get withUrlString:AllUsers_Url withParameters:nil withSuccessBlock:^(id response) {
         
-        
+        FLLog(@"%@", response);
         NSArray *allFriends = [NSArray yy_modelArrayWithClass:[FLFriendModel class] json:response[@"data"][@"allUser"]];
         
         for (NSString *onlineUser in response[@"data"][@"onLineUsers"]) {
-            if (!onlineUser) {
+            if ([onlineUser isKindOfClass:[NSNull class]]) {
                 break;
             }
             for (FLFriendModel *friend in allFriends) {
@@ -90,7 +92,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FLFriendsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FLFriendsListCell" forIndexPath:indexPath];
     cell.model = self.dataSource[indexPath.row];
-    cell.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Fruit-%ld", indexPath.row%12]];
+    cell.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Fruit-%ld", (indexPath.row % 10)]];
     return cell;
 }
 #pragma mark - UITableViewDelegate

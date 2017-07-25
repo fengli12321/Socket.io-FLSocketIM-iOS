@@ -58,6 +58,8 @@
     _tableView.rowHeight = 70;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerClass:[FLChatListCell class] forCellReuseIdentifier:@"FLChatListCell"];
+    [_tableView setSeparatorColor:[UIColor colorWithHex:0xe5e5e5]];
+    [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
 }
 #pragma mark - Data
 - (void)queryDataFromDB {
