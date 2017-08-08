@@ -28,6 +28,7 @@
 #import "FLLocalNotification.h"
 #import "FLSystemTool.h"
 #import "UIImageView+common.h"
+#import "UIImage+Common.h"
 
 #ifdef DEBUG // 处于开发阶段
 #define FLLog(...) NSLog(__VA_ARGS__)
@@ -43,3 +44,4 @@
 #define kMargin 15.0f
 #define FLFont(f) [UIFont systemFontOfSize:(f)]
 #define FLUserDefault [NSUserDefaults standardUserDefaults]
+#define kKeyWindow [UIApplication sharedApplication].keyWindow

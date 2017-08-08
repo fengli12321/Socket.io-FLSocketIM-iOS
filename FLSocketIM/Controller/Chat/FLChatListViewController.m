@@ -11,11 +11,13 @@
 #import "FLConversationModel.h"
 #import "FLChatListCell.h"
 #import "FLChatViewController.h"
+#import "FLStatusTitleView.h"
 
 @interface FLChatListViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) FLStatusTitleView *titleView;
 
 @end
 
@@ -27,6 +29,13 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+- (UIView *)titleView {
+    if (!_titleView) {
+        
+        _titleView = [[FLStatusTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth*2/3, 40)];
+    }
+    return _titleView;
 }
 #pragma mark - LifeCircle
 - (void)viewDidLoad {
@@ -45,7 +54,7 @@
 #pragma mark - UI
 - (void)setupUI {
     
-    self.navigationItem.title = [FLClientManager shareManager].currentUserID;
+    self.navigationItem.titleView = self.titleView;
     
     UIBarButtonItem *chat = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(chat)];
     self.navigationItem.rightBarButtonItem = chat;
@@ -187,43 +196,10 @@
     BOOL isRead = [conversationName isEqualToString:[FLClientManager shareManager].chattingConversation.toUser];
     [self addOrUpdateConversation:conversationName latestMessage:message isRead:isRead];
     
-//    // 异步查询会话是否存在，避免阻塞主线程, 然后回到主线程刷新UI
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        
-//        // 是否已经开启与对方的会话
-//        FLChatViewController *chatVC = [FLClientManager shareManager].chattingConversation;
-//        BOOL isChatting = chatVC && [chatVC.toUser isEqualToString:message.from];
-//        
-//        
-//        FLConversationModel *conversation = [self isExistConversationWithToUser:message.from];
-//        if (conversation) {
-//            conversation.unReadCount += 1;
-//            if (isChatting) {
-//                conversation.unReadCount = 0;
-//            }
-//            conversation.latestMessage = message;
-//            // 将会话放到最前面
-//            [self.dataSource removeObject:conversation];
-//            [self.dataSource insertObject:conversation atIndex:0];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                [self.tableView reloadData];
-//            });
-//        }
-//        else { // 接收到消息但是会话不存在，创建一个新的会话
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self addConversationWithMessage:message isReaded:NO];
-//                
-//            });
-//            
-//    
-//        }
-//        
-//    });
-    
+}
+
+- (void)clientManager:(FLClientManager *)manager didChangeStatus:(SocketIOClientStatus)status {
+    [self.titleView updateWithLinkStatus:status];
 }
 
 @end

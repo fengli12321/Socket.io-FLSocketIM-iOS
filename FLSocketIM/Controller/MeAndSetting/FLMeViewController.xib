@@ -16,6 +16,7 @@
                 <outlet property="backgoundImage" destination="4n3-07-GKr" id="UFT-nr-Psv"/>
                 <outlet property="connectBtn" destination="kGO-LK-n7t" id="iey-hB-oYl"/>
                 <outlet property="currentUserLabel" destination="dTe-nV-p6G" id="N49-dp-2KW"/>
+                <outlet property="existLogin" destination="8uP-h1-7i7" id="tgG-ia-2ID"/>
                 <outlet property="statusLabel" destination="NSc-JU-c4h" id="biS-um-53q"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ygX-eO-6Jr"/>
             </connections>
@@ -63,15 +64,30 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uP-h1-7i7">
+                            <rect key="frame" x="50" y="232" width="275" height="55"/>
+                            <color key="backgroundColor" red="0.97774809945022012" green="0.41946920866499848" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="8uP-h1-7i7" secondAttribute="height" multiplier="10:2" id="hWZ-eD-UU2"/>
+                            </constraints>
+                            <state key="normal" title="退出登录"/>
+                            <state key="selected" title="连接"/>
+                            <connections>
+                                <action selector="existLoginAction:" destination="-1" eventType="touchUpInside" id="HDN-Jg-rfv"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="dTe-nV-p6G" firstAttribute="top" secondItem="qOS-mG-rGO" secondAttribute="top" constant="10" id="280-2J-TvH"/>
+                        <constraint firstItem="kGO-LK-n7t" firstAttribute="top" secondItem="8uP-h1-7i7" secondAttribute="bottom" constant="20" id="2LV-XF-08c"/>
                         <constraint firstAttribute="trailing" secondItem="NSc-JU-c4h" secondAttribute="trailing" constant="10" id="VOy-mg-4ch"/>
                         <constraint firstItem="kGO-LK-n7t" firstAttribute="top" secondItem="qOS-mG-rGO" secondAttribute="centerY" constant="30" id="YV8-7H-Khe"/>
                         <constraint firstItem="dTe-nV-p6G" firstAttribute="leading" secondItem="qOS-mG-rGO" secondAttribute="leading" constant="10" id="gaF-Ah-Jdn"/>
+                        <constraint firstItem="kGO-LK-n7t" firstAttribute="width" secondItem="8uP-h1-7i7" secondAttribute="width" id="jyS-XR-tYX"/>
                         <constraint firstItem="NSc-JU-c4h" firstAttribute="top" secondItem="qOS-mG-rGO" secondAttribute="top" constant="10" id="li5-o3-urt"/>
                         <constraint firstItem="kGO-LK-n7t" firstAttribute="leading" secondItem="qOS-mG-rGO" secondAttribute="leading" constant="50" id="mbm-5u-GMC"/>
+                        <constraint firstItem="kGO-LK-n7t" firstAttribute="centerX" secondItem="8uP-h1-7i7" secondAttribute="centerX" id="qQV-r2-n1m"/>
                         <constraint firstItem="kGO-LK-n7t" firstAttribute="centerX" secondItem="qOS-mG-rGO" secondAttribute="centerX" id="sdu-qY-Csw"/>
                     </constraints>
                 </view>

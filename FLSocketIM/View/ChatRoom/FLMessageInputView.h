@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FLMessageInputViewState) {
+    FLMessageInputViewStateSystem,
+    FLMessageInputViewStateEmotion,
+    FLMessageInputViewStateAdd,
+    FLMessageInputViewStateVoice
+};
 
 @protocol FLMessageInputViewDelegate;
 
 @interface FLMessageInputView : UIView <UITextViewDelegate>
 
 @property (nonatomic, weak) id<FLMessageInputViewDelegate> delegate;
+
+- (void)prepareToShow;
+- (void)prepareToDissmiss;
 
 @end
 

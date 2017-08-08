@@ -8,6 +8,8 @@
 
 #import "FLMessageInputView.h"
 #import "FLPlaceholderTextView.h"
+#import "FLMessageInputView_Voice.h"
+#import "AGEmojiKeyBoardView.h"
 
 #define kKeyboardView_Height 216.0
 #define kMessageInputView_Height 50.0
@@ -16,16 +18,18 @@
 #define kMessageInputView_Width_Tool 35.0
 #define kMessageInputView_MediaPadding 1.0
 
-@interface FLMessageInputView ()
+@interface FLMessageInputView () <AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource>
 
+@property (strong, nonatomic) AGEmojiKeyboardView *emojiKeyboardView;
+@property (strong, nonatomic) FLMessageInputView_Voice *voiceKeyboardView;
 @property (nonatomic, strong) UIScrollView *contentView;
 @property (nonatomic, strong) UIButton *voiceButton;
 @property (nonatomic, strong) UIButton *arrowKeyboardButton;
 @property (nonatomic, strong) UIButton *emotionButton;
 @property (nonatomic, strong) UIButton *addButton;
 @property (nonatomic, strong) FLPlaceholderTextView *inputTextView;
-
 @property (nonatomic, assign) CGFloat viewHeightOld;
+@property (nonatomic, assign) FLMessageInputViewState inputState;
 
 @end
 @implementation FLMessageInputView
@@ -84,6 +88,17 @@
     _arrowKeyboardButton.hidden = YES;
     
     
+    _voiceKeyboardView = [[FLMessageInputView_Voice alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kKeyboardView_Height)];
+    _voiceKeyboardView.recordSuccessfully = ^(NSString *file, NSTimeInterval duration){
+//        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(messageInputView:sendVoice:duration:)]) {
+//            [weakSelf.delegate messageInputView:weakSelf sendVoice:file duration:duration];
+//        }
+    };
+    
+    _emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kKeyboardView_Height) dataSource:self showBigEmotion:YES];
+    _emojiKeyboardView.delegate = self;
+    [_emojiKeyboardView setY:kScreenHeight];
+    
     // contentView
      CGFloat contentViewHeight = kMessageInputView_Height -2*kMessageInputView_PadingHeight;
     _contentView = [[UIScrollView alloc] init];
@@ -112,6 +127,85 @@
     _inputTextView.textContainerInset = insets;
     
     [self.contentView addSubview:_inputTextView];
+}
+#pragma mark - Public
+
+- (BOOL)isAndResignFirstResponder{
+    if (self.inputState == FLMessageInputViewStateAdd || self.inputState == FLMessageInputViewStateEmotion || self.inputState == FLMessageInputViewStateVoice) {
+        [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
+            [_emojiKeyboardView setY:kScreenHeight];
+//            [_addKeyboardView setY:kScreen_Height];
+            [_voiceKeyboardView setY:kScreenHeight];
+            
+            [self setY:kScreenHeight - CGRectGetHeight(self.frame)];
+            
+        } completion:^(BOOL finished) {
+            self.inputState = FLMessageInputViewStateSystem;
+        }];
+        return YES;
+    }else{
+        if ([_inputTextView isFirstResponder]) {
+            [_inputTextView resignFirstResponder];
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+}
+- (void)prepareToShow {
+    
+    [kKeyWindow addSubview:_voiceKeyboardView];
+    [kKeyWindow addSubview:_emojiKeyboardView];
+}
+
+- (void)prepareToDissmiss {
+    
+    [_voiceKeyboardView removeFromSuperview];
+    [_emojiKeyboardView removeFromSuperview];
+}
+
+#pragma mark - overrideSet
+- (void)setInputState:(FLMessageInputViewState)inputState {
+    if (_inputState != inputState) {
+        
+        _inputState = inputState;
+        switch (_inputState) {
+            case FLMessageInputViewStateSystem:
+            {
+                [self.addButton setImage:[UIImage imageNamed:@"keyboard_add"] forState:UIControlStateNormal];
+                [self.emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+                [self.voiceButton setImage:[UIImage imageNamed:@"keyboard_voice"] forState:UIControlStateNormal];
+            }
+                break;
+            case FLMessageInputViewStateEmotion:
+            {
+                [self.addButton setImage:[UIImage imageNamed:@"keyboard_add"] forState:UIControlStateNormal];
+                [self.emotionButton setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+                [self.voiceButton setImage:[UIImage imageNamed:@"keyboard_voice"] forState:UIControlStateNormal];
+            }
+                break;
+            case FLMessageInputViewStateAdd:
+            {
+                [self.addButton setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+                [self.emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+                [self.voiceButton setImage:[UIImage imageNamed:@"keyboard_voice"] forState:UIControlStateNormal];
+            }
+                break;
+            case FLMessageInputViewStateVoice:
+            {
+                [self.addButton setImage:[UIImage imageNamed:@"keyboard_add"] forState:UIControlStateNormal];
+                [self.emotionButton setImage:[UIImage imageNamed:@"keyboard_emotion"] forState:UIControlStateNormal];
+                [self.voiceButton setImage:[UIImage imageNamed:@"keyboard_keyboard"] forState:UIControlStateNormal];
+            }
+                break;
+            default:
+                break;
+        }
+
+        _contentView.hidden = _inputState == FLMessageInputViewStateVoice;
+        _arrowKeyboardButton.hidden = !_contentView.hidden;
+        _arrowKeyboardButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    }
 }
 #pragma mark - Private
 
@@ -175,12 +269,51 @@
     [self.contentView setContentOffset:CGPointMake(0, offsetY) animated:YES];
 }
 #pragma mark - ButtonAction
+
+- (void)arrowButtonClicked:(id)sender {
+    [self isAndResignFirstResponder];
+}
 - (void)emotionButtonClicked:(UIButton *)sender {
-    [[FLSocketManager shareManager].client disconnect];
     
+    CGFloat endY = kScreenHeight;
+    if (self.inputState == FLMessageInputViewStateEmotion) {
+        self.inputState = FLMessageInputViewStateSystem;
+        [_inputTextView becomeFirstResponder];
+    }else{
+        self.inputState = FLMessageInputViewStateEmotion;
+        [_inputTextView resignFirstResponder];
+        endY = kScreenHeight - kKeyboardView_Height;
+    }
+    [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
+        [_emojiKeyboardView setY:endY];
+//        [_addKeyboardView setY:kScreen_Height];
+        [_voiceKeyboardView setY:kScreenHeight];
+        if (ABS(kScreenHeight - endY) > 0.1) {
+            [self setY:endY- CGRectGetHeight(self.frame)];
+        }
+    } completion:^(BOOL finished) {
+    }];
 }
 - (void)voiceButtonClicked:(UIButton *)sender {
-    [[FLSocketManager shareManager].client connect];
+    
+    CGFloat endY = kScreenHeight;
+    if (self.inputState == FLMessageInputViewStateVoice) {
+        self.inputState = FLMessageInputViewStateSystem;
+        [_inputTextView becomeFirstResponder];
+    } else {
+        self.inputState = FLMessageInputViewStateVoice;
+        [_inputTextView resignFirstResponder];
+        endY = kScreenHeight - kKeyboardView_Height;
+    }
+    [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
+        [_voiceKeyboardView setY:endY];
+        [_emojiKeyboardView setY:kScreenHeight];
+//        [_addKeyboardView setY:kScreen_Height];
+        if (ABS(kScreenHeight - endY) > 0.1) {
+            [self setY:endY- CGRectGetHeight(self.frame)];
+        }
+    } completion:^(BOOL finished) {
+    }];
 }
 - (void)addButtonClicked:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(messageInputViewSendImage)]) {
@@ -219,4 +352,44 @@
     
 //    [self changContentViewHeight];
 }
+
+#pragma mark - AGEmojiKeyboardView
+- (void)emojiKeyBoardView:(AGEmojiKeyboardView *)emojiKeyBoardView didUseEmoji:(NSString *)emoji {
+    NSString *emotion_monkey = [emoji emotionSpecailName];
+    if (emotion_monkey) {
+//        if (_delegate && [_delegate respondsToSelector:@selector(messageInputView:sendBigEmotion:)]) {
+////            [self.delegate messageInputView:self sendBigEmotion:emotion_monkey];
+//        }
+    }else{
+        [self.inputTextView insertText:emoji];
+    }
+}
+
+- (void)emojiKeyBoardViewDidPressBackSpace:(AGEmojiKeyboardView *)emojiKeyBoardView {
+    [self.inputTextView deleteBackward];
+}
+
+- (void)emojiKeyBoardViewDidPressSendButton:(AGEmojiKeyboardView *)emojiKeyBoardView {
+    
+    
+    
+}
+
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [UIImage imageNamed:(category == AGEmojiKeyboardViewCategoryImageEmoji? @"keyboard_emotion_emoji":
+                                        category == AGEmojiKeyboardViewCategoryImageMonkey? @"keyboard_emotion_monkey":
+                                        category == AGEmojiKeyboardViewCategoryImageMonkey_Gif? @"keyboard_emotion_monkey_gif":
+                                        @"keyboard_emotion_emoji_code")] ?: [UIImage new];
+    return img;
+}
+
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    return [self emojiKeyboardView:emojiKeyboardView imageForSelectedCategory:category];
+}
+
+- (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
+    UIImage *img = [UIImage imageNamed:@"keyboard_emotion_delete"];
+    return img;
+}
+
 @end

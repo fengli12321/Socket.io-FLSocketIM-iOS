@@ -70,6 +70,18 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.messageInputView prepareToShow];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [self.messageInputView prepareToDissmiss];
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.messageInputView endEditing:YES];
 }
@@ -126,24 +138,24 @@
     }
     [self.dataSource insertObjects:dataArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, dataArray.count)]];
     
-
+    CGSize oldContentSize = _tableView.contentSize;
     [self.tableView reloadData];
     if (_isFirstLoad) {    // 第一次加载，滚动到底部
         _isFirstLoad = NO;
         
-        if (_dataSource.count) {
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        CGPoint tableOffset = _tableView.contentOffset;
+        UIEdgeInsets insets = _tableView.contentInset;
+        CGFloat addOffset = (_tableView.contentSize.height - _tableView.height + insets.bottom + 64);
+        if (addOffset > 0) {
+            tableOffset.y += addOffset;
+            [_tableView setContentOffset:tableOffset animated:NO];
         }
         
     }
     else {
-        
-        CGFloat addHeight = 0.0f;
-        for (FLMessageModel *message in dataArray) {
-            
-            addHeight += message.messageCellHeight;
-        }
-        
+        CGSize newContentSize = _tableView.contentSize;
+        CGFloat addHeight = newContentSize.height - oldContentSize.height;
         CGPoint tableOffset = _tableView.contentOffset;
         tableOffset.y += addHeight;//(addHeight - _tableView.height/2);
         [_tableView setContentOffset:tableOffset animated:NO];
@@ -338,7 +350,7 @@
         }
         keyBoardIsDown = NO;
         CGPoint contentOffset = keyboard_down_ContenOffset;
-        CGFloat spaceHeight = MAX(0, self.tableView.height - _tableView.contentSize.height - keyboard_down_InputViewHeight);
+        CGFloat spaceHeight = MAX(0, self.tableView.height - _tableView.contentSize.height - keyboard_down_InputViewHeight - insetsTop);
         contentOffset.y += MAX(0, heightToBottom - keyboard_down_InputViewHeight - spaceHeight);
         _tableView.contentOffset = contentOffset;
     }
@@ -402,7 +414,7 @@
     __weak typeof(self) weakSelf = self;
     [[FLChatManager shareManager] resendMessage:message sendStatus:^(FLMessageModel *message) {
         
-        [self updateSendStatusUIWithMessage:message];
+        [weakSelf updateSendStatusUIWithMessage:message];
     }];
 }
 @end

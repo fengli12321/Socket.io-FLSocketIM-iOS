@@ -18,4 +18,8 @@
 /** 获取文件保存路径 */
 + (NSString *)getFielSavePath;
 
+- (NSString *)md5Str;
+
+
+- (NSString *)emotionSpecailName;
 @end

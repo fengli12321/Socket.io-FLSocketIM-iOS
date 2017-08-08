@@ -85,6 +85,22 @@
 		12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082F71F15F72F00E0D238 /* FLFriendsListCell.m */; };
 		12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */; };
 		12D45B131F21D46B00B3CB83 /* FLLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D45B121F21D46B00B3CB83 /* FLLocalNotification.m */; };
+		12D461CA1F2826C600507256 /* FLStatusTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D461C91F2826C600507256 /* FLStatusTitleView.m */; };
+		12D4620D1F288F4E00507256 /* FLAudioVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462081F288F4E00507256 /* FLAudioVolumeView.m */; };
+		12D4620E1F288F4E00507256 /* FLMessageInputView_Voice.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462091F288F4E00507256 /* FLMessageInputView_Voice.m */; };
+		12D4620F1F288F4E00507256 /* FLAudioRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D4620B1F288F4E00507256 /* FLAudioRecordView.m */; };
+		12D462221F288F7400507256 /* amrFileCodec.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462121F288F7400507256 /* amrFileCodec.m */; };
+		12D462231F288F7400507256 /* AudioAmrUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462141F288F7400507256 /* AudioAmrUtil.m */; };
+		12D462241F288F7400507256 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462161F288F7400507256 /* AudioManager.m */; };
+		12D462251F288F7400507256 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D462201F288F7400507256 /* libopencore-amrnb.a */; };
+		12D462261F288F7400507256 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D462211F288F7400507256 /* libopencore-amrwb.a */; };
+		12D462281F28958900507256 /* RevealServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D462271F28958900507256 /* RevealServer.framework */; };
+		12D462371F28A59000507256 /* AGEmojiKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462321F28A59000507256 /* AGEmojiKeyBoardView.m */; };
+		12D462381F28A59000507256 /* AGEmojiPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462341F28A59000507256 /* AGEmojiPageView.m */; };
+		12D462391F28A59000507256 /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12D462351F28A59000507256 /* EmojisList.plist */; };
+		12D4623A1F28A59000507256 /* emotion_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12D462361F28A59000507256 /* emotion_list.plist */; };
+		12D4623D1F28A70100507256 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D4623C1F28A70100507256 /* UIImage+Common.m */; };
+		12D462411F28A77600507256 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D462401F28A77600507256 /* SMPageControl.m */; };
 		12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809A71F1C61B40072A42B /* NSDate+Common.m */; };
 		12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D809AA1F1C65DA0072A42B /* NSString+Common.m */; };
 		12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CE21F17634A0069617B /* NSBundle+TZImagePicker.m */; };
@@ -248,6 +264,37 @@
 		12D082FA1F160FCF00E0D238 /* FLBridgeDelegateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLBridgeDelegateModel.m; sourceTree = "<group>"; };
 		12D45B111F21D46B00B3CB83 /* FLLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLocalNotification.h; sourceTree = "<group>"; };
 		12D45B121F21D46B00B3CB83 /* FLLocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLocalNotification.m; sourceTree = "<group>"; };
+		12D461C81F2826C600507256 /* FLStatusTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLStatusTitleView.h; sourceTree = "<group>"; };
+		12D461C91F2826C600507256 /* FLStatusTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLStatusTitleView.m; sourceTree = "<group>"; };
+		12D462071F288F4E00507256 /* FLAudioVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAudioVolumeView.h; sourceTree = "<group>"; };
+		12D462081F288F4E00507256 /* FLAudioVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAudioVolumeView.m; sourceTree = "<group>"; };
+		12D462091F288F4E00507256 /* FLMessageInputView_Voice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageInputView_Voice.m; sourceTree = "<group>"; };
+		12D4620A1F288F4E00507256 /* FLAudioRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAudioRecordView.h; sourceTree = "<group>"; };
+		12D4620B1F288F4E00507256 /* FLAudioRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAudioRecordView.m; sourceTree = "<group>"; };
+		12D4620C1F288F4E00507256 /* FLMessageInputView_Voice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageInputView_Voice.h; sourceTree = "<group>"; };
+		12D462111F288F7400507256 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		12D462121F288F7400507256 /* amrFileCodec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = amrFileCodec.m; sourceTree = "<group>"; };
+		12D462131F288F7400507256 /* AudioAmrUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAmrUtil.h; sourceTree = "<group>"; };
+		12D462141F288F7400507256 /* AudioAmrUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioAmrUtil.m; sourceTree = "<group>"; };
+		12D462151F288F7400507256 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		12D462161F288F7400507256 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
+		12D4621A1F288F7400507256 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		12D4621B1F288F7400507256 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		12D4621D1F288F7400507256 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		12D4621E1F288F7400507256 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		12D462201F288F7400507256 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		12D462211F288F7400507256 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		12D462271F28958900507256 /* RevealServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevealServer.framework; sourceTree = "<group>"; };
+		12D462311F28A59000507256 /* AGEmojiKeyBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEmojiKeyBoardView.h; sourceTree = "<group>"; };
+		12D462321F28A59000507256 /* AGEmojiKeyBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEmojiKeyBoardView.m; sourceTree = "<group>"; };
+		12D462331F28A59000507256 /* AGEmojiPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEmojiPageView.h; sourceTree = "<group>"; };
+		12D462341F28A59000507256 /* AGEmojiPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEmojiPageView.m; sourceTree = "<group>"; };
+		12D462351F28A59000507256 /* EmojisList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojisList.plist; sourceTree = "<group>"; };
+		12D462361F28A59000507256 /* emotion_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emotion_list.plist; sourceTree = "<group>"; };
+		12D4623B1F28A70100507256 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
+		12D4623C1F28A70100507256 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
+		12D4623F1F28A77600507256 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
+		12D462401F28A77600507256 /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
 		12D809A61F1C61B40072A42B /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
 		12D809A71F1C61B40072A42B /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
 		12D809A91F1C65DA0072A42B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
@@ -296,7 +343,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12D462281F28958900507256 /* RevealServer.framework in Frameworks */,
 				7B6B88B802C316BC70E027C1 /* Pods_FLSocketIM.framework in Frameworks */,
+				12D462261F288F7400507256 /* libopencore-amrwb.a in Frameworks */,
+				12D462251F288F7400507256 /* libopencore-amrnb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +486,7 @@
 		123AA0191F0E15D100DCC9E9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				12D462101F288F7400507256 /* Audio */,
 				12D45B101F21D44800B3CB83 /* Tool */,
 				123AA0351F0E25E900DCC9E9 /* Manager */,
 				123AA02E1F0E1D9700DCC9E9 /* Other */,
@@ -499,6 +550,8 @@
 				12D809AA1F1C65DA0072A42B /* NSString+Common.m */,
 				1255BDCE1F25E1D10089F6D0 /* UIImageView+common.h */,
 				1255BDCF1F25E1D10089F6D0 /* UIImageView+common.m */,
+				12D4623B1F28A70100507256 /* UIImage+Common.h */,
+				12D4623C1F28A70100507256 /* UIImage+Common.m */,
 			);
 			name = Category;
 			path = Categroy;
@@ -635,6 +688,12 @@
 				122EBB971F14D07F000E7F70 /* FLMessageInputView.m */,
 				122EBBBF1F14D9B1000E7F70 /* FLPlaceholderTextView.h */,
 				122EBBC01F14D9B1000E7F70 /* FLPlaceholderTextView.m */,
+				12D462071F288F4E00507256 /* FLAudioVolumeView.h */,
+				12D462081F288F4E00507256 /* FLAudioVolumeView.m */,
+				12D4620C1F288F4E00507256 /* FLMessageInputView_Voice.h */,
+				12D462091F288F4E00507256 /* FLMessageInputView_Voice.m */,
+				12D4620A1F288F4E00507256 /* FLAudioRecordView.h */,
+				12D4620B1F288F4E00507256 /* FLAudioRecordView.m */,
 			);
 			path = ChatRoom;
 			sourceTree = "<group>";
@@ -707,9 +766,92 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		12D462101F288F7400507256 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				12D462111F288F7400507256 /* amrFileCodec.h */,
+				12D462121F288F7400507256 /* amrFileCodec.m */,
+				12D462131F288F7400507256 /* AudioAmrUtil.h */,
+				12D462141F288F7400507256 /* AudioAmrUtil.m */,
+				12D462151F288F7400507256 /* AudioManager.h */,
+				12D462161F288F7400507256 /* AudioManager.m */,
+				12D462171F288F7400507256 /* opencore-amr-iOS */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		12D462171F288F7400507256 /* opencore-amr-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				12D462181F288F7400507256 /* include */,
+				12D4621F1F288F7400507256 /* lib */,
+			);
+			path = "opencore-amr-iOS";
+			sourceTree = "<group>";
+		};
+		12D462181F288F7400507256 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				12D462191F288F7400507256 /* opencore-amrnb */,
+				12D4621C1F288F7400507256 /* opencore-amrwb */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		12D462191F288F7400507256 /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				12D4621A1F288F7400507256 /* interf_dec.h */,
+				12D4621B1F288F7400507256 /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		12D4621C1F288F7400507256 /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				12D4621D1F288F7400507256 /* dec_if.h */,
+				12D4621E1F288F7400507256 /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
+		12D4621F1F288F7400507256 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				12D462201F288F7400507256 /* libopencore-amrnb.a */,
+				12D462211F288F7400507256 /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		12D462301F28A59000507256 /* AGEmojiKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12D462311F28A59000507256 /* AGEmojiKeyBoardView.h */,
+				12D462321F28A59000507256 /* AGEmojiKeyBoardView.m */,
+				12D462331F28A59000507256 /* AGEmojiPageView.h */,
+				12D462341F28A59000507256 /* AGEmojiPageView.m */,
+				12D462351F28A59000507256 /* EmojisList.plist */,
+				12D462361F28A59000507256 /* emotion_list.plist */,
+			);
+			path = AGEmojiKeyboard;
+			sourceTree = "<group>";
+		};
+		12D4623E1F28A77600507256 /* SMPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				12D4623F1F28A77600507256 /* SMPageControl.h */,
+				12D462401F28A77600507256 /* SMPageControl.m */,
+			);
+			path = SMPageControl;
+			sourceTree = "<group>";
+		};
 		12D86CDF1F17632B0069617B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				12D4623E1F28A77600507256 /* SMPageControl */,
+				12D462301F28A59000507256 /* AGEmojiKeyboard */,
 				129E31EF1F1DA0CC00ECB93C /* NSDate+Helper */,
 				12D86CE01F17634A0069617B /* TZImagePickerController */,
 			);
@@ -751,6 +893,8 @@
 				12EF3B8D1F18580500111000 /* FLChatListCell.m */,
 				12EF3B931F189B4C00111000 /* FLBadgeLabel.h */,
 				12EF3B941F189B4C00111000 /* FLBadgeLabel.m */,
+				12D461C81F2826C600507256 /* FLStatusTitleView.h */,
+				12D461C91F2826C600507256 /* FLStatusTitleView.m */,
 			);
 			path = ChatList;
 			sourceTree = "<group>";
@@ -767,6 +911,7 @@
 		2CCA57FDA8B68B00B78B01A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12D462271F28958900507256 /* RevealServer.framework */,
 				D8653D711C85AC9A60FF0F41 /* Pods_FLSocketIM.framework */,
 				A9BEE4FF0EDD70CD2F3C976C /* Pods_FLSocketIMTests.framework */,
 				542B8E6B11EEA73C1E79ADFF /* Pods_FLSocketIMUITests.framework */,
@@ -800,6 +945,7 @@
 				123A9FDC1F0E150700DCC9E9 /* Resources */,
 				CF0990EA324808DF7B06C2BE /* [CP] Embed Pods Frameworks */,
 				589B8FBCDF716CB60A96B9F3 /* [CP] Copy Pods Resources */,
+				12D462291F28965900507256 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -918,6 +1064,7 @@
 				122EBBB81F14D6A6000E7F70 /* keyboard_page_selected@2x.png in Resources */,
 				12BAF80E1F1701F7007CC695 /* Fruit-5.png in Resources */,
 				122EBBB51F14D6A6000E7F70 /* keyboard_emotion_monkey@2x.png in Resources */,
+				12D462391F28A59000507256 /* EmojisList.plist in Resources */,
 				122EBBBD1F14D6A6000E7F70 /* keyboard_voice_record@2x.png in Resources */,
 				122EBBB41F14D6A6000E7F70 /* keyboard_emotion_emoji_code@2x.png in Resources */,
 				12BAF80B1F1701F7007CC695 /* Fruit-2.png in Resources */,
@@ -945,6 +1092,7 @@
 				122EBBB01F14D6A6000E7F70 /* keyboard_at@2x.png in Resources */,
 				122EBBBC1F14D6A6000E7F70 /* keyboard_voice@2x.png in Resources */,
 				12BAF80F1F1701F7007CC695 /* Fruit-6.png in Resources */,
+				12D4623A1F28A59000507256 /* emotion_list.plist in Resources */,
 				122EBBBB1F14D6A6000E7F70 /* keyboard_topic@2x.png in Resources */,
 				123A9FEC1F0E150700DCC9E9 /* Main.storyboard in Resources */,
 				12BAF8111F1701F7007CC695 /* Fruit-8.png in Resources */,
@@ -1001,6 +1149,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		12D462291F28965900507256 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export REVEAL_SERVER_FILENAME=\"RevealServer.framework\"\n\n# Update this path to point to the location of RevealServer.framework in your project.\nexport REVEAL_SERVER_PATH=\"${SRCROOT}/${REVEAL_SERVER_FILENAME}\"\n\n# If configuration is not Debug, skip this script.\n[ \"${CONFIGURATION}\" != \"Debug\" ] && exit 0\n\n# If RevealServer.framework exists at the specified path, run code signing script.\nif [ -d \"${REVEAL_SERVER_PATH}\" ]; then\n\"${REVEAL_SERVER_PATH}/Scripts/copy_and_codesign_revealserver.sh\"\nelse\necho \"Cannot find RevealServer.framework, so Reveal Server will not be started for your app.\"\nfi";
 		};
 		57A9668B07CF840C093DEC5F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1121,6 +1282,7 @@
 				12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */,
 				12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */,
 				12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */,
+				12D4620D1F288F4E00507256 /* FLAudioVolumeView.m in Sources */,
 				122EBB981F14D07F000E7F70 /* FLMessageInputView.m in Sources */,
 				123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */,
 				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
@@ -1131,27 +1293,36 @@
 				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
 				129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */,
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
+				12D462241F288F7400507256 /* AudioManager.m in Sources */,
+				12D462231F288F7400507256 /* AudioAmrUtil.m in Sources */,
 				12BEEE2A1F13190800FF3B44 /* FLChatManager.m in Sources */,
 				12D809A81F1C61B40072A42B /* NSDate+Common.m in Sources */,
+				12D462381F28A59000507256 /* AGEmojiPageView.m in Sources */,
 				128DCDA21F270CC700F52ACD /* FLTabBarContactsItemView.m in Sources */,
 				12B9D96F1F0F71C500B7F749 /* FLSocketManager.m in Sources */,
+				12D4623D1F28A70100507256 /* UIImage+Common.m in Sources */,
 				123AA0341F0E220D00DCC9E9 /* FLAlertView.m in Sources */,
 				12D86CFC1F17634A0069617B /* TZPhotoPickerController.m in Sources */,
 				12D86CF91F17634A0069617B /* TZImageManager.m in Sources */,
+				12D4620F1F288F4E00507256 /* FLAudioRecordView.m in Sources */,
 				128DCD9C1F26E97300F52ACD /* FLBarBadgeLabel.m in Sources */,
 				12BEEE271F1316DD00FF3B44 /* FLClientManager.m in Sources */,
 				123AA0501F0E3CBB00DCC9E9 /* FLChatListViewController.m in Sources */,
+				12D4620E1F288F4E00507256 /* FLMessageInputView_Voice.m in Sources */,
+				12D462371F28A59000507256 /* AGEmojiKeyBoardView.m in Sources */,
 				12BEEE2D1F13202900FF3B44 /* FLChatDBManager.m in Sources */,
 				123AA04D1F0E3C9C00DCC9E9 /* FLViewController.m in Sources */,
 				123AA0531F0E3CD200DCC9E9 /* FLChatViewController.m in Sources */,
 				12D86CFE1F17634A0069617B /* TZPhotoPreviewController.m in Sources */,
 				122EBBC11F14D9B1000E7F70 /* FLPlaceholderTextView.m in Sources */,
+				12D462411F28A77600507256 /* SMPageControl.m in Sources */,
 				1255BDCD1F2584080089F6D0 /* FLSystemTool.m in Sources */,
 				12D86CF61F17634A0069617B /* NSBundle+TZImagePicker.m in Sources */,
 				12B9D9691F0F26A400B7F749 /* FLMessageModel.m in Sources */,
 				128DCDA91F2720CD00F52ACD /* FLMeViewController.m in Sources */,
 				128DCDA51F27162A00F52ACD /* FLTabBarDynamicItemView.m in Sources */,
 				12D86CFD1F17634A0069617B /* TZPhotoPreviewCell.m in Sources */,
+				12D462221F288F7400507256 /* amrFileCodec.m in Sources */,
 				123A9FE61F0E150700DCC9E9 /* AppDelegate.m in Sources */,
 				12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */,
 				128DCD901F26DFB600F52ACD /* FLTabBarView.m in Sources */,
@@ -1163,6 +1334,7 @@
 				128DCD9F1F26F32B00F52ACD /* FLTabBarMessageItemView.m in Sources */,
 				12D86D001F17634A0069617B /* UIView+Layout.m in Sources */,
 				12EF3B8E1F18580500111000 /* FLChatListCell.m in Sources */,
+				12D461CA1F2826C600507256 /* FLStatusTitleView.m in Sources */,
 				12EF3B951F189B4C00111000 /* FLBadgeLabel.m in Sources */,
 				123AA0481F0E3AEC00DCC9E9 /* FLTabBarController.m in Sources */,
 				123A9FE31F0E150700DCC9E9 /* main.m in Sources */,
@@ -1320,11 +1492,46 @@
 				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5HBP8N48W6;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
 				INFOPLIST_FILE = FLSocketIM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FLSocketIM/Util/Audio/opencore-amr-iOS/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"GPUImage\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SocketIO\"",
+					"-framework",
+					"\"YYModel\"",
+					"-ObjC",
+					"-weak_framework",
+					RevealServer,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";
@@ -1344,11 +1551,44 @@
 				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5HBP8N48W6;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FLSocketIM/FLSocketIM_Prefix.pch;
 				INFOPLIST_FILE = FLSocketIM/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FLSocketIM/Util/Audio/opencore-amr-iOS/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"GPUImage\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SocketIO\"",
+					"-framework",
+					"\"YYModel\"",
+					"-ObjC",
+					"-weak_framework",
+					RevealServer,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";

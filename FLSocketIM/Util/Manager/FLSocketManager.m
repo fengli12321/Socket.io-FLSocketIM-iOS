@@ -40,7 +40,15 @@ static FLSocketManager *instance = nil;
      reconnectWait 重连间隔时间
      connectParams 参数
      */
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forceNew" : @YES, @"forcePolling": @YES, @"reconnectAttempts":@(-1), @"reconnectWait" : @4, @"connectParams": @{@"auth_token" : token}}];
+    SocketIOClient* socket;
+    if (!self.client) {
+        socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forceNew" : @YES, @"forcePolling": @YES, @"reconnectAttempts":@(-1), @"reconnectWait" : @4, @"connectParams": @{@"auth_token" : token}}];
+    }
+    else {
+        socket = self.client;
+        socket.engine.connectParams = @{@"auth_token" : token};
+    }
+    
 
     // 连接超时时间设置为15秒
     [socket connectWithTimeoutAfter:15 withHandler:^{

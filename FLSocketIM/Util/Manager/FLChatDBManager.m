@@ -296,7 +296,7 @@ static FLChatDBManager *instance = nil;
         
         NSDate *date = [NSDate date];
         NSNumber *timeStamp = [NSNumber numberWithLongLong:[date timeStamp]];
-        FMResultSet *result = [db executeQuery:@"SELECT * FROM message WHERE conversation = ? AND timestamp < ? ORDER BY timestamp DESC LIMIT ? OFFSET ?", userName, timeStamp, @(limit), @(limit*page)];
+        FMResultSet *result = [db executeQuery:@"SELECT * FROM (SELECT * FROM message WHERE conversation = ? AND timestamp < ? ORDER BY timestamp DESC LIMIT ? OFFSET ?) ORDER BY timestamp ASC", userName, timeStamp, @(limit), @(limit*page)];
         while (result.next) {
             
             
@@ -306,10 +306,10 @@ static FLChatDBManager *instance = nil;
     }];
     
     
-    // 数组倒序
-    for (NSInteger index = 0; index < messages.count / 2; index++) {
-        [messages exchangeObjectAtIndex:index withObjectAtIndex:messages.count - index - 1];
-    }
+//    // 数组倒序
+//    for (NSInteger index = 0; index < messages.count / 2; index++) {
+//        [messages exchangeObjectAtIndex:index withObjectAtIndex:messages.count - index - 1];
+//    }
     
 //    [messages sortUsingComparator:^NSComparisonResult(FLMessageModel * _Nonnull obj1, FLMessageModel *  _Nonnull obj2) {
 //        
