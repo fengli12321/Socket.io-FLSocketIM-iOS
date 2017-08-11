@@ -35,14 +35,17 @@ static FLSocketManager *instance = nil;
     
     /**
      log 是否打印日志
-     forcePolling  If passed true, the only transport that will be used will be HTTP long-polling.
+     forceNew      这个参数设为NO从后台恢复到前台时总是重连，暂不清楚原因
+     forcePolling  是否强制使用轮询
      reconnectAttempts 重连次数，-1表示一直重连
      reconnectWait 重连间隔时间
      connectParams 参数
+     forceWebsockets 是否强制使用websocket, 解释The reason it uses polling first is because some firewalls/proxies block websockets. So polling lets socket.io work behind those.
+     来源：https://github.com/socketio/socket.io-client-swift/issues/449
      */
     SocketIOClient* socket;
     if (!self.client) {
-        socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forceNew" : @YES, @"forcePolling": @YES, @"reconnectAttempts":@(-1), @"reconnectWait" : @4, @"connectParams": @{@"auth_token" : token}}];
+        socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @NO, @"forceNew" : @YES, @"forcePolling": @NO, @"reconnectAttempts":@(-1), @"reconnectWait" : @4, @"connectParams": @{@"auth_token" : token}, @"forceWebsockets" : @NO}];
     }
     else {
         socket = self.client;

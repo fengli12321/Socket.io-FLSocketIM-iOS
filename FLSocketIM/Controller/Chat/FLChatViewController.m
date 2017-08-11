@@ -16,9 +16,9 @@
 #import <Photos/Photos.h>
 #import "FLChatListViewController.h"
 #import "FLConversationModel.h"
+#import "FLVideoViewController.h"
 
-
-@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate>
+@interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -26,6 +26,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) BOOL loadAllMessage;
 @property (nonatomic, assign) BOOL isFirstLoad;
+
+@property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 
 @end
 
@@ -165,8 +167,6 @@
 
 #pragma mark - Pravite
 
-
-
 /**
  刷新消息的发送状态
 
@@ -281,6 +281,69 @@
     [[FLClientManager shareManager].chatListVC updateRedPointForUnreadWithConveration:self.toUser];
     [[FLChatDBManager shareManager] updateUnreadCountOfConversation:self.toUser unreadCount:0];
 }
+
+
+/**
+ 从相册选取照片
+ */
+- (void)chooseImagesFormAlbum {
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:100 columnNumber:3 delegate:self pushPhotoPickerVc:YES];
+    
+    imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.allowPickingImage = YES;
+    imagePickerVc.allowPickingOriginalPhoto = YES;
+    imagePickerVc.maxImagesCount = 5;
+    //    imagePickerVc.photoWidth = 500;
+    __weak typeof(self) weakSelf = self;
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        
+        NSInteger index = 0;
+        if (isSelectOriginalPhoto) {
+            for (UIImage *image in photos) {
+                
+                
+                [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
+                index++;
+            }
+        }
+        else {
+            for (UIImage *image in photos) {
+                
+                [weakSelf sendImgMessageWithImage:image asset:nil isOriginalPhoto:isSelectOriginalPhoto];
+                index++;
+            }
+        }
+        
+    }];
+    
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (UIImagePickerController *)imagePickerVc {
+    if (_imagePickerVc == nil) {
+        _imagePickerVc = [[UIImagePickerController alloc] init];
+        _imagePickerVc.delegate = self;
+        // set appearance / 改变相册选择页的导航栏外观
+        _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
+        _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
+        UIBarButtonItem *tzBarItem, *BarItem;
+        if (iOS9Later) {
+            tzBarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[TZImagePickerController class]]];
+            BarItem = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UIImagePickerController class]]];
+        } else {
+            tzBarItem = [UIBarButtonItem appearanceWhenContainedIn:[TZImagePickerController class], nil];
+            BarItem = [UIBarButtonItem appearanceWhenContainedIn:[UIImagePickerController class], nil];
+        }
+        NSDictionary *titleTextAttributes = [tzBarItem titleTextAttributesForState:UIControlStateNormal];
+        [BarItem setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
+    }
+    return _imagePickerVc;
+}
+- (void)takePhoto {
+    
+    FLVideoViewController *takeVC = [[FLVideoViewController alloc] init];
+    [self presentViewController:takeVC animated:YES completion:nil];
+}
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -359,6 +422,11 @@
     }
 }
 
+- (void)messageInputView:(FLMessageInputView *)inputView sendBigEmotion:(NSString *)emotionName {
+    
+    
+}
+
 - (void)messageInputView:(FLMessageInputView *)inputView sendText:(NSString *)text {
     
     [self sendTextMessageWithText:text];
@@ -366,44 +434,29 @@
     
 }
 
-- (void)messageInputViewSendImage {
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:100 columnNumber:3 delegate:self pushPhotoPickerVc:YES];
+- (void)messageInputView:(FLMessageInputView *)inputView addIndexClicked:(NSInteger)index {
     
-    imagePickerVc.allowPickingVideo = NO;
-    imagePickerVc.allowPickingImage = YES;
-    imagePickerVc.allowPickingOriginalPhoto = YES;
-    imagePickerVc.maxImagesCount = 5;
-    //    imagePickerVc.photoWidth = 500;
-    __weak typeof(self) weakSelf = self;
-    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-        
-        NSInteger index = 0;
-        if (isSelectOriginalPhoto) {
-            for (UIImage *image in photos) {
-                
-                
-                [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
-                index++;
-            }
+    [_messageInputView isAndResignFirstResponder];
+    switch (index) {
+        case 0: { // 相册选择照片
+            [self chooseImagesFormAlbum];
+            break;
         }
-        else {
-            for (UIImage *image in photos) {
-                
-                [weakSelf sendImgMessageWithImage:image asset:nil isOriginalPhoto:isSelectOriginalPhoto];
-                index++;
-            }
+            
+        case 1:{ // 拍摄
+            [self takePhoto];
+            break;
         }
-        
-    }];
-    
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
-
-
+        default:
+            break;
+    }
 }
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.messageInputView endEditing:YES];
+    
+    [_messageInputView isAndResignFirstResponder];
 }
 
 #pragma mark - FLMessageCellDelegate

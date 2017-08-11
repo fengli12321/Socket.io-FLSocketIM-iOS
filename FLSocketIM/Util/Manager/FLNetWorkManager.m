@@ -28,10 +28,12 @@
     [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
         
-//        SocketIOClient *client = [FLSocketManager shareManager].client;
-//        if (client && client.status == SocketIOClientStatusDisconnected) {
-//            [client connect];
-//        }
+        SocketIOClient *client = [FLSocketManager shareManager].client;
+        if (client && client.status == SocketIOClientStatusDisconnected) {
+            
+            FLLog(@"重新连接Socket");
+            [client connect];
+        }
         
         switch (status)
         {

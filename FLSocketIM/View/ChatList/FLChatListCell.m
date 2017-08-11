@@ -67,12 +67,13 @@
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(_iconImageView);
+        make.right.equalTo(self).offset(-kPadding);
         make.left.equalTo(_iconImageView.mas_right).offset(kPadding);
     }];
     
     [_lastMessageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(_nameLabel);
+        make.left.right.equalTo(_nameLabel);
         make.bottom.equalTo(_iconImageView);
     }];
     
