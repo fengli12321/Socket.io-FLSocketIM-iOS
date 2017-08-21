@@ -80,6 +80,11 @@
     self.layer.cornerRadius = radius;
 }
 
+- (void)setBorderWidth:(CGFloat)width color:(UIColor *)color {
+    self.layer.borderWidth = width;
+    self.layer.borderColor = color.CGColor;
+    self.layer.masksToBounds = YES;
+}
 
 + (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
 {

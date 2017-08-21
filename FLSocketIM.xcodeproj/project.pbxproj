@@ -98,6 +98,8 @@
 		1258AE4E1F3C488100CE9CAE /* coding_emoji_41@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1258AE241F3C488100CE9CAE /* coding_emoji_41@2x.png */; };
 		1258AE4F1F3C488100CE9CAE /* coding_emoji_42@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1258AE251F3C488100CE9CAE /* coding_emoji_42@2x.png */; };
 		1258AE501F3C488100CE9CAE /* coding_emoji_43@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1258AE261F3C488100CE9CAE /* coding_emoji_43@2x.png */; };
+		1258EF581F42F9DA00282C00 /* keyboard_add_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1258EF571F42F9DA00282C00 /* keyboard_add_location@2x.png */; };
+		1258EF5B1F42FB5500282C00 /* FLLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1258EF5A1F42FB5500282C00 /* FLLocationViewController.m */; };
 		128DCD901F26DFB600F52ACD /* FLTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */; };
 		128DCD991F26E93500F52ACD /* FLTabBarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD971F26E93500F52ACD /* FLTabBarItemView.m */; };
 		128DCD9C1F26E97300F52ACD /* FLBarBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 128DCD9B1F26E97300F52ACD /* FLBarBadgeLabel.m */; };
@@ -308,6 +310,9 @@
 		1258AE241F3C488100CE9CAE /* coding_emoji_41@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coding_emoji_41@2x.png"; sourceTree = "<group>"; };
 		1258AE251F3C488100CE9CAE /* coding_emoji_42@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coding_emoji_42@2x.png"; sourceTree = "<group>"; };
 		1258AE261F3C488100CE9CAE /* coding_emoji_43@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coding_emoji_43@2x.png"; sourceTree = "<group>"; };
+		1258EF571F42F9DA00282C00 /* keyboard_add_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_add_location@2x.png"; sourceTree = "<group>"; };
+		1258EF591F42FB5500282C00 /* FLLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLocationViewController.h; sourceTree = "<group>"; };
+		1258EF5A1F42FB5500282C00 /* FLLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLocationViewController.m; sourceTree = "<group>"; };
 		128DCD8E1F26DFB600F52ACD /* FLTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTabBarView.h; sourceTree = "<group>"; };
 		128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarView.m; sourceTree = "<group>"; };
 		128DCD971F26E93500F52ACD /* FLTabBarItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTabBarItemView.m; sourceTree = "<group>"; };
@@ -485,6 +490,7 @@
 			children = (
 				122EBB9A1F14D6A6000E7F70 /* keyboard_add@2x.png */,
 				122EBB9B1F14D6A6000E7F70 /* keyboard_add_camera@2x.png */,
+				1258EF571F42F9DA00282C00 /* keyboard_add_location@2x.png */,
 				122EBB9C1F14D6A6000E7F70 /* keyboard_add_photo@2x.png */,
 				122EBB9D1F14D6A6000E7F70 /* keyboard_arrow_down@2x.png */,
 				122EBB9E1F14D6A6000E7F70 /* keyboard_at@2x.png */,
@@ -738,6 +744,8 @@
 				12BF1E4C1F3D477D003A31E1 /* FLVideoViewController.h */,
 				12BF1E4D1F3D477D003A31E1 /* FLVideoViewController.m */,
 				12BF1E4E1F3D477D003A31E1 /* FLVideoViewController.xib */,
+				1258EF591F42FB5500282C00 /* FLLocationViewController.h */,
+				1258EF5A1F42FB5500282C00 /* FLLocationViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1276,6 +1284,7 @@
 				12BAF80A1F1701F7007CC695 /* Fruit-1.png in Resources */,
 				128DCDB01F2743F200F52ACD /* WID-small.jpg in Resources */,
 				1258AE3C1F3C488100CE9CAE /* coding_emoji_22@2x.png in Resources */,
+				1258EF581F42F9DA00282C00 /* keyboard_add_location@2x.png in Resources */,
 				1258AE2C1F3C488100CE9CAE /* coding_emoji_06@2x.png in Resources */,
 				122EBBAD1F14D6A6000E7F70 /* keyboard_add_camera@2x.png in Resources */,
 				1258AE2F1F3C488100CE9CAE /* coding_emoji_09@2x.png in Resources */,
@@ -1533,6 +1542,7 @@
 				12D082F81F15F72F00E0D238 /* FLFriendsListCell.m in Sources */,
 				12D082FB1F160FCF00E0D238 /* FLBridgeDelegateModel.m in Sources */,
 				12D809AB1F1C65DA0072A42B /* NSString+Common.m in Sources */,
+				1258EF5B1F42FB5500282C00 /* FLLocationViewController.m in Sources */,
 				123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */,
 				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
 				12BF1E421F3D40B7003A31E1 /* FLMessageInputView.m in Sources */,

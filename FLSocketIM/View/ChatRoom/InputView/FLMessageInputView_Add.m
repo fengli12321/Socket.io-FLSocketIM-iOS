@@ -18,8 +18,10 @@
         self.backgroundColor = FLBackGroundColor;
         UIButton *photoItem = [self buttonWithImageName:@"keyboard_add_photo" title:@"照片" index:0];
         UIButton *cameraItem = [self buttonWithImageName:@"keyboard_add_camera" title:@"拍摄" index:1];
+        UIButton *locationItem = [self buttonWithImageName:@"keyboard_add_location" title:@"位置" index:2];
         [self addSubview:photoItem];
         [self addSubview:cameraItem];
+        [self addSubview:locationItem];
     }
     return self;
 }

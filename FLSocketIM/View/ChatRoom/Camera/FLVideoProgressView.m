@@ -36,7 +36,7 @@
     // 起始半径
     CGFloat startA = -M_PI_2;
     // 终点半径
-    CGFloat endA = -M_PI_2 + _progressValue*M_2_PI;
+    CGFloat endA = -M_PI_2 + _progressValue*M_PI*2.0;
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:startA endAngle:endA clockwise:YES];
     CGContextSetLineWidth(context, 10);
     [[UIColor whiteColor] setStroke];
@@ -48,6 +48,7 @@
     _timeMax = timeMax;
     _currentTime = 0;
     _progressValue = 0;
+    FLLog(@"==========================");
     [self setNeedsDisplay];
     self.hidden = NO;
     [self performSelector:@selector(startProgress) withObject:nil afterDelay:0.1];
@@ -59,6 +60,7 @@
     if (_timeMax > _currentTime) {
         _progressValue = _currentTime/_timeMax;
         [self setNeedsDisplay];
+        FLLog(@"progressValue===%lf", _progressValue);
         [self performSelector:@selector(startProgress) withObject:nil afterDelay:0.1];
     }
     if (_timeMax < _currentTime) {

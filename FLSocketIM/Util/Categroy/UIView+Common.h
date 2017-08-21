@@ -20,6 +20,7 @@
 
 - (void)doCircleFrame;
 - (void)setCornerRadius:(CGFloat)radius;
+- (void)setBorderWidth:(CGFloat)width color:(UIColor *)color;
 + (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve;
 
 + (UIView *)lineViewWithPointYY:(CGFloat)pointY andColor:(UIColor *)color andLeftSpace:(CGFloat)leftSpace;

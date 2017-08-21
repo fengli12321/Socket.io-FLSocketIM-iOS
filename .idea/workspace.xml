@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="343ebf2c-3c2e-4f44-8802-58673cead4a3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_current.imageset/keyboard_location_current.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_current.imageset/keyboard_location_current@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_current.imageset/keyboard_location_current@3x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_select.imageset/keyboard_location_select@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_select.imageset/keyboard_location_select@3x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keybord_location_pin.imageset/keybord_location_pin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keybord_location_pin.imageset/keybord_location_pin@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keybord_location_pin.imageset/keybord_location_pin@3x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Src/Image/keyboard/keyboard_add_location@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_current.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keyboard_location_select.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Assets.xcassets/keybord_location_pin.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLLocationViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLLocationViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/FLSocketIM.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/AppDelegate.m" afterPath="$PROJECT_DIR$/FLSocketIM/AppDelegate.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLChatViewController.m" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLChatViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.h" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.m" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.xib" afterPath="$PROJECT_DIR$/FLSocketIM/Controller/Chat/FLVideoViewController.xib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/FLSocketIM_Prefix.pch" afterPath="$PROJECT_DIR$/FLSocketIM/FLSocketIM_Prefix.pch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Info.plist" afterPath="$PROJECT_DIR$/FLSocketIM/Info.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/NSString+Common.h" afterPath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/NSString+Common.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/UIView+Common.h" afterPath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/UIView+Common.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/UIView+Common.m" afterPath="$PROJECT_DIR$/FLSocketIM/Util/Categroy/UIView+Common.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/Util/Other/ColorConst.h" afterPath="$PROJECT_DIR$/FLSocketIM/Util/Other/ColorConst.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/View/ChatRoom/Camera/FLVideoProgressView.m" afterPath="$PROJECT_DIR$/FLSocketIM/View/ChatRoom/Camera/FLVideoProgressView.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FLSocketIM/View/ChatRoom/InputView/FLMessageInputView_Add.m" afterPath="$PROJECT_DIR$/FLSocketIM/View/ChatRoom/InputView/FLMessageInputView_Add.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile" afterPath="$PROJECT_DIR$/Podfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile.lock" afterPath="$PROJECT_DIR$/Podfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Manifest.lock" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/AFNetworking/AFNetworking.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AFNetworking/AFNetworking.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/FMDB/FMDB.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/FMDB/FMDB.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/GPUImage/GPUImage.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/GPUImage/GPUImage.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/MJRefresh/MJRefresh.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MJRefresh/MJRefresh.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Masonry/Masonry.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Masonry/Masonry.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-acknowledgements.markdown" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-acknowledgements.markdown" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-acknowledgements.plist" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-acknowledgements.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-resources.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM-resources.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.debug.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIM/Pods-FLSocketIM.release.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.debug.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMTests/Pods-FLSocketIMTests.release.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.debug.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-FLSocketIMUITests/Pods-FLSocketIMUITests.release.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/SDWebImage/SDWebImage.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SDWebImage/SDWebImage.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift.xcconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/YYModel/YYModel.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/YYModel/YYModel.xcconfig" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="AppDelegate.m" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FLSocketIM/AppDelegate.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1014">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="22" />
+    <option name="width" value="1396" />
+    <option name="height" value="878" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="FLSocketIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FLSocketIM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLSocketIM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FLSocketIM" type="462c0819:PsiDirectoryNode" />
+              <item name="FLSocketIM" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="343ebf2c-3c2e-4f44-8802-58673cead4a3" name="Default" comment="" />
+      <created>1503123218143</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1503123218143</updated>
+      <workItem from="1503123219853" duration="19000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="19000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1385" height="878" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/FLSocketIM/AppDelegate.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1014">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

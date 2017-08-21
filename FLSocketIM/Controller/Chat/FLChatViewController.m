@@ -17,6 +17,9 @@
 #import "FLChatListViewController.h"
 #import "FLConversationModel.h"
 #import "FLVideoViewController.h"
+#import "FLLocationViewController.h"
+#import "FLNavigationController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -309,7 +312,7 @@
         else {
             for (UIImage *image in photos) {
                 
-                [weakSelf sendImgMessageWithImage:image asset:nil isOriginalPhoto:isSelectOriginalPhoto];
+                [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
                 index++;
             }
         }
@@ -339,10 +342,43 @@
     }
     return _imagePickerVc;
 }
+
+/**
+ 拍摄照片或短视频
+ */
 - (void)takePhoto {
     
     FLVideoViewController *takeVC = [[FLVideoViewController alloc] init];
     [self presentViewController:takeVC animated:YES completion:nil];
+    
+    __weak typeof(self) weakSelf = self;
+    [takeVC setTakePhotoOrVideo:^(NSData *data, BOOL isPhoto){
+        
+        if (isPhoto) { // 照片
+            
+            [weakSelf sendImageMessageWithImgData:data];
+        }
+        else {  // 视频
+            
+        }
+    }];
+//    [self.navigationController pushViewController:takeVC animated:YES];
+}
+
+
+/**
+ 发送位置
+ */
+- (void)sendLoaction {
+    
+    FLLocationViewController *locationVC = [[FLLocationViewController alloc] init];
+    FLNavigationController *nav = [[FLNavigationController alloc] initWithRootViewController:locationVC];
+    [self presentViewController:nav animated:YES completion:nil];
+    
+    [locationVC setSendLocationBlock:^(CLLocationCoordinate2D coordinate){
+        
+        FLLog(@"发送位置坐标:%lf===%lf", coordinate.latitude, coordinate.longitude);
+    }];
 }
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -445,6 +481,10 @@
             
         case 1:{ // 拍摄
             [self takePhoto];
+            break;
+        }
+        case 2: { // 位置
+            [self sendLoaction];
             break;
         }
         default:

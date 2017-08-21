@@ -45,3 +45,4 @@
 #define FLFont(f) [UIFont systemFontOfSize:(f)]
 #define FLUserDefault [NSUserDefaults standardUserDefaults]
 #define kKeyWindow [UIApplication sharedApplication].keyWindow
+#define FLNotificationCenter [NSNotificationCenter defaultCenter]

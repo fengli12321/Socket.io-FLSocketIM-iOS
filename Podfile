@@ -11,6 +11,9 @@ target 'FLSocketIM' do
   pod 'MBProgressHUD'
   pod 'YYModel'
   pod 'GPUImage'
+  pod 'AMapLocation'
+  pod 'AMap2DMap'
+  pod 'AMapSearch'
   # pod 'YYKit'
   target 'FLSocketIMTests' do
     inherit! :search_paths

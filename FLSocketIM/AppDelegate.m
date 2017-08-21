@@ -8,11 +8,16 @@
 
 #import "AppDelegate.h"
 #import "FLLoginViewController.h"
-#import "FLChatViewController.h"
+#import "FLTabBarController.h"
 #import <UserNotifications/UserNotifications.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
 @end
+
+static NSString *const AMapKey = @"244e549b3c06a865153580b054a98afe";
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -21,18 +26,23 @@
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = [UIColor whiteColor];
     
-    _window.rootViewController = [[FLLoginViewController alloc] init];
-//    _window.rootViewController = [[FLChatViewController alloc] initWithToUser:@"3"];
+//    _window.rootViewController = [[FLLoginViewController alloc] init];
+    _window.rootViewController = [[FLTabBarController alloc] init];
     
     [_window makeKeyAndVisible];
     
-    
-    
     [self commonSetting];
+    // 配置推送
     [self remotePushSetting];
+    // 配置地图定位
+    [self AMapSetting];
     return YES;
 }
 
+
+/**
+ 推送配置
+ */
 - (void)remotePushSetting {
 
     
@@ -69,6 +79,16 @@
 
 }
 
+
+/**
+ 地图配置
+ */
+- (void)AMapSetting {
+    // 开启HTTPS功能
+    [[AMapServices sharedServices] setEnableHTTPS:YES];
+    // 设置appKey
+    [[AMapServices sharedServices] setApiKey:AMapKey];
+}
 
 
 - (void)commonSetting {
