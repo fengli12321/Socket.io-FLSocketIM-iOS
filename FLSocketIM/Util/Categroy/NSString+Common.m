@@ -53,6 +53,23 @@
     return path;
 }
 
++ (NSString *)getAudioSavePath {
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [docDir stringByAppendingPathComponent:@"AudioConvert"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = false;
+    BOOL isExist = [fileManager fileExistsAtPath:path isDirectory:&isDir];
+    if (!(isDir && isExist)) {
+        
+        BOOL bCreateDir = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+        if (bCreateDir) {
+            
+            FLLog(@"文件路径创建成功");
+        }
+    }
+    return path;
+}
+
 - (NSString *)md5Str
 {
     const char *cStr = [self UTF8String];

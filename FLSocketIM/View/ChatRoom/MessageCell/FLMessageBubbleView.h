@@ -16,5 +16,6 @@
 @property (nonatomic, assign) UIEdgeInsets textSendInsets UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign) UIEdgeInsets textRecInsets UI_APPEARANCE_SELECTOR;
 - (instancetype)initWithIsSender:(BOOL)isSender;
+@property (nonatomic, assign) CGFloat horizontalOffset;
 
 @end

@@ -29,6 +29,7 @@
 #import "FLSystemTool.h"
 #import "UIImageView+common.h"
 #import "UIImage+Common.h"
+#import "NSData+FLCommon.h"
 
 #ifdef DEBUG // 处于开发阶段
 #define FLLog(...) NSLog(__VA_ARGS__)

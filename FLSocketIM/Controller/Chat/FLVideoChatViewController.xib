@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLVideoChatViewController">
+            <connections>
+                <outlet property="connectBtn" destination="Sm5-AL-gYC" id="pac-ce-FQw"/>
+                <outlet property="connectBtnCenterX" destination="kEc-Tr-G4T" id="kw7-Hn-weM"/>
+                <outlet property="disconnectBtn" destination="ic4-y4-wBb" id="kLG-kd-eo9"/>
+                <outlet property="disconnectBtnCenterX" destination="exo-9y-5VG" id="sj5-hT-KKG"/>
+                <outlet property="meVideoBackView" destination="3tu-iI-Dp2" id="GAY-Ya-xfH"/>
+                <outlet property="userVideoBackView" destination="zfP-lG-48i" id="pmY-z5-ihQ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="V76-MN-ylR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfP-lG-48i">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tu-iI-Dp2">
+                    <rect key="frame" x="225" y="0.0" width="150" height="200"/>
+                    <color key="backgroundColor" red="0.81176470590000005" green="0.79215686269999996" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="G0w-n0-G6d"/>
+                        <constraint firstAttribute="width" secondItem="3tu-iI-Dp2" secondAttribute="height" multiplier="240:320" id="au4-NN-2HU"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiM-7A-Ond">
+                    <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ic4-y4-wBb">
+                            <rect key="frame" x="147" y="60" width="80" height="80"/>
+                            <state key="normal" image="video_disconnect"/>
+                            <connections>
+                                <action selector="disconnet:" destination="-1" eventType="touchUpInside" id="Fla-Wy-PEB"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sm5-AL-gYC">
+                            <rect key="frame" x="147.5" y="60" width="80" height="80"/>
+                            <state key="normal" image="video_connect"/>
+                            <connections>
+                                <action selector="connect:" destination="-1" eventType="touchUpInside" id="Or1-mb-afV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ic4-y4-wBb" firstAttribute="centerY" secondItem="tiM-7A-Ond" secondAttribute="centerY" id="3gD-7G-AnP"/>
+                        <constraint firstItem="Sm5-AL-gYC" firstAttribute="centerY" secondItem="tiM-7A-Ond" secondAttribute="centerY" id="VEr-k7-001"/>
+                        <constraint firstItem="ic4-y4-wBb" firstAttribute="centerX" secondItem="tiM-7A-Ond" secondAttribute="centerX" id="exo-9y-5VG"/>
+                        <constraint firstAttribute="height" constant="200" id="gkL-Ys-S2i"/>
+                        <constraint firstItem="Sm5-AL-gYC" firstAttribute="centerX" secondItem="tiM-7A-Ond" secondAttribute="centerX" id="kEc-Tr-G4T"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="zfP-lG-48i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8bh-Dh-lgO"/>
+                <constraint firstAttribute="trailing" secondItem="tiM-7A-Ond" secondAttribute="trailing" id="KbQ-np-oJa"/>
+                <constraint firstItem="3tu-iI-Dp2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MvS-lO-E4W"/>
+                <constraint firstAttribute="trailing" secondItem="3tu-iI-Dp2" secondAttribute="trailing" id="OeM-wg-E9X"/>
+                <constraint firstItem="tiM-7A-Ond" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WgD-PE-vEl"/>
+                <constraint firstAttribute="bottom" secondItem="zfP-lG-48i" secondAttribute="bottom" id="gK5-Zz-xPz"/>
+                <constraint firstAttribute="bottom" secondItem="tiM-7A-Ond" secondAttribute="bottom" id="mML-gf-TVH"/>
+                <constraint firstAttribute="trailing" secondItem="zfP-lG-48i" secondAttribute="trailing" id="nM7-X1-xl5"/>
+                <constraint firstItem="zfP-lG-48i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zUE-D3-gYt"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="video_connect" width="80" height="80"/>
+        <image name="video_disconnect" width="80" height="80"/>
+    </resources>
+</document>

@@ -39,6 +39,18 @@
             latestMsgStr = @"[图片]";
             break;
             
+        case FLMessageLoc:
+            latestMsgStr = @"[定位]";
+            break;
+            
+        case FlMessageAudio:
+            latestMsgStr = @"[语音]";
+            break;
+            
+        case FLMessageVideo:
+            latestMsgStr = @"[视频]";
+            break;
+            
         case FLMessageOther:
             latestMsgStr = @"[其他]";
             break;

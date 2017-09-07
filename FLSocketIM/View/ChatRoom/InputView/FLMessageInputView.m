@@ -91,10 +91,13 @@
     
     
     _voiceKeyboardView = [[FLMessageInputView_Voice alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kKeyboardView_Height)];
+    __weak typeof(self) weakSelf = self;
     _voiceKeyboardView.recordSuccessfully = ^(NSString *file, NSTimeInterval duration){
-//        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(messageInputView:sendVoice:duration:)]) {
-//            [weakSelf.delegate messageInputView:weakSelf sendVoice:file duration:duration];
-//        }
+        
+        FLLog(@"%@", file);
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(messageInputView:sendVoice:duration:)]) {
+            [weakSelf.delegate messageInputView:weakSelf sendVoice:file duration:duration];
+        }
     };
     
     _emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kKeyboardView_Height) dataSource:self showBigEmotion:YES];
@@ -102,7 +105,6 @@
     [_emojiKeyboardView setY:kScreenHeight];
     
     
-    __weak typeof(self) weakSelf = self;
     _addKeyboardView = [[FLMessageInputView_Add alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kKeyboardView_Height)];
     _addKeyboardView.addIndexBlock = ^(NSInteger index){
         if ([weakSelf.delegate respondsToSelector:@selector(messageInputView:addIndexClicked:)]) {

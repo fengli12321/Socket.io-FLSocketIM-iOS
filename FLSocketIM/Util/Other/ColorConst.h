@@ -11,4 +11,5 @@
 #define FLBackGroundColor   [UIColor colorWithHex:0xefefef]
 #define FLNavBGColor        [UIColor colorWithHex:0xf8f8f8]
 #define FLSecondColor       [UIColor colorWithHex:0x989898]
-#define FLLightGrayColor    [UIColor colorWithHex:0xaaaaaa]
+#define FLGrayColor         [UIColor colorWithHex:0xaaaaaa]
+#define FLLightGrayColor    [UIColor colorWithHex:0xdfdfdf]

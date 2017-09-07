@@ -41,32 +41,31 @@
     
     _bubbleImage = [[UIImageView alloc] init];
     [self addSubview:_bubbleImage];
-    [_bubbleImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self);
-    }];
+    _bubbleImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _bubbleImage.image = [UIImage imageNamed:_isSender ? @"video_send_bubble" : @"video_recive_bubble"];
     
     _textLabel = [[UILabel alloc] init];
     [self addSubview:_textLabel];
-    [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self).with.insets(UIEdgeInsetsZero);
-    }];
     _textLabel.numberOfLines = 0;
     _textLabel.textColor = _isSender ? [UIColor whiteColor] : [UIColor blackColor];
     _textLabel.font = self.textFont;
+    _textLabel.autoresizingMask =
+    _bubbleImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self updateFrame];
+    
 }
 
 - (void)setMessage:(FLMessageModel *)message {
     _message = message;
     _textLabel.text = message.bodies.msg;
-    [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.mas_equalTo(message.textMessageLabelSize.width);
-        make.height.mas_equalTo(message.textMessageLabelSize.height);
-    }];
 }
+
+- (void)updateFrame {
+    UIEdgeInsets insets = _isSender?_textSendInsets:_textRecInsets;
+    _bubbleImage.frame = self.bounds;
+    _textLabel.frame = CGRectMake(_bubbleImage.x + insets.left, _bubbleImage.y + insets.top, _bubbleImage.width - insets.left - insets.right, _bubbleImage.height - insets.top - insets.bottom);
+}
+
 - (void)setTextFont:(UIFont *)textFont {
     _textFont = textFont;
     _textLabel.font = textFont;
@@ -78,19 +77,13 @@
     if (!_isSender) {
         return;
     }
-    [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self).with.insets(textSendInsets);
-    }];
+    [self updateFrame];
 }
 - (void)setTextRecInsets:(UIEdgeInsets)textRecInsets {
     _textRecInsets = textRecInsets;
     if (_isSender) {
         return;
     }
-    [_textLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self).with.insets(textRecInsets);
-    }];
+    [self updateFrame];
 }
 @end

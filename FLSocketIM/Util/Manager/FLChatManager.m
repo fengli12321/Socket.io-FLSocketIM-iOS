@@ -63,57 +63,71 @@ static FLChatManager *instance = nil;
     messageBody.type = @"txt";
     messageBody.msg = text;
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
-    [self saveMessageAndConversationToDBWithMessage:message];
     
-    [self sendMessage:message statusChange:^{
+    [self sendMessage:message fileData:nil isResend:NO statusChange:^{
         
         sendStatus(message);
     }];
     return message;
 }
+- (FLMessageModel *)sendLocationMessage:(CLLocationCoordinate2D)location locationName:(NSString *)locationName toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *))sendStatus {
+    
+    FLMessageBody *messageBody = [[FLMessageBody alloc] init];
+    messageBody.type = @"loc";
+    messageBody.latitude = location.latitude;
+    messageBody.longitude = location.longitude;
+    messageBody.locationName = locationName;
+    FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
 
+    [self sendMessage:message fileData:nil isResend:NO statusChange:^{
+        
+        sendStatus(message);
+    }];
+    return message;
+}
 - (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *message))sendStatus {
     
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg", [NSString creatUUIDString]];
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
     messageBody.type = @"img";
-    messageBody.imgData = imgData;
-    
+    messageBody.fileName = imageName;
     // 保存图片到本地沙河
     NSString *savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:imageName];
-    if ([self saveFile:imgData toPath:savePath]) {
-        messageBody.locSavePath = imageName;
-    }
+    [self saveFile:imgData toPath:savePath];
     
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
     
-    
-    // 保存消息和会话到数据库
-    [self saveMessageAndConversationToDBWithMessage:message];
-    
-    
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"auth_token"] = [FLClientManager shareManager].auth_token;
-    dict[@"imageFileName"] = imageName;
-    __weak typeof(self) weakSelf = self;
-    [self uploadImageToSeverWithImageData:imgData successBlock:^(id response) {
+    [self sendMessage:message fileData:imgData isResend:NO statusChange:^{
         
-        if ([response[@"code"] integerValue] > 0) {
-            
-            messageBody.imgUrl = response[@"data"];
-            [weakSelf sendMessage:message statusChange:^{
-                
-                sendStatus(message);
-            }];
-        }
-    } failurBlock:^(NSError *error) {
-        
-        // 上传失败
-        message.sendStatus = FLMessageSendFail;
         sendStatus(message);
-    } progress:nil];
+    }];
+    
+
     return message;
+}
+
+- (FLMessageModel *)sendAudioMessage:(NSString *)audioDataPath duration:(CGFloat)duration toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *))sendStatus {
+    
+    NSString *audioName = [audioDataPath lastPathComponent];
+    FLMessageBody *messageBody = [[FLMessageBody alloc] init];
+    messageBody.type = @"audio";
+    messageBody.fileName = audioName;
+    messageBody.duration = duration * 2;
+    FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
+    NSData *audioData = [NSData dataWithContentsOfFile:audioDataPath];
+    
+    
+    
+    [self sendMessage:message fileData:audioData isResend:NO statusChange:^{
+        
+        sendStatus(message);
+    }];
+    
+    
+    
+    
+    return message;
+
 }
 
 - (void)resendMessage:(FLMessageModel *)message sendStatus:(void (^)(FLMessageModel *))sendStatus {
@@ -127,7 +141,16 @@ static FLChatManager *instance = nil;
             [self resendImgMessage:message sendStatus:sendStatus];
             break;
         }
+        
+        case FLMessageLoc: {
+            [self resendLocMessage:message sendStatus:sendStatus];
+            break;
+        }
             
+        case FlMessageAudio: {
+            [self resendAudioMessage:message sendStatus:sendStatus];
+            break;
+        }
         case FLMessageOther:{
             
             break;
@@ -147,7 +170,7 @@ static FLChatManager *instance = nil;
  */
 - (void)resendTextMessage:(FLMessageModel *)messsage sendStatus:(void (^)(FLMessageModel *))sendStatus {
     
-    [self sendMessage:messsage statusChange:^{
+    [self sendMessage:messsage fileData:nil isResend:YES statusChange:^{
         sendStatus(messsage);
     }];
 }
@@ -162,7 +185,7 @@ static FLChatManager *instance = nil;
     
     
     NSData *imageData;
-    NSString *locImgPath = [[NSString getFielSavePath] stringByAppendingPathComponent:message.bodies.locSavePath];
+    NSString *locImgPath = [[NSString getFielSavePath] stringByAppendingPathComponent:message.bodies.fileName];
     if (locImgPath.length) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         imageData = [fileManager contentsAtPath:locImgPath];
@@ -171,49 +194,52 @@ static FLChatManager *instance = nil;
         [FLAlertView showWithTitle:@"图片重发失败！" message:@"本地图片已不存在" cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
         return;
     }
-    __weak typeof(self) weakSelf = self;
-    [self uploadImageToSeverWithImageData:imageData successBlock:^(id response) {
+    [self sendMessage:message fileData:imageData isResend:YES statusChange:^{
         
-        if ([response[@"code"] integerValue] > 0) {
-            
-            message.bodies.imgUrl = response[@"data"];
-            [weakSelf sendMessage:message statusChange:^{
-                
-                sendStatus(message);
-            }];
-        }
-    } failurBlock:^(NSError *error) {
-        
-        // 上传失败
-        message.sendStatus = FLMessageSendFail;
         sendStatus(message);
-    } progress:nil];
+    }];
+   
 }
-
 /**
- 上传图片到服务器
-
- @param imageData 图片
- @param successBlock 成功
- @param failureBlock 失败
- @param progress 进度
+ 重发定位消息
+ 
+ @param message 消息模型
+ @param sendStatus 发送状态回调
  */
-- (void)uploadImageToSeverWithImageData:(NSData *)imageData successBlock:(void(^)(id response))successBlock failurBlock:(void(^)(NSError *error))failureBlock progress:(void(^)(int64_t bytesProgress, int64_t totalBytesProgress))progress {
+- (void)resendLocMessage:(FLMessageModel *)message sendStatus:(void (^)(FLMessageModel *))sendStatus {
     
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"auth_token"] = [FLClientManager shareManager].auth_token;
-    dict[@"imageFileName"] = [NSString stringWithFormat:@"%@.jpg", [NSString creatUUIDString]];
-    [FLNetWorkManager ba_uploadImageWithUrlString:SendImgMsg_Url parameters:dict imageData:imageData withSuccessBlock:^(id response) {
-        
-        successBlock(response);
-    } withFailurBlock:^(NSError *error) {
-        
-        failureBlock(error);
-    } withUpLoadProgress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//        progress(bytesProgress, totalBytesProgress);
+    [self sendMessage:message fileData:nil isResend:YES statusChange:^{
+        sendStatus(message);
     }];
 }
+
+
+/**
+ 重发语音消息
+ 
+ @param message 消息模型
+ @param sendStatus 发送状态回调
+ */
+- (void)resendAudioMessage:(FLMessageModel *)message sendStatus:(void (^)(FLMessageModel *))sendStatus {
+    
+    NSData *audioData;
+    NSString *locPath = [[NSString getAudioSavePath] stringByAppendingPathComponent:message.bodies.fileName];
+    if (locPath.length) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        audioData = [fileManager contentsAtPath:locPath];
+    }
+    if (!audioData) {
+        [FLAlertView showWithTitle:@"图片重发失败！" message:@"语音文件已不存在" cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
+        return;
+    }
+    [self sendMessage:message fileData:audioData isResend:YES statusChange:^{
+        
+        sendStatus(message);
+    }];
+}
+
+
+
 - (BOOL)saveFile:(NSData *)fileData toPath:(NSString *)savePath {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL saveSuccess = [fileManager createFileAtPath:savePath contents:fileData attributes:nil];
@@ -249,17 +275,32 @@ static FLChatManager *instance = nil;
  发送消息
 
  @param message 消息模型
+ @param fileData 文件数据
  @param statusChange 发送状态回调
  */
-- (void)sendMessage:(FLMessageModel *)message statusChange:(void (^)())statusChange{
+- (void)sendMessage:(FLMessageModel *)message fileData:(NSData *)fileData isResend:(BOOL)isResend statusChange:(void (^)())statusChange{
     
-    id parameters = [message yy_modelToJSONObject];
-    [[[FLSocketManager shareManager].client emitWithAck:@"chat" with:@[parameters]] timingOutAfter:5 callback:^(NSArray * _Nonnull data) {
+    if (!isResend) { // 重发的消息不要保存
+        // 保存消息和会话到数据库
+        [self saveMessageAndConversationToDBWithMessage:message];
+    }
+    
+    NSMutableDictionary *parameters;
+    if (fileData && fileData.length) {
+        NSDictionary *tempPara = [message yy_modelToJSONObject];
+        NSDictionary *tempBody = tempPara[@"bodies"];
+        parameters = [tempPara mutableCopy];
+        NSMutableDictionary *body = [tempBody mutableCopy];
+        body[@"fileData"] = fileData;
+        parameters[@"bodies"] = body;
+    }
+    else {
+        parameters = [message yy_modelToJSONObject];
+    }
+    [[[FLSocketManager shareManager].client emitWithAck:@"chat" with:@[parameters]] timingOutAfter:10 callback:^(NSArray * _Nonnull data) {
         
         FLLog(@"%@", data.firstObject);
         
-        
-       
         if ([data.firstObject isKindOfClass:[NSString class]] && [data.firstObject isEqualToString:@"NO ACK"]) {  // 服务器没有应答
             
             
@@ -274,6 +315,15 @@ static FLChatManager *instance = nil;
             NSDictionary *ackDic = data.firstObject;
             message.timestamp = [ackDic[@"timestamp"] longLongValue];
             message.msg_id = ackDic[@"msg_id"];
+            if (fileData) {
+                NSDictionary *bodies = ackDic[@"bodies"];
+                message.bodies.fileRemotePath = bodies[@"fileRemotePath"];
+            }
+            if (message.type == FLMessageLoc) {
+                NSDictionary *bodiesDic = ackDic[@"bodies"];
+                message.bodies.fileRemotePath = bodiesDic[@"fileRemotePath"];
+            }
+            
             // 发送成功
             statusChange();
             

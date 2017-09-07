@@ -45,7 +45,7 @@
     _timeLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_timeLabel];
     _timeLabel.font = FLFont(13);
-    _timeLabel.textColor = FLLightGrayColor;
+    _timeLabel.textColor = FLGrayColor;
     
     
     _unReadMsgCountLabel = [[FLBadgeLabel alloc] init];

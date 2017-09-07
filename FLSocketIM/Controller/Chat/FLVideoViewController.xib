@@ -64,7 +64,7 @@
                 </button>
                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hVideo_focusing" translatesAutoresizingMaskIntoConstraints="NO" id="eS3-rc-j9u" userLabel="focus">
                     <rect key="frame" x="100" y="100" width="57" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQ1-gV-51N" userLabel="back">
                     <rect key="frame" x="69" y="507" width="50" height="50"/>

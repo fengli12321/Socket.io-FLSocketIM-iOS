@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLMessageCellContentView.h"
 @class FLMessageModel;
 
-typedef NS_ENUM(NSInteger, FLMessageCellType) {
-    FLTextMessageCell,
-    FLImgMessageCell,
-    FLOtherMessageCell
-};
 @protocol FLMessageCellDelegate;
 @interface FLMessageCell : UITableViewCell
 
@@ -45,3 +41,5 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
 - (void)resendMessage:(FLMessageModel *)message;
 
 @end
+
+

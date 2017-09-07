@@ -11,7 +11,7 @@
 
 @interface FLLocationViewController : FLViewController
 
-@property (nonatomic, copy) void(^sendLocationBlock)(CLLocationCoordinate2D location);
+@property (nonatomic, copy) void(^sendLocationBlock)(CLLocationCoordinate2D location, NSString *locationName);
 
 @end
 

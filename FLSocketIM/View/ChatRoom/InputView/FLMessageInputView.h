@@ -29,6 +29,13 @@ typedef NS_ENUM(NSInteger, FLMessageInputViewState) {
 
 @protocol FLMessageInputViewDelegate <NSObject>
 
+
+/**
+ 底部高度变化
+
+ @param inputView 输入视图
+ @param heightToBottom 变化后的高度
+ */
 - (void)messageInputView:(FLMessageInputView *)inputView heightToBottomChange:(CGFloat)heightToBottom;
 
 /**
@@ -47,6 +54,14 @@ typedef NS_ENUM(NSInteger, FLMessageInputViewState) {
  */
 - (void)messageInputView:(FLMessageInputView *)inputView sendBigEmotion:(NSString *)emotionName;
 
+/**
+ 发送语音
+
+ @param inputView 输入视图
+ @param saveFile 语音保存的本地路径
+ @param duration 语音时长
+ */
+- (void)messageInputView:(FLMessageInputView *)inputView sendVoice:(NSString *)saveFile duration:(CGFloat)duration;
 /**
  更多发送选项点击
 

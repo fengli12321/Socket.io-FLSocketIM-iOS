@@ -11,6 +11,9 @@
 typedef NS_ENUM(NSInteger, FLMessageModelType) {
     FLMessageText,
     FLMessageImage,
+    FLMessageLoc,
+    FlMessageAudio,
+    FLMessageVideo,
     FLMessageOther
 };
 
@@ -20,6 +23,9 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
     FLMessageSendSuccess,   // 发送成功
     FLMessageSendFail   // 发送失败
 };
+
+
+
 @interface FLMessageModel : NSObject <YYModel>
 
 
@@ -56,15 +62,30 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 @interface FLMessageBody : NSObject
 /** 消息类型 */
 @property (nonatomic, copy) NSString *type;
+
 /** 文本消息内容 */
 @property (nonatomic, copy) NSString *msg;
-/** 图片远程地址 */
-@property (nonatomic, copy) NSString *imgUrl;
-/** 图片名称 */
-@property (nonatomic, copy) NSString *imageName;
-/** 图片数据 */
-@property (nonatomic, strong) NSData *imgData;
-/** 文件本地保存地址 */
-@property (nonatomic, copy) NSString *locSavePath;
+
+
+
+/** 纬度 */
+@property (nonatomic, assign) CGFloat latitude;
+/** 经度 */
+@property (nonatomic, assign) CGFloat longitude;
+/** 位置名称 */
+@property (nonatomic, copy) NSString *locationName;
+
+
+/** 语音消息时长 */
+@property (nonatomic, assign) CGFloat duration;
+
+
+
+/** 文件服务器地址 */
+@property (nonatomic, copy) NSString *fileRemotePath;
+/** 文件名称 */
+@property (nonatomic, copy) NSString *fileName;
+/** 文件数据 */
+@property (nonatomic, strong) NSData *fileData;
 
 @end

@@ -9,6 +9,8 @@
 #import "FLClientManager.h"
 #import "FLBridgeDelegateModel.h"
 #import "FLChatViewController.h"
+#import "FLMessageModel.h"
+#import "FLVideoChatViewController.h"
 static FLClientManager *instance;
 
 @interface FLClientManager ()
@@ -105,6 +107,30 @@ static FLClientManager *instance;
         
         
         FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
+        
+        NSData *fileData = message.bodies.fileData;
+        if (fileData && fileData != NULL && fileData.length) {
+            
+            NSString *fileName = message.bodies.fileName;
+            NSString *savePath = nil;
+            switch (message.type) {
+                case FLMessageImage:
+                    savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:fileName];
+                    break;
+                case FlMessageAudio:
+                    savePath = [[NSString getAudioSavePath] stringByAppendingPathComponent:fileName];
+                    break;
+                default:
+                    savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:fileName];
+                    break;
+            }
+            
+            
+            message.bodies.fileData = nil;
+            [fileData saveToLocalPath:savePath];
+        }
+        
+        
         id bodyStr = data.firstObject[@"bodies"];
         if ([bodyStr isKindOfClass:[NSString class]]) {
             FLMessageBody *body = [FLMessageBody yy_modelWithJSON:[bodyStr stringToJsonDictionary]];
@@ -139,6 +165,16 @@ static FLClientManager *instance;
         }
     }];
     
+    [socket on:@"videoChat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
+        UIViewController *vc = [self getCurrentVC];
+        
+        NSDictionary *dataDict = data.firstObject;
+        FLVideoChatViewController *videoVC = [[FLVideoChatViewController alloc] initWithFromUser:dataDict[@"from_user"] toUser:[FLClientManager shareManager].currentUserID type:FLVideoChatCallee];
+        videoVC.room = dataDict[@"room"];
+        [vc presentViewController:videoVC animated:YES completion:nil];
+        FLLog(@"%@============", data);
+    }];
+    
     // 用户上线
     [socket on:@"onLine" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
         
@@ -165,29 +201,7 @@ static FLClientManager *instance;
         }
     }];
     
-//    // socket连接
-//    [socket on:@"connect" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-//        
-//        FLLog(@"%ld========================状态socket连接", socket.status);
-//    }];
-//    
-//    // socket断开连接
-//    [socket on:@"disconnect" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-//        
-//        FLLog(@"%ld========================状态socket断开连接", socket.status);
-//    }];
-//    
-//    // socket重新连接
-//    [socket on:@"reconnect" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-//        
-//        FLLog(@"%ld========================状态socket重新连接", socket.status);
-//    }];
-//    
-//    // socket重连尝试
-//    [socket on:@"reconnectAttempt" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-//        
-//        FLLog(@"%ld========================状态socket重连尝试", socket.status);
-//    }];
+
     
     // 连接状态改变
     [socket on:@"statusChange" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
@@ -205,6 +219,35 @@ static FLClientManager *instance;
 }
 
 
-
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]]){
+        result = nextResponder;
+    }
+    else {
+        result = window.rootViewController;
+    }
+    return result;
+}
 
 @end

@@ -224,4 +224,66 @@
 }
 
 
++ (NSURLSessionDownloadTask *)downLoadWithUrl:(NSString *)url progress:(DownloadProgress)progress success:(ResponseSuccess)success fail:(ResponseFail)fail {
+    //首先判断网络是否可用
+    if ([FLNetWorkManager shareManager].netWorkStatus == NetworkStatusNotReachable) {
+        FLLog(@"网络异常,请稍后再试！");
+        return nil;
+    }else{
+        //        NSLog(@"网络不错");
+    }
+    
+    //默认传输的数据类型是二进制
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    //构造request对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    //使用系统类创建downLoad Task对象
+    NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        //下载进度
+        if (progress) {
+            progress(downloadProgress.fractionCompleted);//完成的百分比
+        }
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //拼接存放路径
+        NSURL *pathURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+        
+        //返回下载到哪里(返回值是一个路径)
+        return [pathURL URLByAppendingPathComponent:[response suggestedFilename]];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        //此处已经在主线程了
+        if (!error){
+            
+            //文件名称
+            NSString *fileName = filePath.lastPathComponent;
+            //沙盒documents路径
+            NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+            //文件路径
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsPath,fileName];
+            
+            NSData *dataURL = [NSData dataWithContentsOfFile:filePath];
+            
+            if (success) {
+                success(dataURL);
+            }
+            //如果请求没有错误(请求成功), 则打印地址
+            FLLog(@"打印地址-->%@", filePath);
+        }else{
+            
+            if (fail) {
+                fail(error);
+            }
+        }
+    }];
+    //开始请求
+    [task resume];
+    return task;
+}
+
 @end

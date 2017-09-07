@@ -15,7 +15,8 @@
 #define kMessageCell_UserIconWith 40.0
 
 #import "FLMessageCell.h"
-#import "FLMessageBubbleView.h"
+
+
 #import "FLMessageModel.h"
 
 @interface FLMessageCell () {
@@ -24,19 +25,14 @@
 
 
 @property (nonatomic, strong) UIImageView *userIconView;            // 用户头像
-@property (nonatomic, strong) FLMessageBubbleView *bubbleView;      // 文字气泡
-@property (nonatomic, strong) UIImageView *messageImage;            // 消息图片
+@property (nonatomic, strong) FLMessageCellContentView *contentBackView;  // 消息内容部分背景
 
 @property (nonatomic, strong) UIButton *reSendBtn;                  // 重新发送按钮
 @property (nonatomic, strong) UIActivityIndicatorView *sendingView; // 发送中菊花转
 
+
 @end
 @implementation FLMessageCell
-
-+ (void)initialize {
-//    FLMessageCell *cell = [FLMessageCell appearance];
-//    cell.textFont = [UIFont systemFontOfSize:20];
-}
 
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier messageModel:(FLMessageModel *)model {
@@ -56,19 +52,21 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     self.contentView.backgroundColor = FLBackGroundColor;
     
-    _userIconView = [[UIImageView alloc] init];
+    // 用户头像
+    CGRect iconFrame = _isSender?CGRectMake(kScreenWidth - kPadding - kMessageCell_UserIconWith, kPadding, kMessageCell_UserIconWith, kMessageCell_UserIconWith):CGRectMake(kPadding, kPadding, kMessageCell_UserIconWith, kMessageCell_UserIconWith);;
+    _userIconView = [[UIImageView alloc] initWithFrame:iconFrame];
     [self.contentView addSubview:_userIconView];
-    [_userIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        _isSender ? make.right.equalTo(self).offset(-kPadding) : make.left.equalTo(self).offset(kPadding);
-        make.top.equalTo(self).offset(10);
-        make.width.height.mas_equalTo(kMessageCell_UserIconWith);
-    }];
     _userIconView.image = [UIImage imageNamed:_isSender?@"Fruit-1":@"Fruit-2"];
     [_userIconView setCornerRadius:kMessageCell_UserIconWith/2.0];
 
     
-    if (_isSender) {
+    // 内容部分背景
+    _contentBackView = [[FLMessageCellContentView alloc] initWithCellType:self.cellType isSender:_isSender];
+    _contentBackView.horizontalOffset = _userIconView.width + kPadding * 2;
+    _contentBackView.verticalOffset = _userIconView.y;
+    [self.contentView addSubview:_contentBackView];
+    
+    if (_isSender) { // 发送者， 添加发送状态菊花转和重发按钮
         _reSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_reSendBtn setImage:[UIImage imageNamed:@"resend"] forState:UIControlStateNormal];
         [self.contentView addSubview:_reSendBtn];
@@ -80,93 +78,33 @@
         
         _sendingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self.contentView addSubview:_sendingView];
-        [_sendingView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerY.equalTo(_reSendBtn);
-            make.right.equalTo(_reSendBtn);
-        }];
-        [_sendingView startAnimating];
     }
     
     
-    switch (self.cellType) {
-        case FLTextMessageCell:{
-            _bubbleView = [[FLMessageBubbleView alloc] initWithIsSender:_isSender];
-            [self.contentView addSubview:_bubbleView];
-            [_bubbleView mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                _isSender ? make.right.equalTo(_userIconView.mas_left).offset(-10) : make.left.equalTo(_userIconView.mas_right).offset(10);
-                make.top.equalTo(_userIconView);
-                make.width.mas_lessThanOrEqualTo(kScreenWidth);
-            }];
-            
-            if (_isSender) {
-                [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    
-                    make.centerY.equalTo(_bubbleView);
-                    make.right.mas_equalTo(_bubbleView.mas_left).offset(-5);
-                    make.height.mas_equalTo(30);
-                }];
-            }
-        
-            
-            break;
-        }
-        case FLImgMessageCell:{
-            _messageImage = [[UIImageView alloc] init];
-            
-            _messageImage.contentMode = UIViewContentModeScaleAspectFill;
-            _messageImage.clipsToBounds = YES;
-            [self.contentView addSubview:_messageImage];
-            [_messageImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                _isSender ? make.right.equalTo(_userIconView.mas_left).offset(-10) : make.left.equalTo(_userIconView.mas_right).offset(10);
-                make.top.equalTo(_userIconView);
-                make.width.mas_equalTo(kScreenWidth/4.0);
-                make.height.equalTo(_messageImage.mas_width).multipliedBy(1.5);
-            }];
-            
-            if (_isSender) {
-                [_reSendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    
-                    make.centerY.equalTo(_messageImage);
-                    make.right.mas_equalTo(_messageImage.mas_left).offset(-5);
-                    make.height.mas_equalTo(30);
-                }];
-            }
-            
-            break;
-        }
-            
-        default:
-            break;
-    }
+    
 }
 - (void)setMessage:(FLMessageModel *)message {
     _message = message;
-    switch (self.cellType) {
-        case FLTextMessageCell:
-            _bubbleView.message = message;
-            break;
-        case FLImgMessageCell:{
-            NSData *imgData = message.bodies.imgData;
-            if (imgData) {
-                self.messageImage.image = [UIImage imageWithData:imgData];
-            }
-            else {
-                [self.messageImage fl_setImageWithURL:[NSString stringWithFormat:@"%@/%@", BaseUrl, message.bodies.imgUrl] locSavePath:message.bodies.locSavePath placeholderImage:[UIImage imageNamed:@"Fruit-5"]];
-            }
-            break;
-        }
-        default:
-            break;
-    }
+    self.contentBackView.message = message;
     [self updateSendStatus:message.sendStatus];
+    if (_isSender) {
+        [self updateFrame];
+    }
+}
+
+- (void)updateFrame {
+    CGFloat sendingViewW = 30;
+    CGRect frame = CGRectMake(_contentBackView.x - 5 - sendingViewW, (self.contentBackView.height - sendingViewW)/2.0 + kPadding, sendingViewW, sendingViewW);
+    _sendingView.frame = frame;
+    
+    [_reSendBtn sizeToFit];
+    CGFloat btnW = _reSendBtn.width;
+    _reSendBtn.frame = CGRectMake(_contentBackView.x - 5 - btnW, (self.contentBackView.height - sendingViewW)/2.0 + kPadding, btnW, sendingViewW);
 }
 
 - (void)setTextFont:(UIFont *)textFont {
     _textFont = textFont;
-    _bubbleView.textFont = textFont;
+    _contentBackView.textFont = textFont;
 }
 
 
@@ -181,8 +119,12 @@
             return isSender ? @"FLTxtMessageCell_send" : @"FLTxtMessageCell_receive";
             break;
             
-            case FLImgMessageCell:
+        case FLImgMessageCell:
             return isSender ? @"FLImgMessageCell_send" : @"FLImgMessageCell_receive";
+            break;
+            
+        case FLLocMessageCell:
+            return isSender ? @"FLLocMessageCell_send" : @"FLLocMessageCell_receive";
             break;
         default:
             return nil;
@@ -211,11 +153,20 @@
             
             [_sendingView stopAnimating];
             _reSendBtn.hidden = NO;
+            break;
         }
             
             
         default:
             break;
+    }
+    
+    if (self.cellType == FLLocMessageCell) {
+        
+        FLLocMessageContentView *contentView = (FLLocMessageContentView *)self.contentBackView;
+        if ([contentView isKindOfClass:[FLLocMessageContentView class]]) {
+            [contentView resetLocImage];
+        }
     }
 }
 
@@ -231,3 +182,5 @@
 }
 
 @end
+
+

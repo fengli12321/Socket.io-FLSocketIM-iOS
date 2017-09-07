@@ -17,6 +17,8 @@
 
 /** 获取文件保存路径 */
 + (NSString *)getFielSavePath;
+/** 获取音频保存路径 */
++ (NSString *)getAudioSavePath;
 /** md5编码 */
 - (NSString *)md5Str;
 

@@ -724,6 +724,12 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 @end
 
 
+
+
+
+
+
+
 @interface FLVideoPlayer ()
 
 

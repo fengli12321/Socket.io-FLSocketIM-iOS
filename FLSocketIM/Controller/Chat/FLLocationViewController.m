@@ -26,6 +26,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
 @property (nonatomic, assign) CLLocationCoordinate2D oldLocation;
 @property (nonatomic, strong) UIImageView *locationPin;
 
+
 @end
 
 @implementation FLLocationViewController
@@ -69,7 +70,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
     _mapView.delegate = self;
     _mapView.showsCompass = NO;
     _mapView.showsScale = NO;
-    [_mapView setZoomLevel:1.5 animated:YES];
+    [_mapView setZoomLevel:15.5 animated:YES];
     [self.view addSubview:_mapView];
     
     _mapView.showsUserLocation = YES;
@@ -88,7 +89,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
     CGFloat btnW = 50;
     UIButton *reLocatedBtn = [[UIButton alloc] initWithFrame:CGRectMake(_mapView.width - 10 - btnW, _mapView.height - 20 - btnW, btnW, btnW)];
     [reLocatedBtn setCornerRadius:btnW/2.0];
-    [reLocatedBtn setBorderWidth:1 color:FLLightGrayColor];
+    [reLocatedBtn setBorderWidth:1 color:FLGrayColor];
     [reLocatedBtn setBackgroundColor:[UIColor whiteColor]];
     [reLocatedBtn setImage:[UIImage imageNamed:@"keyboard_location_current"] forState:UIControlStateNormal];
     [reLocatedBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
@@ -141,6 +142,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
     AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
     regeo.location = [AMapGeoPoint locationWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     regeo.requireExtension = YES;
+    self.oldLocation = coordinate;
     [self.search AMapReGoecodeSearch:regeo];
 }
 
@@ -191,7 +193,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
             AMapPOI *poi = self.aroundLocationArr[index];
             coordinate = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
         }
-        self.sendLocationBlock(coordinate);
+        self.sendLocationBlock(coordinate, self.currentLocationName);
     }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -226,7 +228,6 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
         
         [_mapView setRegion:MACoordinateRegionMake(userLocation.coordinate, mapView.region.span) animated:YES];
         self.oldLocation = userLocation.coordinate;
-//        [self creatCenterPinWithCoordinate:userLocation.coordinate];
         [self addAnimationToLocationPin];
         [self searchLocationNameWithCoordinate:userLocation.coordinate];
     }
@@ -303,7 +304,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
         AMapPOI *poi = self.aroundLocationArr[index];
         coordinate = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
         [_mapView setRegion:MACoordinateRegionMake(coordinate, _mapView.region.span) animated:YES];
-        
+        self.currentLocationName = poi.name;
     }
     [self addAnimationToLocationPin];
 }

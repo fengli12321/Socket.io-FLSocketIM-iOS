@@ -65,6 +65,8 @@ typedef void( ^ DownloadProgress)(CGFloat);
 
 #pragma mark - 图片上传
 + (NSURLSessionTask *)ba_uploadImageWithUrlString:(NSString *)urlString parameters:(NSDictionary *)parameters imageData:(NSData *)imageData withSuccessBlock:(ResponseSuccess)successBlock withFailurBlock:(ResponseFail)failureBlock withUpLoadProgress:(UploadProgress)progress;
+#pragma mark - 文件下载
++ (NSURLSessionDownloadTask *)downLoadWithUrl:(NSString *)url progress:(DownloadProgress)progress success:(ResponseSuccess)success fail:(ResponseFail)fail;
 
 
 @end

@@ -20,6 +20,7 @@
 #import "FLLocationViewController.h"
 #import "FLNavigationController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "FLVideoChatViewController.h"
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -215,7 +216,21 @@
 }
 
 
+/**
+ 发送语音
 
+ @param audioSavePath 语音保存路径
+ @param duration 语音持续时长
+ */
+- (void)sendAudioMessageWithAudioSavePath:(NSString *)audioSavePath duration:(CGFloat)duration {
+    __weak typeof(self) weakSelf = self;
+    
+    FLMessageModel *message = [[FLChatManager shareManager] sendAudioMessage:audioSavePath duration:duration toUser:_toUser sendStatus:^(FLMessageModel *newMessage) {
+        
+        [weakSelf updateSendStatusUIWithMessage:newMessage];
+    }];
+    [self clientManager:nil didReceivedMessage:message];
+}
 
 // 发送图片消息
 - (void)sendImgMessageWithImage:(UIImage *)image asset:(id)asset isOriginalPhoto:(BOOL)isOriginalPhoto {
@@ -277,6 +292,21 @@
 }
 
 
+/**
+ 发送定位
+
+ @param location 地位坐标
+ @param locationName 定位名字
+ */
+- (void)sendLocationMessageWithLocation:(CLLocationCoordinate2D)location locationName:(NSString *)locationName{
+    __weak typeof(self) weakSelf = self;
+    FLMessageModel *message = [[FLChatManager shareManager] sendLocationMessage:location locationName:locationName toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
+        
+        [weakSelf updateSendStatusUIWithMessage:newMessage];
+    }];
+    [self clientManager:nil didReceivedMessage:message];
+}
+
 
 // 更新消息列表未读消息数量, 更新数据库
 - (void)updateUnreadMessageRedIconForListAndDB {
@@ -301,22 +331,13 @@
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         
         NSInteger index = 0;
-        if (isSelectOriginalPhoto) {
-            for (UIImage *image in photos) {
-                
-                
-                [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
-                index++;
-            }
+        for (UIImage *image in photos) {
+            
+            
+            [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
+            index++;
         }
-        else {
-            for (UIImage *image in photos) {
-                
-                [weakSelf sendImgMessageWithImage:image asset:assets[index] isOriginalPhoto:isSelectOriginalPhoto];
-                index++;
-            }
-        }
-        
+    
     }];
     
     [self presentViewController:imagePickerVc animated:YES completion:nil];
@@ -369,16 +390,27 @@
 /**
  发送位置
  */
-- (void)sendLoaction {
+- (void)sendLocation {
     
     FLLocationViewController *locationVC = [[FLLocationViewController alloc] init];
     FLNavigationController *nav = [[FLNavigationController alloc] initWithRootViewController:locationVC];
     [self presentViewController:nav animated:YES completion:nil];
-    
-    [locationVC setSendLocationBlock:^(CLLocationCoordinate2D coordinate){
+    __weak typeof(self) weakSelf = self;
+    [locationVC setSendLocationBlock:^(CLLocationCoordinate2D coordinate, NSString *locationName){
         
+        locationName = locationName.length ? locationName : @"位置";
         FLLog(@"发送位置坐标:%lf===%lf", coordinate.latitude, coordinate.longitude);
+        [weakSelf sendLocationMessageWithLocation:coordinate locationName:locationName];
     }];
+}
+
+/**
+ 进入视频聊天
+ */
+- (void)goToVideoChatRoom {
+    
+     FLVideoChatViewController *videoChatVC = [[FLVideoChatViewController alloc] initWithFromUser:[FLClientManager shareManager].currentUserID toUser:self.toUser type:FLVideoChatCaller];
+     [self presentViewController:videoChatVC animated:YES completion:nil];
 }
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -406,6 +438,11 @@
     
     FLMessageModel *model = self.dataSource[indexPath.row];
     return model.messageCellHeight;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FLLog(@"afdlsakdfjlsakdfsadf");
 }
 
 #pragma mark - FLClientManagerDelegate
@@ -469,6 +506,11 @@
     
     
 }
+// 发送语音
+- (void)messageInputView:(FLMessageInputView *)inputView sendVoice:(NSString *)saveFile duration:(CGFloat)duration {
+    
+    [self sendAudioMessageWithAudioSavePath:saveFile duration:duration];
+}
 
 - (void)messageInputView:(FLMessageInputView *)inputView addIndexClicked:(NSInteger)index {
     
@@ -484,7 +526,11 @@
             break;
         }
         case 2: { // 位置
-            [self sendLoaction];
+            [self sendLocation];
+            break;
+        }
+        case 3: { // 视频通话
+            [self goToVideoChatRoom];
             break;
         }
         default:
@@ -501,7 +547,7 @@
 
 #pragma mark - FLMessageCellDelegate
 - (void)resendMessage:(FLMessageModel *)message {
-    
+    FLLog(@"%@", [message.bodies yy_modelToJSONString]);
     message.sendStatus = FLMessageSending;
     [self updateSendStatusUIWithMessage:message];
     __weak typeof(self) weakSelf = self;

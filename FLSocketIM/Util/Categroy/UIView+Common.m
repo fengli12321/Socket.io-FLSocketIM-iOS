@@ -76,14 +76,24 @@
 }
 
 - (void)setCornerRadius:(CGFloat)radius {
-    self.layer.masksToBounds = YES;
+    
     self.layer.cornerRadius = radius;
+    [self _config];
 }
 
 - (void)setBorderWidth:(CGFloat)width color:(UIColor *)color {
     self.layer.borderWidth = width;
     self.layer.borderColor = color.CGColor;
+    [self _config];
+}
+
+- (void)_config
+{
     self.layer.masksToBounds = YES;
+    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.layer.shouldRasterize = YES;
+    
+    
 }
 
 + (UIViewAnimationOptions)animationOptionsForCurve:(UIViewAnimationCurve)curve
@@ -133,4 +143,6 @@
         }
     }
 }
+
+
 @end

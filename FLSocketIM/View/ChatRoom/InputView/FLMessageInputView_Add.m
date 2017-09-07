@@ -19,9 +19,11 @@
         UIButton *photoItem = [self buttonWithImageName:@"keyboard_add_photo" title:@"照片" index:0];
         UIButton *cameraItem = [self buttonWithImageName:@"keyboard_add_camera" title:@"拍摄" index:1];
         UIButton *locationItem = [self buttonWithImageName:@"keyboard_add_location" title:@"位置" index:2];
+        UIButton *videoItem = [self buttonWithImageName:@"keyboard_add_Video" title:@"视频通话" index:3];
         [self addSubview:photoItem];
         [self addSubview:cameraItem];
         [self addSubview:locationItem];
+        [self addSubview:videoItem];
     }
     return self;
 }
@@ -32,12 +34,14 @@
     CGFloat iconWidth = 57;
     CGFloat leftX = kMargin, topY = 10;
     UIButton *addItem = [[UIButton alloc] initWithFrame:CGRectMake(leftX +index*itemWidth +(itemWidth -iconWidth)/2, topY, iconWidth, itemHeight)];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, itemHeight - 20, iconWidth, 20)];
+    UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
     titleLabel.textColor = [UIColor colorWithHex:0x666666];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = title;
+    [titleLabel sizeToFit];
+    titleLabel.frame = CGRectMake((iconWidth - titleLabel.width)/2.0, itemHeight - 20, titleLabel.width, 20);
     [addItem addSubview:titleLabel];
     
     [addItem setImageEdgeInsets:UIEdgeInsetsMake(-15, 0, 15, 0)];

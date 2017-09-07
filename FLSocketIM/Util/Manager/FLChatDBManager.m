@@ -275,7 +275,7 @@ static FLChatDBManager *instance = nil;
         // 如果消息存在，更新状态
         if (isExist) {
             
-            [db executeUpdate:@"UPDATE message SET status = ?, id = ?, timestamp = ? WHERE localtime = ?", sendStatus, message.msg_id, @(message.timestamp), @(message.sendtime)];
+            [db executeUpdate:@"UPDATE message SET status = ?, id = ?, timestamp = ?, bodies = ? WHERE localtime = ?", sendStatus, message.msg_id, @(message.timestamp), [message.bodies yy_modelToJSONString],@(message.sendtime)];
         }
     }];
 }

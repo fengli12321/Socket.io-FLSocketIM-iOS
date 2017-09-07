@@ -26,8 +26,8 @@ static NSString *const AMapKey = @"244e549b3c06a865153580b054a98afe";
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = [UIColor whiteColor];
     
-//    _window.rootViewController = [[FLLoginViewController alloc] init];
-    _window.rootViewController = [[FLTabBarController alloc] init];
+    _window.rootViewController = [[FLLoginViewController alloc] init];
+//    _window.rootViewController = [[FLTabBarController alloc] init];
     
     [_window makeKeyAndVisible];
     
