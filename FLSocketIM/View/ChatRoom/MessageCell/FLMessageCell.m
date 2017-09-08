@@ -45,9 +45,14 @@
     }
     return self;
 }
+- (void)longPress {
+    
+    NSLog(@"长按");
+}
 
 #pragma mark - UI
 - (void)creatUI {
+    
     
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     self.contentView.backgroundColor = FLBackGroundColor;
@@ -65,6 +70,15 @@
     _contentBackView.horizontalOffset = _userIconView.width + kPadding * 2;
     _contentBackView.verticalOffset = _userIconView.y;
     [self.contentView addSubview:_contentBackView];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.contentBackView setContentViewTapBlock:^{
+        [weakSelf cellContentTapAction];
+    }];
+    
+    
+    
+    
     
     if (_isSender) { // 发送者， 添加发送状态菊花转和重发按钮
         _reSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -105,6 +119,15 @@
 - (void)setTextFont:(UIFont *)textFont {
     _textFont = textFont;
     _contentBackView.textFont = textFont;
+}
+
+#pragma mark - Private
+- (void)cellContentTapAction {
+    
+    FLLog(@"内容点击");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapContentOfMessageCell:meesage:)]) {
+        [self.delegate didTapContentOfMessageCell:self meesage:self.message];
+    }
 }
 
 
@@ -175,9 +198,9 @@
  */
 - (void)reSendMessage {
     
-    if (_delegate && [_delegate respondsToSelector:@selector(resendMessage:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(messageCell:resendMessage:)]) {
         
-        [_delegate resendMessage:self.message];
+        [_delegate messageCell:self resendMessage:self.message];
     }
 }
 

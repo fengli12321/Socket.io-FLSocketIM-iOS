@@ -7,9 +7,9 @@
 //
 
 // 服务器地址
-//#define BaseUrl                                 @"http://192.168.0.109:3000"
-//#define BaseUrl                                 @"http://192.168.0.66:3000"
-#define BaseUrl                                 @"http://119.4.45.59:3000"
+//#define BaseUrl                                 @"http://192.168.0.107:3000"
+#define BaseUrl                                 @"http://192.168.0.66:3000"
+//#define BaseUrl                                 @"http://119.4.45.59:3000"
 
 // 登录接口
 #define Login_Url                               @"mobileLogin"

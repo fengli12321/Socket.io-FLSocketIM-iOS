@@ -74,6 +74,8 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 @property (nonatomic, assign) CGFloat longitude;
 /** 位置名称 */
 @property (nonatomic, copy) NSString *locationName;
+/** 详细位置名称 */
+@property (nonatomic, copy) NSString *detailLocationName;
 
 
 /** 语音消息时长 */

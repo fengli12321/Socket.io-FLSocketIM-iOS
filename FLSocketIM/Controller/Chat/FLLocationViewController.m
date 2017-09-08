@@ -21,6 +21,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
 @property (nonatomic, assign) BOOL firstLoad;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *currentLocationName;
+@property (nonatomic, copy) NSString *currentDetailLocationName;
 @property (nonatomic, strong) NSArray *aroundLocationArr;
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) CLLocationCoordinate2D oldLocation;
@@ -193,7 +194,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
             AMapPOI *poi = self.aroundLocationArr[index];
             coordinate = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
         }
-        self.sendLocationBlock(coordinate, self.currentLocationName);
+        self.sendLocationBlock(coordinate, self.currentLocationName, self.currentDetailLocationName);
     }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -248,7 +249,9 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
 #pragma mark - AMapSearchDelegate
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     
-    self.currentLocationName = response.regeocode.formattedAddress;
+    self.currentDetailLocationName = response.regeocode.formattedAddress;
+    AMapAOI *tt = response.regeocode.aois.firstObject;
+    self.currentLocationName = tt.name;
     self.aroundLocationArr = [response.regeocode.pois copy];
     [self.tableView reloadData];
     self.selectedIndex = 0;
@@ -264,7 +267,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
         if (!cell) {
             cell = [[FLAroundLocationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FLAroundLocationCellOnlyName cellStyle:FLOnlyName];
         }
-        cell.nameLabel.text = self.currentLocationName;
+        cell.nameLabel.text = self.currentDetailLocationName;
 
     }
     else {
@@ -305,6 +308,7 @@ static NSString *const FLAroundLocationCellDefault = @"FLAroundLocationCellDefau
         coordinate = CLLocationCoordinate2DMake(poi.location.latitude, poi.location.longitude);
         [_mapView setRegion:MACoordinateRegionMake(coordinate, _mapView.region.span) animated:YES];
         self.currentLocationName = poi.name;
+        self.currentDetailLocationName = poi.address;
     }
     [self addAnimationToLocationPin];
 }

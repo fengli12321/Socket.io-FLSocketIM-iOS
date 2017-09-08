@@ -117,7 +117,30 @@
     
     
     NSDate *date = [NSDate timeStampToDate:((CGFloat)timeStamp/1000.0f)];
-    return [date stringTimesAgo];
+    
+    NSString *displayStr;
+    switch ([date leftDayCount]) {
+        case 2:
+            displayStr = @"后天";
+            break;
+        case 1:
+            displayStr = @"明天";
+            break;
+        case 0:
+            displayStr = [date stringWithFormat:@"aaa hh:mm"];
+            break;
+        case -1:
+            displayStr = @"昨天";
+            break;
+        case -2:
+            displayStr = @"前天";
+            break;
+        default:
+            displayStr = [date stringWithFormat:@"yy年MM月dd日"];
+            break;
+
+    }
+    return displayStr;
 }
 - (NSString *)string_yyyy_MM_dd_EEE{
     NSString *text = [self stringWithFormat:@"yyyy-MM-dd EEE"];

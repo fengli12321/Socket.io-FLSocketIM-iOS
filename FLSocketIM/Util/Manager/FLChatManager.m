@@ -70,13 +70,14 @@ static FLChatManager *instance = nil;
     }];
     return message;
 }
-- (FLMessageModel *)sendLocationMessage:(CLLocationCoordinate2D)location locationName:(NSString *)locationName toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *))sendStatus {
+- (FLMessageModel *)sendLocationMessage:(CLLocationCoordinate2D)location locationName:(NSString *)locationName detailLocationName:(NSString *)detailLocationName toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *))sendStatus {
     
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
     messageBody.type = @"loc";
     messageBody.latitude = location.latitude;
     messageBody.longitude = location.longitude;
     messageBody.locationName = locationName;
+    messageBody.detailLocationName = detailLocationName;
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
 
     [self sendMessage:message fileData:nil isResend:NO statusChange:^{

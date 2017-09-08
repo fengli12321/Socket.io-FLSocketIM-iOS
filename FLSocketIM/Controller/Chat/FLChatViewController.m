@@ -21,6 +21,7 @@
 #import "FLNavigationController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "FLVideoChatViewController.h"
+#import "FLLocationDetailViewController.h"
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -298,9 +299,9 @@
  @param location 地位坐标
  @param locationName 定位名字
  */
-- (void)sendLocationMessageWithLocation:(CLLocationCoordinate2D)location locationName:(NSString *)locationName{
+- (void)sendLocationMessageWithLocation:(CLLocationCoordinate2D)location locationName:(NSString *)locationName detailLocationName:(NSString *)detailLocationName{
     __weak typeof(self) weakSelf = self;
-    FLMessageModel *message = [[FLChatManager shareManager] sendLocationMessage:location locationName:locationName toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
+    FLMessageModel *message = [[FLChatManager shareManager] sendLocationMessage:location locationName:locationName detailLocationName:detailLocationName toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
         
         [weakSelf updateSendStatusUIWithMessage:newMessage];
     }];
@@ -396,11 +397,11 @@
     FLNavigationController *nav = [[FLNavigationController alloc] initWithRootViewController:locationVC];
     [self presentViewController:nav animated:YES completion:nil];
     __weak typeof(self) weakSelf = self;
-    [locationVC setSendLocationBlock:^(CLLocationCoordinate2D coordinate, NSString *locationName){
+    [locationVC setSendLocationBlock:^(CLLocationCoordinate2D coordinate, NSString *locationName, NSString *detailLocationName){
         
         locationName = locationName.length ? locationName : @"位置";
         FLLog(@"发送位置坐标:%lf===%lf", coordinate.latitude, coordinate.longitude);
-        [weakSelf sendLocationMessageWithLocation:coordinate locationName:locationName];
+        [weakSelf sendLocationMessageWithLocation:coordinate locationName:locationName detailLocationName:detailLocationName];
     }];
 }
 
@@ -470,7 +471,7 @@
 - (void)messageInputView:(FLMessageInputView *)inputView heightToBottomChange:(CGFloat)heightToBottom {
     
     
-    FLLog(@"\n\n=========%lf=======%ld\n=====\n====%@====\n======%lf\n\n\n", heightToBottom, self.dataSource.count, _tableView, _tableView.contentInset.top);
+//    FLLog(@"\n\n=========%lf=======%ld\n=====\n====%@====\n======%lf\n\n\n", heightToBottom, self.dataSource.count, _tableView, _tableView.contentInset.top);
     CGFloat insetsTop = _tableView.contentInset.top;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(insetsTop, 0, MAX(inputView.height, heightToBottom), 0);
     _tableView.contentInset = contentInsets;
@@ -546,7 +547,7 @@
 }
 
 #pragma mark - FLMessageCellDelegate
-- (void)resendMessage:(FLMessageModel *)message {
+- (void)messageCell:(FLMessageCell *)cell resendMessage:(FLMessageModel *)message {
     FLLog(@"%@", [message.bodies yy_modelToJSONString]);
     message.sendStatus = FLMessageSending;
     [self updateSendStatusUIWithMessage:message];
@@ -555,5 +556,36 @@
         
         [weakSelf updateSendStatusUIWithMessage:message];
     }];
+}
+
+- (void)didTapContentOfMessageCell:(FLMessageCell *)cell meesage:(FLMessageModel *)message{
+     
+     switch (message.type) {
+          case FLMessageImage:{
+               
+               break;
+          }
+          case FLMessageLoc:{
+               self.navigationController.delegate = self;
+               FLLocationDetailViewController *locDetailVC = [[FLLocationDetailViewController alloc] initWithMessageModel:message];
+               [self.navigationController pushViewController:locDetailVC animated:YES];
+               
+               break;
+          }
+               
+          default:
+               break;
+     }
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+     if ([viewController isKindOfClass:[self class]]) {
+          
+          [navigationController setNavigationBarHidden:NO animated:YES];
+     }
+     else if([viewController isKindOfClass:[FLLocationDetailViewController class]]){
+          [navigationController setNavigationBarHidden:YES animated:YES];
+     }
 }
 @end

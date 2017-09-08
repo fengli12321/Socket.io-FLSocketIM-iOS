@@ -13,11 +13,36 @@
 
 @interface FLMessageCellContentView ()
 
-
+@property (nonatomic, strong) CAShapeLayer *selectedMaskLayer;
+@property (nonatomic, strong) UIView *seletedView;
 
 @end
 @implementation FLMessageCellContentView
 
+#pragma mark - Lazy
+- (CAShapeLayer *)selectedMaskLayer {
+    if (!_selectedMaskLayer) {
+        
+        _selectedMaskLayer = [CAShapeLayer layer];
+        UIImage *image = [UIImage imageNamed:self.isSender ? @"video_send_bubble" : @"video_recive_bubble"];
+        _selectedMaskLayer.contents = (id)(image.CGImage);
+        CGRect rect = self.isSender?CGRectMake(0.35, 0.6, 0, 0) : CGRectMake(0.55, 0.6, 0, 0);
+        _selectedMaskLayer.contentsCenter = rect;
+        _selectedMaskLayer.contentsScale = [UIScreen mainScreen].scale;
+    }
+    return _selectedMaskLayer;
+}
+
+- (UIView *)seletedView {
+    if (!_seletedView) {
+        _seletedView = [[UIView alloc] init];
+        _seletedView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.3];
+        _seletedView.layer.mask = self.selectedMaskLayer;
+    }
+    return _seletedView;
+}
+
+#pragma mark - FactoryInit
 - (instancetype)initWithCellType:(FLMessageCellType)cellType isSender:(BOOL)isSender{
    
         
@@ -42,31 +67,135 @@
         }
             
         default:
-            contentView = [[FLLocMessageContentView alloc] initWithIsSender:isSender];
+            contentView = [[FLTextMessageContentView alloc] initWithIsSender:isSender];
             break;
     }
+
     
-    [contentView addTarget:self action:@selector(tapViewAction) forControlEvents:UIControlEventTouchUpInside];
     return contentView;
 }
 
-
-
-- (void)creatUI {
-    
-}
-
+#pragma mark - Init
 - (instancetype)initWithIsSender:(BOOL)isSender {
     
     if (self = [super init]) {
         self.isSender = isSender;
         [self creatUI];
+        
+        
+        [self addTarget:self action:@selector(tapViewAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+        
+        [self addGestureRecognizer:longPress];
     }
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
+#pragma mark - OverWride
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    
+    if (action == @selector(copy:) || action == @selector(transmit:)) {
+        
+        return YES;
+    }
+    return NO;
+}
+
+- (void)copy:(id)sender {
+    
+}
+
+#pragma mark - Private
+
+
+/**
+ 转发
+
+ @param sender 触发者
+ */
+- (void)transmit:(id)sender {
+    
+}
+
+/**
+ 长按事件
+ */
+- (void)longPress:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [self becomeFirstResponder];
+        UIMenuController* menuController = [UIMenuController sharedMenuController];
+        [menuController setTargetRect:self.frame inView:self.superview];
+        UIMenuItem *transmit = [[UIMenuItem alloc] initWithTitle:@"转发" action:@selector(transmit:)];
+        menuController.menuItems = @[transmit];
+        [menuController setMenuVisible:YES animated:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDismiss) name:UIMenuControllerWillHideMenuNotification object:nil];
+        
+        FLLog(@"长按手势");
+    }
+}
+
+/**
+ 隐藏menu
+ */
+- (void)menuDismiss {
+    [self touchesEnded];
+}
+
+
+#pragma mark - Touches
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+
+    [self touchesBegan];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+
+    [self touchesEnded];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    
+    UIView *view = [super hitTest:point withEvent:event];
+    
+//    FLLog(@"view=======%@", view);
+    // 不将点击事件往下传递
+    return view?self:view;
+}
+
+#pragma mark - Public
+- (void)touchesBegan {
+    
+    self.selectedMaskLayer.frame = self.bounds;
+    self.seletedView.frame = self.bounds;
+    [self addSubview:self.seletedView];
+}
+
+- (void)touchesEnded {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.seletedView removeFromSuperview];
+    });
+}
+- (void)tapViewAction {
+    
+    if (self.contentViewTapBlock) {
+        self.contentViewTapBlock();
+    }
+}
 - (void)updateFrame {
     
 }
@@ -75,12 +204,12 @@
     [self updateFrame];
 }
 
-- (void)tapViewAction {
+- (void)creatUI {
     
 }
-
-
 @end
+
+
 
 @interface FLTextMessageContentView ()
 
@@ -121,6 +250,8 @@
     _bubbleView.textFont = textFont;
 }
 
+
+
 @end
 
 
@@ -133,6 +264,10 @@
 @end
 @implementation FLImageMessageContentView
 
+
+- (CAShapeLayer *)selectedMaskLayer {
+    return nil;
+}
 - (void)creatUI {
     
     
@@ -176,18 +311,36 @@
 
 
 
+- (void)touchesBegan {
+    [super touchesBegan];
+    [self.messageImage addSubview:self.seletedView];
+}
+
+
 @end
 
 @interface FLLocMessageContentView ()
 
 @property (nonatomic, strong) UIView *locationBackView;             // 位置背景视图
 @property (nonatomic, strong) UILabel *locationNameLabel;           // 位置名称label
+@property (nonatomic, strong) UILabel *detailLocationNameLabel;     // 位置详情
 @property (nonatomic, strong) UIImageView *locationImageView;       // 定位地图图片
 @property (nonatomic, strong) UIView *sepLine;
 
 @end
 
 @implementation FLLocMessageContentView
+
+- (CAShapeLayer *)selectedMaskLayer {
+    return nil;
+}
+
+- (UIView *)seletedView {
+    UIView *view = [super seletedView];
+    
+    [view setCornerRadius:5];
+    return view;
+}
 
 - (void)creatUI {
     
@@ -201,8 +354,13 @@
 
     
     _locationNameLabel = [[UILabel alloc] init];
-    _locationNameLabel.font = FLFont(12);
+    _locationNameLabel.font = FLFont(14);
     [_locationBackView addSubview:_locationNameLabel];
+    
+    _detailLocationNameLabel = [[UILabel alloc] init];
+    _detailLocationNameLabel.font = FLFont(12);
+    _detailLocationNameLabel.textColor = FLSecondColor;
+    [_locationBackView addSubview:_detailLocationNameLabel];
 
     
     _locationImageView = [[UIImageView alloc] init];
@@ -219,20 +377,23 @@
     CGFloat width = 200;
     CGFloat imageHeight = width/2.0;
     CGFloat labelH = 30;
+    CGFloat sLabelH = 15;
     
-    CGRect frame = self.isSender ? CGRectMake(kScreenWidth - self.horizontalOffset - width, self.verticalOffset, width, imageHeight + labelH) : CGRectMake(self.horizontalOffset, self.verticalOffset, width, imageHeight + labelH);
+    CGRect frame = self.isSender ? CGRectMake(kScreenWidth - self.horizontalOffset - width, self.verticalOffset, width, imageHeight + labelH + sLabelH) : CGRectMake(self.horizontalOffset, self.verticalOffset, width, imageHeight + 2*labelH);
     self.frame = frame;
     
     _locationBackView.frame = self.bounds;
     _locationNameLabel.frame = CGRectMake(5, 0, self.width - 5, labelH);
-    _locationImageView.frame = CGRectMake(0, labelH, self.width, imageHeight);
-    _sepLine.frame = CGRectMake(0, labelH - 0.5, self.width, 0.5);
+    _detailLocationNameLabel.frame = CGRectMake(5, labelH - 5, self.width - 5, sLabelH);
+    _locationImageView.frame = CGRectMake(0, labelH + sLabelH, self.width, imageHeight);
+    _sepLine.frame = CGRectMake(0, sLabelH+labelH - 0.5, self.width, 0.5);
 }
 
 
 - (void)setMessage:(FLMessageModel *)message {
     super.message = message;
     _locationNameLabel.text = message.bodies.locationName;
+    _detailLocationNameLabel.text = message.bodies.detailLocationName;
 }
 
 - (void)resetLocImage {
@@ -240,6 +401,8 @@
         [_locationImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", BaseUrl, self.message.bodies.fileRemotePath]]];
     }
 }
+
+
 @end
 
 
@@ -307,9 +470,6 @@
     
 }
 
-- (void)setFrameWithIconView:(UIView *)iconView {
-    
-}
 
 - (void)setMessage:(FLMessageModel *)message {
     super.message = message;

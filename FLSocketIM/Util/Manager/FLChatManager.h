@@ -57,11 +57,12 @@
  发送位置消息
 
  @param locationName 位置名称
+ @param detailLocationName 详细位置名称
  @param toUser 发送目标人
  @param sendStatus 状态改变返回消息模型
  @return 消息模型
  */
-- (FLMessageModel *)sendLocationMessage:(CLLocationCoordinate2D)location locationName:(NSString *)locationName toUser:(NSString *)toUser sendStatus:(void(^)(FLMessageModel *message))sendStatus;
+- (FLMessageModel *)sendLocationMessage:(CLLocationCoordinate2D)location locationName:(NSString *)locationName detailLocationName:(NSString *)detailLocationName toUser:(NSString *)toUser sendStatus:(void(^)(FLMessageModel *message))sendStatus;
 
 /**
  消息重发

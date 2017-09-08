@@ -35,10 +35,19 @@
 
 /**
  重新发送消息
-
+ @param cell cell
  @param message 消息模型
  */
-- (void)resendMessage:(FLMessageModel *)message;
+- (void)messageCell:(FLMessageCell *)cell resendMessage:(FLMessageModel *)message;
+
+
+/**
+ cell上内容部分被点击
+
+ @param cell cell
+ */
+- (void)didTapContentOfMessageCell:(FLMessageCell *)cell meesage:(FLMessageModel *)message;
+
 
 @end
 

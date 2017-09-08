@@ -43,7 +43,7 @@
     }
     else if ([type isEqualToString:@"loc"]) {
         self.type = FLMessageLoc;
-        _messageCellHeight = 130 + 10 + 15;
+        _messageCellHeight = 150 + 10 + 15;
     }
     else if ([type isEqualToString:@"audio"]) {
         self.type = FlMessageAudio;

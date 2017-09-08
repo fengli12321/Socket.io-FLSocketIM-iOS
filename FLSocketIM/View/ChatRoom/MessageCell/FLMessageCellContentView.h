@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
 @property (nonatomic, assign) CGFloat horizontalOffset;
 @property (nonatomic, assign) CGFloat verticalOffset;
 
+@property (nonatomic, copy) void(^contentViewTapBlock)();
 
 /**
  工厂类创建入口
@@ -58,6 +59,9 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
  点击事件
  */
 - (void)tapViewAction;
+
+- (void)touchesBegan;
+- (void)touchesEnded;
 
 @end
 

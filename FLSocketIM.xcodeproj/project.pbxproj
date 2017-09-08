@@ -186,6 +186,7 @@
 		12D86CFE1F17634A0069617B /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF11F17634A0069617B /* TZPhotoPreviewController.m */; };
 		12D86CFF1F17634A0069617B /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF31F17634A0069617B /* TZVideoPlayerController.m */; };
 		12D86D001F17634A0069617B /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D86CF51F17634A0069617B /* UIView+Layout.m */; };
+		12E5CF431F6193400047A4D3 /* FLLocationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E5CF421F6193400047A4D3 /* FLLocationDetailViewController.m */; };
 		12E886ED1F4B0984005563B7 /* FLMessageCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E886EC1F4B0984005563B7 /* FLMessageCellContentView.m */; };
 		12EF3B8E1F18580500111000 /* FLChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF3B8D1F18580500111000 /* FLChatListCell.m */; };
 		12EF3B921F186E8C00111000 /* FLConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EF3B911F186E8C00111000 /* FLConversationModel.m */; };
@@ -503,6 +504,10 @@
 		12D86CF31F17634A0069617B /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		12D86CF41F17634A0069617B /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		12D86CF51F17634A0069617B /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		12E5CF3F1F617EAE0047A4D3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		12E5CF401F617EAE0047A4D3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		12E5CF411F6193400047A4D3 /* FLLocationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLLocationDetailViewController.h; sourceTree = "<group>"; };
+		12E5CF421F6193400047A4D3 /* FLLocationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLocationDetailViewController.m; sourceTree = "<group>"; };
 		12E886EB1F4B0984005563B7 /* FLMessageCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLMessageCellContentView.h; sourceTree = "<group>"; };
 		12E886EC1F4B0984005563B7 /* FLMessageCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLMessageCellContentView.m; sourceTree = "<group>"; };
 		12EF3B8C1F18580500111000 /* FLChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLChatListCell.h; sourceTree = "<group>"; };
@@ -834,6 +839,8 @@
 				125A89B41F55541B00941102 /* FLVideoChatViewController.h */,
 				125A89B51F55541B00941102 /* FLVideoChatViewController.m */,
 				125A89B71F555AC000941102 /* FLVideoChatViewController.xib */,
+				12E5CF411F6193400047A4D3 /* FLLocationDetailViewController.h */,
+				12E5CF421F6193400047A4D3 /* FLLocationDetailViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1697,6 +1704,7 @@
 				1258EF5B1F42FB5500282C00 /* FLLocationViewController.m in Sources */,
 				123AA0561F0E3DD600DCC9E9 /* FLFriendsAndGroupsViewController.m in Sources */,
 				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
+				12E5CF431F6193400047A4D3 /* FLLocationDetailViewController.m in Sources */,
 				12BF1E421F3D40B7003A31E1 /* FLMessageInputView.m in Sources */,
 				12B9D96C1F0F384400B7F749 /* FLMessageBubbleView.m in Sources */,
 				12D86CF81F17634A0069617B /* TZAssetModel.m in Sources */,
@@ -1798,6 +1806,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				123A9FEB1F0E150700DCC9E9 /* Base */,
+				12E5CF3F1F617EAE0047A4D3 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1806,6 +1815,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				123A9FF01F0E150700DCC9E9 /* Base */,
+				12E5CF401F617EAE0047A4D3 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1817,6 +1827,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1865,6 +1876,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
