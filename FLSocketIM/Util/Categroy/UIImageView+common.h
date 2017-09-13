@@ -10,6 +10,6 @@
 
 @interface UIImageView (common)
 
-- (void)fl_setImageWithURL:(NSString *)url locSavePath:(NSString *)localPath placeholderImage:(UIImage *)placeholderImage;
+//- (void)fl_setImageWithURL:(NSString *)url locSavePath:(NSString *)localPath placeholderImage:(UIImage *)placeholderImage;
 
 @end

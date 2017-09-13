@@ -168,10 +168,10 @@
     NSString *urlString;
     switch (type) {
         case 0: // 高德地图
-            urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&sid=BGVIS1&slat=%f&slon=%f&sname=我的位置&did=BGVIS2&dlat=%f&dlon=%f&dname=终点&dev=0&t=0",@"FoxChat", messageBody.latitude, messageBody.longitude, self.currentLocation.latitude, self.currentLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&sid=BGVIS1&slat=%f&slon=%f&sname=我的位置&did=BGVIS2&dlat=%f&dlon=%f&dname=终点&dev=0&t=0",@"FoxChat", self.currentLocation.latitude, self.currentLocation.longitude ,messageBody.latitude, messageBody.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             break;
         case 1: // 百度地图
-            urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",messageBody.latitude, messageBody.longitude, self.currentLocation.latitude, self.currentLocation.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving", self.currentLocation.latitude, self.currentLocation.longitude ,messageBody.latitude, messageBody.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         default:
             break;
     }

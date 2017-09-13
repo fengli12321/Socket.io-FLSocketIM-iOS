@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121950981F64DD6B009D6154 /* FLImageBrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 121950971F64DD6B009D6154 /* FLImageBrowseViewController.m */; };
+		1219509B1F650D09009D6154 /* FLImageBrowseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1219509A1F650D09009D6154 /* FLImageBrowseCell.m */; };
+		1219509E1F650E57009D6154 /* FLImageBrowseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1219509D1F650E57009D6154 /* FLImageBrowseModel.m */; };
 		122EBBAC1F14D6A6000E7F70 /* keyboard_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EBB9A1F14D6A6000E7F70 /* keyboard_add@2x.png */; };
 		122EBBAD1F14D6A6000E7F70 /* keyboard_add_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EBB9B1F14D6A6000E7F70 /* keyboard_add_camera@2x.png */; };
 		122EBBAE1F14D6A6000E7F70 /* keyboard_add_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 122EBB9C1F14D6A6000E7F70 /* keyboard_add_photo@2x.png */; };
@@ -215,6 +218,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		121950961F64DD6B009D6154 /* FLImageBrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageBrowseViewController.h; sourceTree = "<group>"; };
+		121950971F64DD6B009D6154 /* FLImageBrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLImageBrowseViewController.m; sourceTree = "<group>"; };
+		121950991F650D09009D6154 /* FLImageBrowseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageBrowseCell.h; sourceTree = "<group>"; };
+		1219509A1F650D09009D6154 /* FLImageBrowseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLImageBrowseCell.m; sourceTree = "<group>"; };
+		1219509C1F650E57009D6154 /* FLImageBrowseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageBrowseModel.h; sourceTree = "<group>"; };
+		1219509D1F650E57009D6154 /* FLImageBrowseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLImageBrowseModel.m; sourceTree = "<group>"; };
 		122EBB9A1F14D6A6000E7F70 /* keyboard_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_add@2x.png"; sourceTree = "<group>"; };
 		122EBB9B1F14D6A6000E7F70 /* keyboard_add_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_add_camera@2x.png"; sourceTree = "<group>"; };
 		122EBB9C1F14D6A6000E7F70 /* keyboard_add_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_add_photo@2x.png"; sourceTree = "<group>"; };
@@ -841,6 +850,8 @@
 				125A89B71F555AC000941102 /* FLVideoChatViewController.xib */,
 				12E5CF411F6193400047A4D3 /* FLLocationDetailViewController.h */,
 				12E5CF421F6193400047A4D3 /* FLLocationDetailViewController.m */,
+				121950961F64DD6B009D6154 /* FLImageBrowseViewController.h */,
+				121950971F64DD6B009D6154 /* FLImageBrowseViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1015,6 +1026,8 @@
 				12BF1E331F3D40B7003A31E1 /* InputView */,
 				12B9D9611F0F25C800B7F749 /* MessageCell */,
 				12BF1E461F3D40EB003A31E1 /* Camera */,
+				121950991F650D09009D6154 /* FLImageBrowseCell.h */,
+				1219509A1F650D09009D6154 /* FLImageBrowseCell.m */,
 			);
 			path = ChatRoom;
 			sourceTree = "<group>";
@@ -1036,6 +1049,8 @@
 			isa = PBXGroup;
 			children = (
 				12B9D9661F0F267E00B7F749 /* MessageModel */,
+				1219509C1F650E57009D6154 /* FLImageBrowseModel.h */,
+				1219509D1F650E57009D6154 /* FLImageBrowseModel.m */,
 			);
 			path = ChatRoom;
 			sourceTree = "<group>";
@@ -1706,7 +1721,9 @@
 				12B9D9641F0F264000B7F749 /* FLMessageCell.m in Sources */,
 				12E5CF431F6193400047A4D3 /* FLLocationDetailViewController.m in Sources */,
 				12BF1E421F3D40B7003A31E1 /* FLMessageInputView.m in Sources */,
+				121950981F64DD6B009D6154 /* FLImageBrowseViewController.m in Sources */,
 				12B9D96C1F0F384400B7F749 /* FLMessageBubbleView.m in Sources */,
+				1219509B1F650D09009D6154 /* FLImageBrowseCell.m in Sources */,
 				12D86CF81F17634A0069617B /* TZAssetModel.m in Sources */,
 				123AA0291F0E1A7700DCC9E9 /* UIView+Common.m in Sources */,
 				12D45B131F21D46B00B3CB83 /* FLLocalNotification.m in Sources */,
@@ -1751,6 +1768,7 @@
 				12D462221F288F7400507256 /* amrFileCodec.m in Sources */,
 				123A9FE61F0E150700DCC9E9 /* AppDelegate.m in Sources */,
 				12E886ED1F4B0984005563B7 /* FLMessageCellContentView.m in Sources */,
+				1219509E1F650E57009D6154 /* FLImageBrowseModel.m in Sources */,
 				12B9D95F1F0F1B4200B7F749 /* UIColor+Common.m in Sources */,
 				12BF1E491F3D412A003A31E1 /* FLVideoProgressView.m in Sources */,
 				128DCD901F26DFB600F52ACD /* FLTabBarView.m in Sources */,

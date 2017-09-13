@@ -13,4 +13,6 @@
 @property (nonatomic, copy) NSString *toUser;
 - (instancetype)initWithToUser:(NSString *)toUser;
 
+- (CGRect)getImageRectInWindowAtIndex:(NSInteger)index;
+
 @end

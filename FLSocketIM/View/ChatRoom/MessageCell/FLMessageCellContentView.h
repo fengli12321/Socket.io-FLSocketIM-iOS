@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
 };
 
 
-@interface FLMessageCellContentView : UIControl
+@interface FLMessageCellContentView : UIButton
 @property (nonatomic, assign) BOOL isSender;
 @property (nonatomic, strong) FLMessageModel *message;
 @property (nonatomic, strong) UIFont *textFont UI_APPEARANCE_SELECTOR;
@@ -71,6 +71,8 @@ typedef NS_ENUM(NSInteger, FLMessageCellType) {
 @end
 
 @interface FLImageMessageContentView : FLMessageCellContentView
+
+
 
 @end
 

@@ -20,7 +20,6 @@
 - (void)setBodies:(FLMessageBody *)bodies {
     _bodies = bodies;
     
-    _messageCellHeight = 0;
     
     NSString *type = bodies.type;
     if ([type isEqualToString:@"txt"]) {
@@ -38,8 +37,15 @@
         self.type = FLMessageText;
     }
     else if ([type isEqualToString:@"img"]) {
-        _messageCellHeight = kScreenWidth/4 *1.5 + 10 + 15;
         self.type = FLMessageImage;
+        if (bodies.size) {
+            
+            [self setImageCellSize];
+        }
+        else {
+            bodies.superModel = self;
+        }
+        
     }
     else if ([type isEqualToString:@"loc"]) {
         self.type = FLMessageLoc;
@@ -57,8 +63,20 @@
         self.type = FLMessageOther;
     }
 
+}
+
++ (NSArray<NSString *> *)modelPropertyBlacklist {
+    return @[@"messageCellHeight"];
+}
+
+- (void)setImageCellSize {
+    
+    NSDictionary *size = self.bodies.size;
+    CGFloat height = [size[@"height"] floatValue];
+    _messageCellHeight = height + 10 + 15;
     
 }
+
 
 - (instancetype)initWithToUser:(NSString *)toUser fromUser:(NSString *)fromUser chatType:(NSString *)chatType messageBody:(FLMessageBody *)body{
     if (self = [super init]) {
@@ -75,6 +93,31 @@
 
 @implementation FLMessageBody
 
+- (void)setSize:(NSDictionary *)size {
+    
+    
+    CGFloat width = [size[@"width"] floatValue];
+    CGFloat height = [size[@"height"] floatValue];
+    CGFloat scale = width/height;
+    CGFloat refer = scale>1?width:height;
+    CGFloat imageScale;
+    if (refer > 300) {
+        
+        imageScale = refer/300*2.0;
+    }
+    else {
+        imageScale = 1;
+    }
+    
+    _size = @{@"width" : @(width/imageScale), @"height" : @(height/imageScale)};
+    if (self.superModel) {
+        
+        [self.superModel setImageCellSize];
+    }
+}
 
++ (NSArray<NSString *> *)modelPropertyBlacklist {
+    return @[@"superModel"];
+}
 
 @end

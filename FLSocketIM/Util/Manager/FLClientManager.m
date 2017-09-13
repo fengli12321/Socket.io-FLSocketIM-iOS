@@ -115,7 +115,7 @@ static FLClientManager *instance;
             NSString *savePath = nil;
             switch (message.type) {
                 case FLMessageImage:
-                    savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:fileName];
+                    savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"s_%@", fileName]];
                     break;
                 case FlMessageAudio:
                     savePath = [[NSString getAudioSavePath] stringByAppendingPathComponent:fileName];

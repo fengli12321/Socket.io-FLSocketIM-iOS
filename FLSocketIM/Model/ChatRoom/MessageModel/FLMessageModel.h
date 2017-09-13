@@ -54,20 +54,31 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 /** 消息发送状态 */
 @property (nonatomic, assign) enum FLMessageSendStatus sendStatus;
 
-
+- (void)setImageCellSize;
 - (instancetype)initWithToUser:(NSString *)toUser fromUser:(NSString *)fromUser chatType:(NSString *)chatType messageBody:(FLMessageBody *)body;
 
 @end
 
-@interface FLMessageBody : NSObject
+@interface FLMessageBody : NSObject <YYModel>
+
+
+#pragma mark - 公共
 /** 消息类型 */
 @property (nonatomic, copy) NSString *type;
 
+#pragma mark - 文本
 /** 文本消息内容 */
 @property (nonatomic, copy) NSString *msg;
 
+#pragma mark - 图片
+/** 图片尺寸 */
+@property (nonatomic, copy) NSDictionary *size;
+/** 缩略图远程地址 */
+@property (nonatomic, copy) NSString *thumbnailRemotePath;
+/** 父亲 */
+@property (nonatomic, weak) FLMessageModel *superModel;
 
-
+#pragma mark - 定位
 /** 纬度 */
 @property (nonatomic, assign) CGFloat latitude;
 /** 经度 */
@@ -77,12 +88,12 @@ typedef NS_ENUM(NSInteger, FLMessageSendStatus) {
 /** 详细位置名称 */
 @property (nonatomic, copy) NSString *detailLocationName;
 
-
+#pragma mark - 语音
 /** 语音消息时长 */
 @property (nonatomic, assign) CGFloat duration;
 
 
-
+#pragma mark - 文件
 /** 文件服务器地址 */
 @property (nonatomic, copy) NSString *fileRemotePath;
 /** 文件名称 */

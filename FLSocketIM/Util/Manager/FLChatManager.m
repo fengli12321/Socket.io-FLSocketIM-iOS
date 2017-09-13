@@ -86,15 +86,21 @@ static FLChatManager *instance = nil;
     }];
     return message;
 }
-- (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *message))sendStatus {
+- (FLMessageModel *)sendImgMessage:(NSData *)imgData sImageData:(NSData *)sImageData toUser:(NSString *)toUser sendStatus:(void (^)(FLMessageModel *message))sendStatus {
     
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg", [NSString creatUUIDString]];
     FLMessageBody *messageBody = [[FLMessageBody alloc] init];
     messageBody.type = @"img";
     messageBody.fileName = imageName;
+    
+    UIImage *image = [UIImage imageWithData:imgData];
+    CGSize size = image.size;
+    messageBody.size = @{@"width" : @(size.width), @"height" : @(size.height)};
     // 保存图片到本地沙河
     NSString *savePath = [[NSString getFielSavePath] stringByAppendingPathComponent:imageName];
+    NSString *sSavePath = [[NSString getFielSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"s_%@", imageName]];
     [self saveFile:imgData toPath:savePath];
+    [self saveFile:sImageData toPath:sSavePath];
     
     FLMessageModel *message = [[FLMessageModel alloc] initWithToUser:toUser fromUser:[FLClientManager shareManager].currentUserID chatType:@"chat" messageBody:messageBody];
     
@@ -319,6 +325,7 @@ static FLChatManager *instance = nil;
             if (fileData) {
                 NSDictionary *bodies = ackDic[@"bodies"];
                 message.bodies.fileRemotePath = bodies[@"fileRemotePath"];
+                message.bodies.thumbnailRemotePath = bodies[@"thumbnailRemotePath"];
             }
             if (message.type == FLMessageLoc) {
                 NSDictionary *bodiesDic = ackDic[@"bodies"];

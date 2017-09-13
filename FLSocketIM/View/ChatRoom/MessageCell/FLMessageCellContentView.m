@@ -271,11 +271,9 @@
 - (void)creatUI {
     
     
-    CGFloat width = kScreenWidth/4.0;
-    CGFloat height = width*1.5;
+ 
     
     _maskLayer = [CAShapeLayer layer];
-    _maskLayer.frame = CGRectMake(0, 0, width, height);
     CGRect rect = self.isSender?CGRectMake(0.35, 0.6, 0, 0) : CGRectMake(0.55, 0.6, 0, 0);
     _maskLayer.contentsCenter = rect;
     
@@ -286,7 +284,7 @@
     
     
     
-    _messageImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    _messageImage = [[UIImageView alloc] init];
     _messageImage.contentMode = UIViewContentModeScaleAspectFill;
     _messageImage.clipsToBounds = YES;
     _messageImage.layer.mask = _maskLayer;
@@ -297,18 +295,47 @@
 }
 
 - (void)updateFrame {
-    CGFloat width = kScreenWidth/4.0;
-    CGFloat height = width*1.5;
+   
+    NSDictionary *size = self.message.bodies.size;
+    CGFloat width = [size[@"width"] floatValue];
+    CGFloat height = [size[@"height"] floatValue];
     CGRect frame = self.isSender?CGRectMake(kScreenWidth - self.horizontalOffset - width, self.verticalOffset, width, height):CGRectMake(self.horizontalOffset, self.verticalOffset, width, height);
     self.frame = frame;
+    _maskLayer.frame = self.bounds;
+    _messageImage.frame = self.bounds;
 }
 
 - (void)setMessage:(FLMessageModel *)message {
     super.message = message;
-    [self.messageImage fl_setImageWithURL:[NSString stringWithFormat:@"%@/%@", BaseUrl, message.bodies.fileRemotePath] locSavePath:message.bodies.fileName placeholderImage:[UIImage imageNamed:@"Fruit-5"]];
     
+    FLMessageBody *messageBody = message.bodies;
+  
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            UIImage *image;
+            if (messageBody.fileName.length) { // 从本地读取图片
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSData *imageData = [fileManager contentsAtPath:[[NSString getFielSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"s_%@", messageBody.fileName]]];
+                image = [UIImage imageWithData:imageData];
+            
+            };
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (image) { // 本地有图片
+                    
+                    FLLog(@"本地有图片");
+                    [self.messageImage setImage:image];
+                }
+                else { // 网络加载图片
+                    
+                    FLLog(@"网络加载图片");
+                    [self.messageImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", BaseUrl, messageBody.thumbnailRemotePath]]];
+                }
+            });
+        });
 }
-
 
 
 - (void)touchesBegan {

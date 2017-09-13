@@ -35,11 +35,12 @@
  发送图片消息
 
  @param imgData 图片数据
+ @param sImageData 小图数据
  @param toUser 发送目标
  @param sendStatus 状态改变返回消息模型
  @return 消息模型
  */
-- (FLMessageModel *)sendImgMessage:(NSData *)imgData toUser:(NSString *)toUser sendStatus:(void(^)(FLMessageModel *message))sendStatus;
+- (FLMessageModel *)sendImgMessage:(NSData *)imgData sImageData:(NSData *)sImageData toUser:(NSString *)toUser sendStatus:(void(^)(FLMessageModel *message))sendStatus;
 
 
 /**

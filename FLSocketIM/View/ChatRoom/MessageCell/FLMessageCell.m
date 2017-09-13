@@ -25,7 +25,6 @@
 
 
 @property (nonatomic, strong) UIImageView *userIconView;            // 用户头像
-@property (nonatomic, strong) FLMessageCellContentView *contentBackView;  // 消息内容部分背景
 
 @property (nonatomic, strong) UIButton *reSendBtn;                  // 重新发送按钮
 @property (nonatomic, strong) UIActivityIndicatorView *sendingView; // 发送中菊花转
@@ -191,6 +190,7 @@
             [contentView resetLocImage];
         }
     }
+    
 }
 
 /**

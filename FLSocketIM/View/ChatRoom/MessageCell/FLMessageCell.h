@@ -17,6 +17,7 @@
  文字字体
  */
 @property (nonatomic, strong) UIFont *textFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) FLMessageCellContentView *contentBackView;  // 消息内容部分背景
 @property (nonatomic, assign) FLMessageCellType cellType;
 @property (nonatomic, strong) FLMessageModel *message;
 @property (nonatomic, weak) id<FLMessageCellDelegate>delegate;

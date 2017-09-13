@@ -22,6 +22,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "FLVideoChatViewController.h"
 #import "FLLocationDetailViewController.h"
+#import "FLImageBrowseViewController.h"
+#import "FLImageBrowseModel.h"
 
 @interface FLChatViewController () <UITableViewDelegate, UITableViewDataSource, FLClientManagerDelegate, FLMessageInputViewDelegate, UIScrollViewDelegate, TZImagePickerControllerDelegate, FLMessageCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -170,6 +172,22 @@
     
 }
 
+#pragma mark - Public
+- (CGRect)getImageRectInWindowAtIndex:(NSInteger)index {
+     
+     FLMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+     
+     if (cell) { // cell存在
+          
+          if ([cell.contentBackView isKindOfClass:[FLImageMessageContentView class]]) { // 图片类型
+               UIView *view = cell.contentBackView;
+               CGRect rect = [kKeyWindow convertRect:view.bounds fromView:view];
+               return rect;
+          }
+     }
+     return CGRectZero;
+}
+
 #pragma mark - Pravite
 
 /**
@@ -236,7 +254,7 @@
 // 发送图片消息
 - (void)sendImgMessageWithImage:(UIImage *)image asset:(id)asset isOriginalPhoto:(BOOL)isOriginalPhoto {
     
-    
+     NSDictionary *size = @{@"width" : @([asset pixelWidth]), @"height" : @([asset pixelHeight])};
     if (isOriginalPhoto) {
         __weak typeof(self) weakSelf = self;
         if (iOS8Later) {    // 系统版本
@@ -250,7 +268,7 @@
                 BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]);
                 if (downloadFinined && imageData) {// 图片数据不为空才传递
                     
-                    [weakSelf sendImageMessageWithImgData:imageData];
+                    [weakSelf sendImageMessageWithImgData:imageData image:image size:size];
                 }
 
             }];
@@ -261,7 +279,7 @@
                 ALAsset *alsset = asset;
                 UIImage *image = [UIImage imageWithCGImage:[alsset thumbnail]];
                 NSData *imgData = UIImageJPEGRepresentation(image, 1);
-                [weakSelf sendImageMessageWithImgData:imgData];
+                [weakSelf sendImageMessageWithImgData:imgData image:image size:size];
             });
             
         }
@@ -270,7 +288,7 @@
     else {
         @autoreleasepool {
             NSData *imageData = UIImageJPEGRepresentation(image, 1);
-            [self sendImageMessageWithImgData:imageData];
+            [self sendImageMessageWithImgData:imageData image:image size:size];
         }
         
     }
@@ -282,14 +300,14 @@
 
  @param imgData 图片文件
  */
-- (void)sendImageMessageWithImgData:(NSData *)imgData {
+- (void)sendImageMessageWithImgData:(NSData *)imgData image:(UIImage *)image size:(NSDictionary *)size{
     
-    __weak typeof(self) weakSelf = self;
-    FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
-        
-        [weakSelf updateSendStatusUIWithMessage:newMessage];
-    }];
-    [self clientManager:nil didReceivedMessage:message];
+     __weak typeof(self) weakSelf = self;
+     FLMessageModel *message = [[FLChatManager shareManager] sendImgMessage:imgData  sImageData:UIImageJPEGRepresentation(image, 1) toUser:self.toUser sendStatus:^(FLMessageModel *newMessage) {
+          
+          [weakSelf updateSendStatusUIWithMessage:newMessage];
+     }];
+     [self clientManager:nil didReceivedMessage:message];
 }
 
 
@@ -322,7 +340,7 @@
  */
 - (void)chooseImagesFormAlbum {
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:100 columnNumber:3 delegate:self pushPhotoPickerVc:YES];
-    
+     imagePickerVc.photoWidth = 320;
     imagePickerVc.allowPickingVideo = NO;
     imagePickerVc.allowPickingImage = YES;
     imagePickerVc.allowPickingOriginalPhoto = YES;
@@ -378,7 +396,7 @@
         
         if (isPhoto) { // 照片
             
-            [weakSelf sendImageMessageWithImgData:data];
+            [weakSelf sendImageMessageWithImgData:data image:[UIImage imageWithData:data] size:@{@"width" : @(kScreenWidth * 2), @"height" : @(kScreenHeight * 2)}];
         }
         else {  // 视频
             
@@ -563,6 +581,35 @@
      switch (message.type) {
           case FLMessageImage:{
                
+               NSMutableArray *array = [NSMutableArray array];
+               NSInteger index = 0;
+               NSInteger index1 = 0;
+               NSInteger selectedIndex = 0;
+               for (FLMessageModel *oneMessage in self.dataSource) {
+                    if (oneMessage.type == FLMessageImage) {
+                         
+                         FLMessageBody *body = oneMessage.bodies;
+                         FLImageBrowseModel *model = [[FLImageBrowseModel alloc] init];
+                         model.imageRemotePath = body.fileRemotePath;
+                         model.imageName = body.fileName;
+                         model.thumRemotePath = body.thumbnailRemotePath;
+                         model.imageSize = CGSizeMake([body.size[@"width"] floatValue], [body.size[@"height"] floatValue]);
+                         model.messageIndex = index;
+                         [array addObject:model];
+                         
+                         
+                         if ([oneMessage isEqual:message]) {
+                              selectedIndex = index1;
+                         }
+                         index1++;
+                    }
+                    
+                    index ++;
+               }
+               
+               FLImageBrowseViewController *imageBrowseVC = [[FLImageBrowseViewController alloc] initWithImageModels:array selectedIndex:selectedIndex];
+               imageBrowseVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+               [self presentViewController:imageBrowseVC animated:NO completion:nil];
                break;
           }
           case FLMessageLoc:{
@@ -583,9 +630,11 @@
      if ([viewController isKindOfClass:[self class]]) {
           
           [navigationController setNavigationBarHidden:NO animated:YES];
+          [[UIApplication sharedApplication] setStatusBarHidden:NO];
      }
      else if([viewController isKindOfClass:[FLLocationDetailViewController class]]){
           [navigationController setNavigationBarHidden:YES animated:YES];
+          [[UIApplication sharedApplication] setStatusBarHidden:YES];
      }
 }
 @end
