@@ -304,7 +304,12 @@ static FLChatManager *instance = nil;
     else {
         parameters = [message yy_modelToJSONObject];
     }
-    [[[FLSocketManager shareManager].client emitWithAck:@"chat" with:@[parameters]] timingOutAfter:10 callback:^(NSArray * _Nonnull data) {
+    
+    CGFloat timeOut = 10;
+    if (message.type == FLMessageImage) {
+        timeOut = 20;
+    }
+    [[[FLSocketManager shareManager].client emitWithAck:@"chat" with:@[parameters]] timingOutAfter:20 callback:^(NSArray * _Nonnull data) {
         
         FLLog(@"%@", data.firstObject);
         

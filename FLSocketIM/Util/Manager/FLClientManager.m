@@ -95,7 +95,6 @@ static FLClientManager *instance;
     SocketIOClient *socket = [FLSocketManager shareManager].client;
      
     // 收到消息
-
     [socket on:@"chat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
         
 
@@ -103,8 +102,7 @@ static FLClientManager *instance;
             
             [ack with:@[@"hello 我是应答"]];
         }
-        
-        
+
         
         FLMessageModel *message = [FLMessageModel yy_modelWithJSON:data.firstObject];
         
@@ -145,8 +143,7 @@ static FLClientManager *instance;
         [[FLChatDBManager shareManager] addOrUpdateConversationWithMessage:message isChatting:isChatting];
         
         
-        
-        
+        // 本地推送，收到消息添加红点，声音及震动提示
         [FLLocalNotification pushLocalNotificationWithMessage:message];
         
         
@@ -165,9 +162,10 @@ static FLClientManager *instance;
         }
     }];
     
+    // 视频通话请求
     [socket on:@"videoChat" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
-        UIViewController *vc = [self getCurrentVC];
         
+        UIViewController *vc = [self getCurrentVC];
         NSDictionary *dataDict = data.firstObject;
         FLVideoChatViewController *videoVC = [[FLVideoChatViewController alloc] initWithFromUser:dataDict[@"from_user"] toUser:[FLClientManager shareManager].currentUserID type:FLVideoChatCallee];
         videoVC.room = dataDict[@"room"];

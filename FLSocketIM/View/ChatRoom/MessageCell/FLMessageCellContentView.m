@@ -289,9 +289,6 @@
     _messageImage.clipsToBounds = YES;
     _messageImage.layer.mask = _maskLayer;
     [self addSubview:_messageImage];
-    
-   
-
 }
 
 - (void)updateFrame {
