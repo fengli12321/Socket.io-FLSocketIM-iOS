@@ -22,13 +22,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSArray *tabBarSubViews = self.tabBarController.tabBar.subviews;
-    for (UIView *subView in tabBarSubViews) {
-        if ([subView isKindOfClass:[UIControl class]]) {
-            [subView removeFromSuperview];
-        }
-    }
 }
+
 
 
 

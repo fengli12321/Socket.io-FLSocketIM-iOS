@@ -2,7 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'FLSocketIM' do
-  pod 'Socket.IO-Client-Swift', '~> 10.2.0'
+  pod 'Socket.IO-Client-Swift', '~> 11.0.0'
   pod 'Masonry', '~> 1.0.1'
   pod 'AFNetworking'
   pod 'FMDB'

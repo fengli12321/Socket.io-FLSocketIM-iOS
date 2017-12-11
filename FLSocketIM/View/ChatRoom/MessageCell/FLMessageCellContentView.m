@@ -403,7 +403,7 @@
     CGFloat labelH = 30;
     CGFloat sLabelH = 15;
     
-    CGRect frame = self.isSender ? CGRectMake(kScreenWidth - self.horizontalOffset - width, self.verticalOffset, width, imageHeight + labelH + sLabelH) : CGRectMake(self.horizontalOffset, self.verticalOffset, width, imageHeight + 2*labelH);
+    CGRect frame = self.isSender ? CGRectMake(kScreenWidth - self.horizontalOffset - width, self.verticalOffset, width, imageHeight + labelH + sLabelH) : CGRectMake(self.horizontalOffset, self.verticalOffset, width, imageHeight + labelH + sLabelH);
     self.frame = frame;
     
     _locationBackView.frame = self.bounds;

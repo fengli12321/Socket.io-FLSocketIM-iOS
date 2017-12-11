@@ -76,7 +76,7 @@ static NSString *loginAccountInfo = @"loginAccountInfo";
             [weakSelf hideHud];
             if ([response[@"code"] integerValue] < 0) {
                 
-                [FLAlertView showWithTitle:@"账户或者密码错误" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
+                [FLAlertView showWithTitle:response[@"message"] message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
             }
             else {
                 
@@ -102,7 +102,9 @@ static NSString *loginAccountInfo = @"loginAccountInfo";
         
         [weakSelf hideHud];
         if (weakSelf) {
-            [UIApplication sharedApplication].keyWindow.rootViewController = [[FLTabBarController alloc] init];
+            FLTabBarController *tabBarVC = [[FLTabBarController alloc] init];
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarVC;
         }
         
     } fail:^{
@@ -126,7 +128,7 @@ static NSString *loginAccountInfo = @"loginAccountInfo";
             
             [weakSelf hideHud];
             if([response[@"code"] integerValue] < 0) {
-                [FLAlertView showWithTitle:@"注册失败" message:@"该账号已注册" cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
+                [FLAlertView showWithTitle:@"注册失败" message:response[@"message"] cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
             }else {
                 [FLAlertView showWithTitle:@"🎉注册成功" message:nil cancelButtonTitle:@"确定" otherButtonTitles:nil andAction:nil andParentView:nil];
             }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120065F41FDE8E3300478657 /* FLTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 120065F31FDE8E3300478657 /* FLTabBar.m */; };
 		121950981F64DD6B009D6154 /* FLImageBrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 121950971F64DD6B009D6154 /* FLImageBrowseViewController.m */; };
 		1219509B1F650D09009D6154 /* FLImageBrowseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1219509A1F650D09009D6154 /* FLImageBrowseCell.m */; };
 		1219509E1F650E57009D6154 /* FLImageBrowseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1219509D1F650E57009D6154 /* FLImageBrowseModel.m */; };
@@ -218,6 +219,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120065F21FDE8E3300478657 /* FLTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLTabBar.h; sourceTree = "<group>"; };
+		120065F31FDE8E3300478657 /* FLTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLTabBar.m; sourceTree = "<group>"; };
 		121950961F64DD6B009D6154 /* FLImageBrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageBrowseViewController.h; sourceTree = "<group>"; };
 		121950971F64DD6B009D6154 /* FLImageBrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLImageBrowseViewController.m; sourceTree = "<group>"; };
 		121950991F650D09009D6154 /* FLImageBrowseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageBrowseCell.h; sourceTree = "<group>"; };
@@ -929,6 +932,8 @@
 		128DCD8D1F26DFA400F52ACD /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				120065F21FDE8E3300478657 /* FLTabBar.h */,
+				120065F31FDE8E3300478657 /* FLTabBar.m */,
 				128DCD8E1F26DFB600F52ACD /* FLTabBarView.h */,
 				128DCD8F1F26DFB600F52ACD /* FLTabBarView.m */,
 				128DCD981F26E93500F52ACD /* FLTabBarItemView.h */,
@@ -1390,15 +1395,15 @@
 				TargetAttributes = {
 					123A9FDD1F0E150700DCC9E9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5HBP8N48W6;
+						DevelopmentTeam = 6625VD7T97;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1729,6 +1734,7 @@
 				12D45B131F21D46B00B3CB83 /* FLLocalNotification.m in Sources */,
 				123AA0381F0E261000DCC9E9 /* FLNetWorkManager.m in Sources */,
 				12BF1E451F3D40B7003A31E1 /* FLPlaceholderTextView.m in Sources */,
+				120065F41FDE8E3300478657 /* FLTabBar.m in Sources */,
 				129E31F31F1DA0CC00ECB93C /* NSDate+Helper.m in Sources */,
 				123A9FE91F0E150700DCC9E9 /* ViewController.m in Sources */,
 				12D462241F288F7400507256 /* AudioManager.m in Sources */,
@@ -1939,9 +1945,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5HBP8N48W6;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6625VD7T97;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1983,10 +1989,10 @@
 					"-weak_framework",
 					RevealServer,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.FLSocketIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";
-				PROVISIONING_PROFILE_SPECIFIER = vifuLink;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1999,9 +2005,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = FLSocketIM/FLSocketIM.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5HBP8N48W6;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6625VD7T97;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2041,10 +2047,10 @@
 					"-weak_framework",
 					RevealServer,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.vifulink.vifu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.FLSocketIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce49ee29-6472-46ba-824f-3eef42684eb6";
-				PROVISIONING_PROFILE_SPECIFIER = vifuLink;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FLSocketIM/Util/Manager/FLSocketIM-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

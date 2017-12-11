@@ -44,7 +44,6 @@
         case SocketIOClientStatusNotConnected:{
             
             [_indicator stopAnimating];
-            _statusLabel.x = 0;
             _statusLabel.text = @"FoxChat(未连接)";
             break;
         }
@@ -52,7 +51,6 @@
         case SocketIOClientStatusDisconnected:{
             
             [_indicator stopAnimating];
-            _statusLabel.x = 0;
             _statusLabel.text = @"FoxChat(连接断开)";
             break;
         }
@@ -60,7 +58,6 @@
         case SocketIOClientStatusConnecting:{
             
             [_indicator startAnimating];
-            _statusLabel.x = _indicator.maxX;
             _statusLabel.text = @"FoxChat(连接中...)";
             break;
         }
@@ -68,7 +65,6 @@
         case SocketIOClientStatusConnected:{
             
             [_indicator stopAnimating];
-            _statusLabel.x = 0;
             _statusLabel.text = @"FoxChat";
             break;
         }
@@ -79,7 +75,23 @@
     
     [_statusLabel sizeToFit];
     _statusLabel.height = self.height;
-    self.width = _statusLabel.maxX;
+    
+    if (_indicator.isAnimating) {
+        CGFloat offset = (self.width - _statusLabel.width - _indicator.width)/2.0;
+        _indicator.x = offset;
+        _statusLabel.x = _indicator.maxX;
+    }
+    else {
+        _statusLabel.x = (self.width - _statusLabel.width)/2.0;
+    }
+    
+}
+
+- (void)setFrame:(CGRect)frame {
+    
+    [super setFrame:frame];
+    FLLog(@"????????????????===%lf", self.width);
+    
 }
 
 @end

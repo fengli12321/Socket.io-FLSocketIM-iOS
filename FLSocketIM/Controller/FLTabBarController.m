@@ -12,6 +12,7 @@
 #import "FLFriendsAndGroupsViewController.h"
 #import "FLMeViewController.h"
 #import "FLTabBarView.h"
+#import "FLTabBar.h"
 
 @interface FLTabBarController () <FLTabBarViewDelegate>
 
@@ -46,9 +47,9 @@
 
     
 
-    [self setupChildVc:chatList title:@"消息" image:@"manu_news" selectedImage:@"manu_news_on"];
-    [self setupChildVc:friends title:@"联系人" image:@"menu_navigation" selectedImage:@"menu_navigation_on"];
-    [self setupChildVc:me title:@"我的" image:@"" selectedImage:@""];
+    [self setupChildVc:chatList];
+    [self setupChildVc:friends];
+    [self setupChildVc:me];
     
     FLTabBarView *tabBarView = [[FLTabBarView alloc] initWithFrame:self.tabBar.bounds];
     tabBarView.backgroundColor = [UIColor whiteColor];
@@ -58,7 +59,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
+    [self setValue:[[FLTabBar alloc] init] forKey:@"tabBar"];
+    
     [self commonInit];
 }
 
@@ -67,12 +70,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupChildVc:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *) selectedImage {
+- (void)setupChildVc:(UIViewController *)vc {
     
-    
-//    vc.tabBarItem.title = title;
-//    vc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     FLNavigationController *nav = [[FLNavigationController alloc] initWithRootViewController:vc];
     

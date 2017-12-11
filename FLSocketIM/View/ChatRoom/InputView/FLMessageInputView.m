@@ -43,7 +43,7 @@
     [self.inputTextView removeObserver:self forKeyPath:@"contentSize"];
 }
 - (instancetype)init {
-    if (self = [super initWithFrame:CGRectMake(0, kScreenHeight - kMessageInputView_Height, kScreenWidth, kMessageInputView_Height)]) {
+    if (self = [super initWithFrame:CGRectMake(0, kScreenHeight - kMessageInputView_Height - HOME_INDICATOR_HEIGHT, kScreenWidth, kMessageInputView_Height)]) {
         
         [self setupUI];
         _viewHeightOld = self.height;
@@ -149,7 +149,7 @@
             [_addKeyboardView setY:kScreenHeight];
             [_voiceKeyboardView setY:kScreenHeight];
             
-            [self setY:kScreenHeight - CGRectGetHeight(self.frame)];
+            [self setY:kScreenHeight - CGRectGetHeight(self.frame) - HOME_INDICATOR_HEIGHT];
             
         } completion:^(BOOL finished) {
             self.inputState = FLMessageInputViewStateSystem;
@@ -296,7 +296,7 @@
     }else{
         self.inputState = FLMessageInputViewStateEmotion;
         [_inputTextView resignFirstResponder];
-        endY = kScreenHeight - kKeyboardView_Height;
+        endY = kScreenHeight - kKeyboardView_Height - HOME_INDICATOR_HEIGHT;
     }
     [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
         [_emojiKeyboardView setY:endY];
@@ -317,7 +317,7 @@
     } else {
         self.inputState = FLMessageInputViewStateVoice;
         [_inputTextView resignFirstResponder];
-        endY = kScreenHeight - kKeyboardView_Height;
+        endY = kScreenHeight - kKeyboardView_Height - HOME_INDICATOR_HEIGHT;
     }
     [UIView animateWithDuration:0.25 delay:0.0f options:UIViewAnimationOptionTransitionFlipFromBottom animations:^{
         [_voiceKeyboardView setY:endY];

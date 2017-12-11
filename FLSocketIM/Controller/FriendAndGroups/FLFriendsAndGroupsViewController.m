@@ -41,7 +41,7 @@
 #pragma mark - UI
 - (void)creatUI {
     
-    self.title = @"联系人";
+    self.navigationItem.title = @"联系人";
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.view addSubview:_tableView];

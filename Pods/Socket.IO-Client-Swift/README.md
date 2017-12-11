@@ -70,10 +70,6 @@ If you need Swift 1.2 use v2.4.5 (Pre-Swift 2 support is no longer maintained)
 
 If you need Swift 1.1 use v1.5.2. (Pre-Swift 1.2 support is no longer maintained)
 
-### Manually (iOS 7+)
-1. Copy the Source folder into your Xcode project. (Make sure you add the files to your target(s))
-2. If you plan on using this from Objective-C, read [this](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) on exposing Swift code to Objective-C.
-
 ### Swift Package Manager
 Add the project as a dependency to your Package.swift:
 ```swift
@@ -82,7 +78,7 @@ import PackageDescription
 let package = Package(
     name: "YourSocketIOProject",
     dependencies: [
-        .Package(url: "https://github.com/socketio/socket.io-client-swift", majorVersion: 10)
+        .Package(url: "https://github.com/socketio/socket.io-client-swift", majorVersion: 11)
     ]
 )
 ```
@@ -92,7 +88,7 @@ Then import `import SocketIO`.
 ### Carthage
 Add this line to your `Cartfile`:
 ```
-github "socketio/socket.io-client-swift" ~> 10.2.0 # Or latest version
+github "socketio/socket.io-client-swift" ~> 11.0.0 # Or latest version
 ```
 
 Run `carthage update --platform ios,macosx`.
@@ -104,7 +100,7 @@ Create `Podfile` and add `pod 'Socket.IO-Client-Swift'`:
 use_frameworks!
 
 target 'YourApp' do
-    pod 'Socket.IO-Client-Swift', '~> 10.2.0' # Or latest version
+    pod 'Socket.IO-Client-Swift', '~> 11.0.0' # Or latest version
 end
 ```
 
@@ -132,7 +128,7 @@ Objective-C:
 Add this line to your `Seedfile`:
 
 ```
-github "socketio/socket.io-client-swift", "v10.2.0", :files => "Source/*.swift" # Or latest version
+github "socketio/socket.io-client-swift", "v11.0.0", :files => "Source/*.swift" # Or latest version
 ```
 
 Run `seed install`.

@@ -54,7 +54,6 @@
 #pragma mark - UI
 - (void)setupUI {
     
-    self.title = @"消息";
     
     self.navigationItem.titleView = self.titleView;
     

@@ -1,0 +1,6 @@
+framework module StarscreamSocketIO {
+  umbrella header "StarscreamSocketIO-umbrella.h"
+
+  export *
+  module * { export * }
+}

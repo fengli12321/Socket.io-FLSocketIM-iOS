@@ -9,10 +9,6 @@
 #import "FLTabBarItemView.h"
 #import "FLBarBadgeLabel.h"
 
-
-
-
-
 @interface FLTabBarItemView ()
 
 

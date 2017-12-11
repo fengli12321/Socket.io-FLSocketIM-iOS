@@ -34,7 +34,7 @@
 }
 #pragma mark - UI
 - (void)setupUI {
-    self.title = @"我的";
+    self.navigationItem.title = @"我的";
     
     self.connectBtn.layer.cornerRadius = 8;
     self.existLogin.layer.cornerRadius = 8;
