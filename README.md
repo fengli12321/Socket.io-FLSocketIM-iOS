@@ -2,8 +2,8 @@
 ##### [简书详情介绍地址](http://www.jianshu.com/p/686c4bf6df3f)
 
 ###### iOS 代码地址:https://github.com/fengli12321/Socket.io-FLSocketIM-iOS
-###### 服务器端代码实现参照:https://github.com/githuanl/node.js-socket.io-server
-###### 安卓端代码实现参照:https://github.com/githuanl/socket.io-android-
+###### 服务器端代码实现参照:https://github.com/fengli12321/Socket.io-FLSocketIM-Server
+###### 安卓端代码实现参照:https://github.com/fengli12321/Socket.io-FLSocketIM-Android
 
 ### 实现功能
 1. 文本发送
