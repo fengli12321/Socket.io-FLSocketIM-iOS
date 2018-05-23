@@ -428,8 +428,18 @@
  */
 - (void)goToVideoChatRoom {
     
-     FLVideoChatViewController *videoChatVC = [[FLVideoChatViewController alloc] initWithFromUser:[FLClientManager shareManager].currentUserID toUser:self.toUser type:FLVideoChatCaller];
-     [self presentViewController:videoChatVC animated:YES completion:nil];
+     [FLAlertView showWithTitle:@"提示" message:@"选择聊天类型" cancelButtonTitle:@"单聊" otherButtonTitles:@[@"群聊"] andAction:^(NSInteger buttonIndex) {
+          NSInteger type = 0;
+          if (buttonIndex == 0) {
+               type = 0;
+          } else {
+               type = buttonIndex;
+          }
+          FLVideoChatViewController *videoChatVC = [[FLVideoChatViewController alloc] initWithFromUser:[FLClientManager shareManager].currentUserID toUser:self.toUser type:FLVideoChatCaller];
+          videoChatVC.chatType = type;
+          [self presentViewController:videoChatVC animated:YES completion:nil];
+     } andParentView:nil];
+     
 }
 #pragma mark - UITableViewDatasource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -168,6 +168,7 @@ static FLClientManager *instance;
         UIViewController *vc = [self getCurrentVC];
         NSDictionary *dataDict = data.firstObject;
         FLVideoChatViewController *videoVC = [[FLVideoChatViewController alloc] initWithFromUser:dataDict[@"from_user"] toUser:[FLClientManager shareManager].currentUserID type:FLVideoChatCallee];
+        videoVC.chatType = [dataDict[@"chat_type"] integerValue];
         videoVC.room = dataDict[@"room"];
         [vc presentViewController:videoVC animated:YES completion:nil];
         FLLog(@"%@============", data);

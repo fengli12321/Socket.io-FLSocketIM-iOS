@@ -1989,7 +1989,7 @@
 					"-weak_framework",
 					RevealServer,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.FLSocketIM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.SocketIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2047,7 +2047,7 @@
 					"-weak_framework",
 					RevealServer,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.FLSocketIM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.foxPower.SocketIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

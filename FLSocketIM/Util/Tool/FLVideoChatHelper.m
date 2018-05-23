@@ -13,12 +13,12 @@
 //google提供的
 static NSString *const RTCSTUNServerURL = @"stun:stun.l.google.com:19302";
 static NSString *const RTCSTUNServerURL2 = @"stun:23.21.150.121";
-typedef enum : NSUInteger {
-    //发送者
-    RoleCaller,
-    //被发送者
-    RoleCallee,
-} Role;
+//typedef enum : NSUInteger {
+//    //发送者
+//    RoleCaller,
+//    //被发送者
+//    RoleCallee,
+//} Role;
 @interface FLVideoChatHelper () <RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate>
 
 @property (nonatomic, weak) SocketIOClient *client;
@@ -36,7 +36,7 @@ typedef enum : NSUInteger {
     NSMutableDictionary *_connectionDic;
     NSMutableArray *_connectionIdArray;
     
-    Role _role;
+//    Role _role;
     
     NSMutableArray *ICEServers;
     
@@ -174,7 +174,10 @@ static FLVideoChatHelper *instance = nil;
         [peerConnection setRemoteDescriptionWithDelegate:self sessionDescription:remoteSdp];
         
         //设置当前角色状态为被呼叫，（被发offer）
-        _role = RoleCallee;
+//        _role = RoleCallee;
+        
+        // 回复answer
+        [peerConnection createAnswerWithDelegate:self constraints:[self offerOranswerConstraint]];
     }];
     //回应offer
     [self.client on:@"_answer" callback:^(NSArray * _Nonnull data, SocketAckEmitter * _Nonnull ack) {
@@ -320,7 +323,7 @@ static FLVideoChatHelper *instance = nil;
 - (void)createOffers{
     //给每一个点对点连接，都去创建offer
     [_connectionDic enumerateKeysAndObjectsUsingBlock:^(NSString *key, RTCPeerConnection *obj, BOOL * _Nonnull stop) {
-        _role = RoleCaller;
+//        _role = RoleCaller;
         [obj createOfferWithDelegate:self constraints:[self offerOranswerConstraint]];
     }];
 }
@@ -463,6 +466,10 @@ didCreateSessionDescription:(RTCSessionDescription *)sdp
     //设置本地的SDP
     [peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdp];
     
+    NSString *currentId = [self getKeyFromConnectionDic : peerConnection];
+    NSString *type = sdp.type;
+    NSString *event = [NSString stringWithFormat:@"__%@", type];
+    [self.client emit:event with:@[@{@"sdp": @{@"type": type, @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
 }
 
 // Called when setting a local or remote description.
@@ -472,36 +479,36 @@ didSetSessionDescriptionWithError:(NSError *)error
 {
     NSLog(@"%s",__func__);
     
-    NSString *currentId = [self getKeyFromConnectionDic : peerConnection];
-    
-    //判断，当前连接状态为，收到了远程点发来的offer，这个是进入房间的时候，尚且没人，来人就调到这里
-    if (peerConnection.signalingState == RTCSignalingHaveRemoteOffer)
-    {
-        //创建一个answer,会把自己的SDP信息返回出去
-        [peerConnection createAnswerWithDelegate:self constraints:[self offerOranswerConstraint]];
-    }
+//    NSString *currentId = [self getKeyFromConnectionDic : peerConnection];
+//
+//    //判断，当前连接状态为，收到了远程点发来的offer，这个是进入房间的时候，尚且没人，来人就调到这里
+//    if (peerConnection.signalingState == RTCSignalingHaveRemoteOffer)
+//    {
+//        //创建一个answer,会把自己的SDP信息返回出去
+//        [peerConnection createAnswerWithDelegate:self constraints:[self offerOranswerConstraint]];
+//    }
     //判断连接状态为本地发送offer
-    else if (peerConnection.signalingState == RTCSignalingHaveLocalOffer)
-    {
-        if (_role == RoleCallee)
-        {
-            [self.client emit:@"__answer" with:@[@{@"sdp": @{@"type": @"answer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
-     
-        }
-        //发送者,发送自己的offer
-        else if(_role == RoleCaller)
-        {
-            [self.client emit:@"__offer" with:@[@{@"sdp": @{@"type": @"offer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
-        }
-    }
-    else if (peerConnection.signalingState == RTCSignalingStable)
-    {
-        if (_role == RoleCallee)
-        {
-            [self.client emit:@"__answer" with:@[@{@"sdp": @{@"type": @"answer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
-            
-        }
-    }
+//    else if (peerConnection.signalingState == RTCSignalingHaveLocalOffer)
+//    {
+//        if (_role == RoleCallee)
+//        {
+//            [self.client emit:@"__answer" with:@[@{@"sdp": @{@"type": @"answer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
+//
+//        }
+//        //发送者,发送自己的offer
+//        else if(_role == RoleCaller)
+//        {
+//            [self.client emit:@"__offer" with:@[@{@"sdp": @{@"type": @"offer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
+//        }
+//    }
+//    else if (peerConnection.signalingState == RTCSignalingStable)
+//    {
+//        if (_role == RoleCallee)
+//        {
+//            [self.client emit:@"__answer" with:@[@{@"sdp": @{@"type": @"answer", @"sdp": peerConnection.localDescription.description}, @"socketId": currentId}]];
+//
+//        }
+//    }
 }
 
 #pragma mark--RTCPeerConnectionDelegate
@@ -578,3 +585,19 @@ didSetSessionDescriptionWithError:(NSError *)error
 }
 
 @end
+
+//@interface FLPeer()
+//
+//@property (nonatomic, strong) RTCPeerConnection *pc;
+//@property (nonatomic, copy) NSString *socketId;
+//
+//@end
+//@implementation FLPeer
+//
+//- (instancetype)initWithSocketId:(NSString *)socketId {
+//    if (self = [super init]) {
+//        self.socketId = socketId;
+//    }
+//}
+
+//@end

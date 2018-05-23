@@ -81,7 +81,7 @@
     SocketIOClient *client = [FLSocketManager shareManager].client;
     // 首先请求服务器创建一个房间
     __weak typeof(self) weakSelf = self;
-    [[client emitWithAck:@"videoChat" with:@[@{@"from_user":[FLClientManager shareManager].currentUserID, @"to_user":self.toUser}]] timingOutAfter:10 callback:^(NSArray * _Nonnull data) {
+    [[client emitWithAck:@"videoChat" with:@[@{@"from_user":[FLClientManager shareManager].currentUserID, @"to_user":self.toUser, @"chat_type":@(self.chatType)}]] timingOutAfter:10 callback:^(NSArray * _Nonnull data) {
         
         if ([data.firstObject isKindOfClass:[NSString class]] && [data.firstObject isEqualToString:@"NO ACK"]) {  // 服务器没有应答
             
@@ -176,21 +176,43 @@
 
 - (void)_refreshRemoteView
 {
-//    for (RTCEAGLVideoView *videoView in self.userVideoBackView.subviews) {
+    
+    for (RTCEAGLVideoView *videoView in self.userVideoBackView.subviews) {
 //        //本地的视频View和关闭按钮不做处理
 //        if (videoView.tag == 100) {
 //            continue;
 //        }
-//        //其他的移除
-//        [videoView removeFromSuperview];
-//    }
+        //其他的移除
+        [videoView removeFromSuperview];
+    }
     //再去添加
+    __block NSInteger index = 0;
+    CGFloat scale = 320.0/240.0;
+    CGFloat startY = 150 *scale;
+    CGFloat width = kScreenWidth/4.0;
+    CGFloat height = width * scale;
+    
+
     [_remoteVideoTracks enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, RTCVideoTrack *remoteTrack, BOOL * _Nonnull stop) {
         
-        RTCEAGLVideoView *remoteVideoView = [[RTCEAGLVideoView alloc] initWithFrame:self.view.bounds];
-        [remoteTrack addRenderer:remoteVideoView];
-        [self.userVideoBackView addSubview:remoteVideoView];
-        
+        NSInteger count = self.userVideoBackView.subviews.count;
+        if (index < count) {
+            RTCEAGLVideoView *videoView = self.userVideoBackView.subviews[index];
+            [remoteTrack removeRenderer:videoView];
+        }
+        if (self.chatType == 0) {
+            
+            RTCEAGLVideoView *remoteVideoView = [[RTCEAGLVideoView alloc] initWithFrame:self.view.bounds];
+            [remoteTrack addRenderer:remoteVideoView];
+            [self.userVideoBackView addSubview:remoteVideoView];
+        }
+        else {
+            
+            RTCEAGLVideoView *remoteVideoView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectMake(index*width, startY + index*height, width, height)];
+            [remoteTrack addRenderer:remoteVideoView];
+            [self.userVideoBackView addSubview:remoteVideoView];
+        }
+        index++;
     }];
 }
 @end

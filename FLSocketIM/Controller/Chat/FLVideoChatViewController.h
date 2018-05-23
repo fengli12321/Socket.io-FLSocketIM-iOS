@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, FLVideoChatType) {
 @interface FLVideoChatViewController : FLViewController
 
 @property (nonatomic, copy) NSString *room;
+@property (nonatomic, assign) NSInteger chatType;
 - (instancetype)initWithFromUser:(NSString *)fromUser toUser:(NSString *)toUser type:(FLVideoChatType)type;
 
 @end

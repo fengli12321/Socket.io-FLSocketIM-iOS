@@ -53,3 +53,8 @@
 - (void)videoChatHelper:(FLVideoChatHelper *)videoChatHelper closeWithUserId:(NSString *)userId;
 - (void)closeRoomWithVideoChatHelper:(FLVideoChatHelper *)videoChatHelper;
 @end
+
+//
+//@interface FLPeer : NSObject
+//
+//@end
